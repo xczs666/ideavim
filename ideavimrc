@@ -1,0 +1,161 @@
+" `:actionlist` command show all Intellij action. :-)
+" https://github.com/JetBrains/ideavim/discussions/303
+set clipboard+=unnamed,ideaput
+let mapleader=","
+set timeoutlen=5000
+
+set nocompatible              " be iMproved, required
+set ignorecase
+set keep-english-in-normal
+filetype off                  " required
+""" IdeaVim options
+" Smart join for <C-J>
+set ideajoin
+" Map vim marks to IDEA global marks
+set ideamarks
+
+" set the runtime path to include Vundle and initialize
+"set rtp+=~/.vim/bundle/vundle
+"call vundle#rc()
+
+" <A-n>, <A-x>, <A-p>, g<A-n>
+Plug 'terryma/vim-multiple-cursors'
+set multiple-cursors
+
+set multicursor
+
+"" ys ysiw cs ds
+Plug 'vim-surround'
+set surround
+
+Plug 'chrisbra/matchit'
+set matchit
+
+"cx, cxx, X, cxc
+Plug 'vim-exchange'
+set exchange
+"" gr grr
+Plug 'vim-scripts/ReplaceWithRegister'
+set ReplaceWithRegister
+
+set easymotion
+"set sneak
+"set multiple-cursors
+"set ReplaceWithRegister
+"
+
+"inoremap jk <esc>
+"inoremap <C-A> <Home>
+"inoremap <C-E> <End>
+inoremap <c-a> <c-o>^
+inoremap <c-e> <c-o>$
+inoremap <C-B> <Left>
+"inoremap <C-J> <Down>
+"inoremap <C-K> <Up>
+inoremap <C-F> <Right>
+inoremap <C-\> <C-O>:action CodeCompletion<CR>
+"nnoremap <C-D> :action EditorDuplicate<CR>
+"nnoremap <C-D> :action Compare.SameVersion<CR>
+
+"Move code up and down
+inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
+inoremap <c-k> <Esc>:action MoveStatementUp<CR>i
+vnoremap J :action MoveStatementDown<CR>
+vnoremap K :action MoveStatementUp<CR>
+
+"nnoremap <c-w> :action JumpToLastWindow<CR>
+nnoremap <c-w><c-w> :action NextSplitter<CR>
+
+nnoremap [[ :action MethodUp<CR>
+nnoremap ]] :action MethodDown<CR>
+
+" Keys from vim-gitgutter
+nmap ]c <Action>(VcsShowNextChangeMarker)
+nmap [c <Action>(VcsShowPrevChangeMarker)
+" Not from vim-gitgutter. ={motion} is for indenting. =c does nothing
+nmap =c <Action>(VcsShowCurrentChangeMarker)
+
+" These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
+nmap ]q <Action>(GotoNextElementUnderCaretUsage)
+nmap [q <Action>(GotoPrevElementUnderCaretUsage)
+
+nmap gb <Action>(Back)
+nmap gD <Action>(GotoTypeDeclaration)
+nmap gf <Action>(Forward)
+nmap gl <Action>(QuickJavaDoc)
+nmap gL <Action>(QuickImplementations)
+nmap gy <Action>(ShowErrorDescription)
+
+inoremap <c-l> <Esc>:action EditorCompleteStatement<CR>
+nnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
+vnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
+nnoremap <leader>t :action ActivateTerminalToolWindow<CR>
+"nnoremap <leader>t :action TerminalOpenInTerminal<CR>
+nnoremap <Space>q :action HideActiveWindow<CR>
+nnoremap <leader>e :e ~/.ideavimrc<CR>
+nnoremap <leader>r :action IdeaVim.ReloadVimRc.reload<CR>
+"nnoremap <leader>m :action CMake.ReloadCMakeProject<CR>
+"nnoremap <Space>km :action CMake.ReloadCMakeProject<CR>
+nnoremap <leader>n :action ContextRun<CR>
+nnoremap <leader>b :action ShowNavBar<CR>
+
+nnoremap <leader>c :action ChooseRunConfiguration<CR>
+nnoremap <leader>d :action ChooseDebugConfiguration<CR>
+nnoremap <leader>s :action FileStructurePopup<CR>
+nnoremap <Space>r :action RenameElement<CR>
+nnoremap <Space>kr :action Run<CR>
+nnoremap <Space>kn :action ContextRun<CR>
+nnoremap <Space>kc :action RunClass<CR>
+nnoremap <Space>kf :action RerunFailedTests<CR>
+
+nnoremap <Space>f :action GotoFile<CR>
+nnoremap <leader>a :action GotoAction<CR>
+nnoremap <Space>h :action HideAllWindows<CR>
+nnoremap <Space>w :action GotoNextError<CR>
+nnoremap <Space>b :action GotoPreviousError<CR>
+nnoremap ge :action GotoNextError<CR>
+nnoremap gE :action GotoPreviousError<CR>
+noremap <Space>sw :action SurroundWith<CR>
+nnoremap <leader>l :action RecentLocations<CR>
+nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
+"nnoremap <Space>u :action FindUsages<CR>
+nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
+nnoremap <Space>u :action ShowUsages<CR>
+nnoremap <Space>sk :action TypeHierarchy<CR>
+
+"Refactor
+nnoremap <Space>n :action Inline<CR>
+vnoremap <Space>n :action Inline<CR>
+nnoremap <Space>m :action ExtractMethod<CR>
+vnoremap <Space>m :action ExtractMethod<CR>
+nnoremap <Space>v :action IntroduceVariable<CR>
+vnoremap <Space>v :action IntroduceVariable<CR>
+nnoremap <Space>i :action ShowIntentionActions<CR>
+nnoremap <Space>e :action ReformatCode<CR>
+
+nnoremap <Space>p :action IntroduceParameter<CR>
+nnoremap <Space>c :action ExtractClass<CR>
+
+nnoremap gc :action GotoClass<CR>
+nnoremap gI :action GotoImplementation<CR>
+nnoremap gs :action GotoSuperMethod<CR>
+nnoremap gt :action GotoTest<CR>
+
+nnoremap <leader>f :action FindInPath<CR>
+
+if &ide =~? 'intellij idea'
+elseif &ide =~? 'clion'
+  nnoremap <Space>v :action CIDR.Lang.IntroduceVariable<CR>
+elseif &ide =~? 'android studio'
+  nnoremap <Space>kn :action RunContextGroup<CR>
+  nnoremap <leader>n :action RunContextGroup<CR>
+endif
+
+"
+"
+" easymotion插件
+" 忽略大小写
+let g:EasyMotion_smartcase = 1
+nmap ss <Plug>(easymotion-s2)
+
+
