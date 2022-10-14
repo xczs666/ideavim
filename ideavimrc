@@ -18,6 +18,30 @@ set ideamarks
 "set rtp+=~/.vim/bundle/vundle
 "call vundle#rc()
 
+"https://github.com/JetBrains/ideavim/wiki/NERDTree-support
+":NERDTree
+":NERDTreeFocus
+":NERDTreeToggle
+":NERDTreeClose
+":NERDTreeFind
+":NERDTreeRefreshRoot
+"Key   | Description
+"o     | Open files, directories and bookmarks
+"O     | Recursively open the selected directory
+"t     | Open selected node/bookmark in a new tab
+"i     | Open selected file in a split window
+"s     | Open selected file in a new vsplit
+"x     | Close the current nodes parent
+"X     | Recursively close all children of the current node
+"P     | Jump to the root node
+"p     | Jump to current nodes parent
+"K     | Jump up inside directories at the current tree depth
+"J     | Jump down inside directories at the current tree depth
+"m     | Display the NERDTree menu
+"q     | Close the NERDTree window
+Plug 'preservim/nerdtree'
+set NERDTree
+
 " <A-n>, <A-x>, <A-p>, g<A-n>
 Plug 'terryma/vim-multiple-cursors'
 set multiple-cursors
@@ -56,6 +80,7 @@ inoremap <C-F> <Right>
 inoremap <C-\> <C-O>:action CodeCompletion<CR>
 "nnoremap <C-D> :action EditorDuplicate<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
+nnoremap <C-T> :NERDTreeFind<CR>
 
 "Move code up and down
 inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
