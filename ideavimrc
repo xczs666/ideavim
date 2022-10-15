@@ -68,6 +68,7 @@ set easymotion
 " [count]gc{motion}, o_gc, v_gc, gcc
 Plug 'tpope/vim-commentary'
 
+Plug 'vim-scripts/argtextobj.vim' " aa, ia
 
 """""""" map
 inoremap jk <esc>
@@ -83,6 +84,7 @@ inoremap <C-F> <Right>
 inoremap <C-\> <C-O>:action CodeCompletion<CR>
 "nnoremap <C-D> :action EditorDuplicate<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
+nnoremap <C-I> :action GotoImplementation<CR>
 
 "Move code up and down
 inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
@@ -219,10 +221,10 @@ nnoremap <Space>ed :action ShowErrorDescription<CR>
 "nnoremap <Space>ti :action ExpressionTypeInfo<CR>
 nnoremap <Space>pi :action ParameterInfo<CR>
 nnoremap <Space>jd :action QuickJavaDoc<CR>
-nnoremap <Space>fs mm`m:action FileStructurePopup<CR>
+"nnoremap <Space>fs mm`m:action FileStructurePopup<CR>
 nnoremap <Space>sd :action ShowUmlDiagram<CR>
 nnoremap <Space>ch :action CallHierarchy<CR>
-nnoremap <Space>fu :action FindUsages<CR>
+"nnoremap <Space>fu :action FindUsages<CR>
 nnoremap <Space>su :action ShowUsages<CR>
 nnoremap <Space>mh :action MethodHierarchy<CR>
 "nnoremap <Space>ss :action ShowSettings<CR>
