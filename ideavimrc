@@ -5,6 +5,7 @@ let mapleader=","
 set timeoutlen=5000
 
 set nocompatible              " be iMproved, required
+set showcmd
 set ignorecase
 set keep-english-in-normal
 filetype off                  " required
@@ -63,12 +64,14 @@ Plug 'vim-scripts/ReplaceWithRegister'
 set ReplaceWithRegister
 
 set easymotion
-"set sneak
-"set multiple-cursors
-"set ReplaceWithRegister
-"
 
-"inoremap jk <esc>
+" [count]gc{motion}, o_gc, v_gc, gcc
+Plug 'tpope/vim-commentary'
+
+
+"""""""" map
+inoremap jk <esc>
+inoremap kj <esc>
 "inoremap <C-A> <Home>
 "inoremap <C-E> <End>
 inoremap <c-a> <c-o>^
@@ -80,7 +83,6 @@ inoremap <C-F> <Right>
 inoremap <C-\> <C-O>:action CodeCompletion<CR>
 "nnoremap <C-D> :action EditorDuplicate<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
-nnoremap <C-T> :NERDTreeFind<CR>
 
 "Move code up and down
 inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
@@ -89,7 +91,7 @@ vnoremap J :action MoveStatementDown<CR>
 vnoremap K :action MoveStatementUp<CR>
 
 "nnoremap <c-w> :action JumpToLastWindow<CR>
-nnoremap <c-w><c-w> :action NextSplitter<CR>
+ noremap <c-w><c-w> :action NextSplitter<CR>
 
 nnoremap [[ :action MethodUp<CR>
 nnoremap ]] :action MethodDown<CR>
@@ -111,9 +113,7 @@ nmap gl <Action>(QuickJavaDoc)
 nmap gL <Action>(QuickImplementations)
 nmap gy <Action>(ShowErrorDescription)
 
-inoremap <c-l> <Esc>:action EditorCompleteStatement<CR>
-nnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
-vnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
+"inoremap <c-l> <Esc>:action EditorCompleteStatement<CR>
 nnoremap <leader>t :action ActivateTerminalToolWindow<CR>
 "nnoremap <leader>t :action TerminalOpenInTerminal<CR>
 nnoremap <Space>q :action HideActiveWindow<CR>
@@ -147,26 +147,94 @@ nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
 nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
 nnoremap <Space>u :action ShowUsages<CR>
 nnoremap <Space>sk :action TypeHierarchy<CR>
+nnoremap <Space>sj :action CallHierarchy<CR>
 
 "Refactor
-nnoremap <Space>n :action Inline<CR>
-vnoremap <Space>n :action Inline<CR>
-nnoremap <Space>m :action ExtractMethod<CR>
-vnoremap <Space>m :action ExtractMethod<CR>
-nnoremap <Space>v :action IntroduceVariable<CR>
-vnoremap <Space>v :action IntroduceVariable<CR>
-nnoremap <Space>i :action ShowIntentionActions<CR>
-nnoremap <Space>e :action ReformatCode<CR>
+nnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
+vnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
+"nnoremap <Space>e :action ReformatCode<CR>
+"nnoremap <Space>n :action Inline<CR>
+"vnoremap <Space>n :action Inline<CR>
+"nnoremap <Space>m :action ExtractMethod<CR>
+"vnoremap <Space>m :action ExtractMethod<CR>
+"nnoremap <Space>p :action IntroduceParameter<CR>
+"nnoremap <Space>P :action ReplaceMethodWithMethodObject<CR> " 提取到内部类方法
+"vnoremap <Space>P :action ReplaceMethodWithMethodObject<CR>
+"nnoremap <Space>v :action IntroduceVariable<CR>
+"vnoremap <Space>v :action IntroduceVariable<CR>
+"nnoremap <Space>ec :action ExtractClass<CR>
+"nnoremap <Space>eo :action Move<CR>
+"nnoremap <Space>ei :action ExtractInterface<CR>
+"nnoremap <Space>ef :action EncapsulateFields<CR>
+"nnoremap <Space>ed :action MemberPushDown<CR>
+"nnoremap <Space>eu :action MembersPullUp<CR>
+"nnoremap <Space>ic :action IntroduceConstant<CR>
+"nnoremap <Space>if :action IntroduceField<CR>
+"nnoremap <Space>ip :action IntroduceParameterObject<CR>
+"nnoremap <Space>st :action MakeStatic<CR>
 
-nnoremap <Space>p :action IntroduceParameter<CR>
-nnoremap <Space>c :action ExtractClass<CR>
 
+
+nnoremap <Space>il :action Inline<CR>
+vnoremap <Space>il :action Inline<CR>
+nnoremap <Space>iv :action IntroduceVariable<CR>
+vnoremap <Space>iv :action IntroduceVariable<CR>
+nnoremap <Space>ip :action IntroduceParameter<CR>
+nnoremap <Space>iF :action IntroduceFunctionalParameter<CR>
+nnoremap <Space>io :action IntroduceParameterObject<CR>
+nnoremap <Space>if :action IntroduceField<CR>
+nnoremap <Space>ic :action IntroduceConstant<CR>
+nnoremap <Space>em :action ExtractMethod<CR>
+vnoremap <Space>em :action ExtractMethod<CR>
+nnoremap <Space>eo :action ReplaceMethodWithMethodObject<CR> " 提取到内部类方法
+vnoremap <Space>eo :action ReplaceMethodWithMethodObject<CR>
+nnoremap <Space>ec :action ExtractClass<CR>
+nnoremap <Space>ei :action ExtractInterface<CR>
+nnoremap <Space>ef :action EncapsulateFields<CR>
+nnoremap <Space>mv :action Move<CR>
+nnoremap <Space>mu :action MembersPullUp<CR>
+nnoremap <Space>md :action MemberPushDown<CR>
+nnoremap <Space>ai :action AnonymousToInner<CR>
+
+nnoremap <Space>ms :action MakeStatic<CR>
+
+
+
+
+"nnoremap <Space>RF :action RenameFile<CR>
+nnoremap <Space>cs :action ChangeSignature<CR>
+
+"""""""""""""""""""Jump articles"""""""""""""""""""""""""""
 nnoremap gc :action GotoClass<CR>
 nnoremap gI :action GotoImplementation<CR>
 nnoremap gs :action GotoSuperMethod<CR>
 nnoremap gt :action GotoTest<CR>
 
 nnoremap <leader>f :action FindInPath<CR>
+
+
+""""""""""""""""""""""""""""""""""""""Information""""""""""""""""""""""""""""""""""""""
+"nnoremap <Space>i :action ShowIntentionActions<CR>
+nnoremap <Space>ed :action ShowErrorDescription<CR>
+"nnoremap <Space>ti :action ExpressionTypeInfo<CR>
+nnoremap <Space>pi :action ParameterInfo<CR>
+nnoremap <Space>jd :action QuickJavaDoc<CR>
+nnoremap <Space>fs mm`m:action FileStructurePopup<CR>
+nnoremap <Space>sd :action ShowUmlDiagram<CR>
+nnoremap <Space>ch :action CallHierarchy<CR>
+nnoremap <Space>fu :action FindUsages<CR>
+nnoremap <Space>su :action ShowUsages<CR>
+nnoremap <Space>mh :action MethodHierarchy<CR>
+"nnoremap <Space>ss :action ShowSettings<CR>
+
+""""""""""""""""""""""""""""""""""" bookmarks and buffer """""""""""""""""""""""""""""""
+nnoremap <leader>bb :action Bookmarks<CR>
+nnoremap <leader>bs :action ShowBookmarks<CR>
+nnoremap <leader>bt :action ToggleBookmark<CR>
+nnoremap <leader>bf :action AddToFavorites<CR>
+nnoremap <leader>bn :action GotoNextBookmark<CR>
+nnoremap <leader>bp :action GotoPreviousBookmark<CR>
+
 
 if &ide =~? 'intellij idea'
 elseif &ide =~? 'clion'
@@ -176,11 +244,72 @@ elseif &ide =~? 'android studio'
   nnoremap <leader>n :action RunContextGroup<CR>
 endif
 
-"
-"
+" NERDTree
+nnoremap <C-T> :NERDTreeFind<CR>
+
 " easymotion插件
 " 忽略大小写
 let g:EasyMotion_smartcase = 1
 nmap ss <Plug>(easymotion-s2)
 
+" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
+" <A-n> is used to enter accented text e.g. ñ
+nmap <leader><C-n> <Plug>AllWholeOccurrences
+xmap <leader><C-n> <Plug>AllWholeOccurrences
+nmap <leader>g<C-n> <Plug>AllOccurrences
+xmap <leader>g<C-n> <Plug>AllOccurrences
+
+
+" CamelCaseMotion approximation (obsolete with proper CamelCaseMotoin plugin)
+" Missing inner word motions e.g. i<leader>w
+" nmap <leader>w [w
+" nmap <leader>b [b
+" nmap <leader>e ]w
+" nmap <leader>ge ]b
+
+
+function! Invert(calledFromVisual)
+  let antonyms = ['true', 'false', 'after', 'before', 'start', 'end', 'left', 'right', 'first', 'last',
+                 \'True', 'False', 'After', 'Before', 'Start', 'End', 'Left', 'Right', 'First', 'Last',
+                 \'isEmpty', 'isNotEmpty', 'isNull', 'isNotNull', 'isSuccess', 'isFail']
+
+  if a:calledFromVisual
+    normal gv"wy
+  else
+    normal "wyiw
+  endif
+  let wordUnderCaret = @w
+
+  let eraseWord = a:calledFromVisual ? 'gvc' : 'ciw'
+  let count = 0
+  while (count < len(antonyms))
+    if (antonyms[count] ==# wordUnderCaret)
+      let antonym = (count % 2 ==? 0) ? antonyms[count + 1] : antonyms[count - 1]
+      execute 'normal ' .. eraseWord .. antonym
+      break
+    endif
+    let count += 1
+  endwhile
+endfunction
+
+" 翻转关键字
+nnoremap ! :call Invert(0)<CR>
+" 指定部分字符翻转
+vnoremap ! :<C-u>call Invert(1)<CR>
+" 删除方法 ap-段落
+nnoremap dam :action MethodUp<CR>f{vi{:g/^$/d<CR>dap
+" surround
+nmap S ysiW
+
+
+""" IdeaVim development stuff
+set ideastrictmode
 
