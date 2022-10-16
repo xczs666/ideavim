@@ -99,10 +99,10 @@ nnoremap [[ :action MethodUp<CR>
 nnoremap ]] :action MethodDown<CR>
 
 " Keys from vim-gitgutter
-nmap ]c <Action>(VcsShowNextChangeMarker)
-nmap [c <Action>(VcsShowPrevChangeMarker)
+nmap ]g <Action>(VcsShowNextChangeMarker)
+nmap [g <Action>(VcsShowPrevChangeMarker)
 " Not from vim-gitgutter. ={motion} is for indenting. =c does nothing
-nmap =c <Action>(VcsShowCurrentChangeMarker)
+nmap =g <Action>(VcsShowCurrentChangeMarker)
 
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
 nmap ]q <Action>(GotoNextElementUnderCaretUsage)
@@ -129,6 +129,7 @@ nnoremap <leader>b :action ShowNavBar<CR>
 nnoremap <leader>c :action ChooseRunConfiguration<CR>
 nnoremap <leader>d :action ChooseDebugConfiguration<CR>
 nnoremap <leader>s :action FileStructurePopup<CR>
+nnoremap <Space>sp :action FileStructurePopup<CR>
 nnoremap <Space>r :action RenameElement<CR>
 nnoremap <Space>kr :action Run<CR>
 nnoremap <Space>kn :action ContextRun<CR>
@@ -142,6 +143,8 @@ nnoremap <Space>w :action GotoNextError<CR>
 nnoremap <Space>b :action GotoPreviousError<CR>
 nnoremap ge :action GotoNextError<CR>
 nnoremap gE :action GotoPreviousError<CR>
+nnoremap ]e :action GotoNextError<CR>
+nnoremap [e :action GotoPreviousError<CR>
 noremap <Space>sw :action SurroundWith<CR>
 nnoremap <leader>l :action RecentLocations<CR>
 nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
@@ -191,12 +194,17 @@ vnoremap <Space>em :action ExtractMethod<CR>
 nnoremap <Space>eo :action ReplaceMethodWithMethodObject<CR> " 提取到内部类方法
 vnoremap <Space>eo :action ReplaceMethodWithMethodObject<CR>
 nnoremap <Space>ec :action ExtractClass<CR>
+nnoremap <Space>es :action ExtractSuperclass<CR>
 nnoremap <Space>ei :action ExtractInterface<CR>
 nnoremap <Space>ef :action EncapsulateFields<CR>
 nnoremap <Space>mv :action Move<CR>
+vnoremap <Space>mv :action Move<CR>
 nnoremap <Space>mu :action MembersPullUp<CR>
+vnoremap <Space>mu :action MembersPullUp<CR>
 nnoremap <Space>md :action MemberPushDown<CR>
+vnoremap <Space>md :action MemberPushDown<CR>
 nnoremap <Space>ai :action AnonymousToInner<CR>
+vnoremap <Space>ai :action AnonymousToInner<CR>
 
 nnoremap <Space>ms :action MakeStatic<CR>
 
@@ -302,6 +310,7 @@ function! Invert(calledFromVisual)
   endwhile
 endfunction
 
+
 " 翻转关键字
 nnoremap ! :call Invert(0)<CR>
 " 指定部分字符翻转
@@ -310,6 +319,18 @@ vnoremap ! :<C-u>call Invert(1)<CR>
 nnoremap dam :action MethodUp<CR>f{vi{:g/^$/d<CR>dap
 " surround
 nmap S ysiW
+
+
+""""""""""""""""""""customer java map""""""""""""""""""""""""""
+" 为属性增加@Autowired
+vnoremap aw :s/\( *\)\(.*\)/\1@Autowired\r\1\2/<CR>
+" 跳转到自己类上
+nnoremap [c :action MethodUp<CR>[{
+" class add annotation
+nmap <Space>aa [cO
+" class add field
+nmap <Space>af [co
+nnoremap ff :s/get\([A-Z]\)\([A-z0-9_]*\)()/\l\1\2/<CR>
 
 
 """ IdeaVim development stuff
