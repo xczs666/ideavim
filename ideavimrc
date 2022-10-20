@@ -66,6 +66,12 @@ Plug 'vim-scripts/ReplaceWithRegister'
 set ReplaceWithRegister
 
 set easymotion
+" easymotion插件
+" 忽略大小写
+let g:EasyMotion_smartcase = 1
+nmap s <Plug>(easymotion-s2)
+
+"set sneak
 
 " [count]gc{motion}, o_gc, v_gc, gcc
 Plug 'tpope/vim-commentary'
@@ -86,7 +92,14 @@ inoremap <C-F> <Right>
 inoremap <C-\> <C-O>:action CodeCompletion<CR>
 "nnoremap <C-D> :action EditorDuplicate<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
-nnoremap <C-I> :action GotoImplementation<CR>
+nnoremap <c-i> :action GotoImplementation<CR>
+nnoremap <c-o> :action GotoSuperMethod<CR>
+nnoremap <c-j> :action GotoNextError<CR>
+nnoremap <c-k> :action GotoPreviousError<CR>
+nnoremap <c-l> :action ShowIntentionActions<CR>
+nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
+vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
+nnoremap <c-[> :action Back<CR>
 
 "Move code up and down
 inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
@@ -97,8 +110,10 @@ vnoremap K :action MoveStatementUp<CR>
 "nnoremap <c-w> :action JumpToLastWindow<CR>
  noremap <c-w><c-w> :action NextSplitter<CR>
 
-nnoremap [[ :action MethodUp<CR>
-nnoremap ]] :action MethodDown<CR>
+nmap [[ <Action>(MethodUp)
+vmap [[ <Action>(MethodUp)
+nmap ]] <Action>(MethodDown)
+vmap ]] <Action>(MethodDown)
 
 " Keys from vim-gitgutter
 nmap ]g <Action>(VcsShowNextChangeMarker)
@@ -144,8 +159,8 @@ nnoremap <leader>a :action GotoAction<CR>
 nnoremap <Space>h :action HideAllWindows<CR>
 nnoremap <Space>w :action GotoNextError<CR>
 nnoremap <Space>b :action GotoPreviousError<CR>
-nnoremap ge :action GotoNextError<CR>
-nnoremap gE :action GotoPreviousError<CR>
+"nnoremap ge :action GotoNextError<CR>
+"nnoremap gE :action GotoPreviousError<CR>
 nnoremap ]e :action GotoNextError<CR>
 nnoremap [e :action GotoPreviousError<CR>
 noremap <Space>sw :action SurroundWith<CR>
@@ -260,25 +275,20 @@ endif
 " NERDTree
 nnoremap <C-T> :NERDTreeFind<CR>
 
-" easymotion插件
-" 忽略大小写
-let g:EasyMotion_smartcase = 1
-nmap ss <Plug>(easymotion-s2)
-
 " Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
-nmap <C-n> <Plug>NextWholeOccurrence
-xmap <C-n> <Plug>NextWholeOccurrence
-nmap g<C-n> <Plug>NextOccurrence
-xmap g<C-n> <Plug>NextOccurrence
-xmap <C-x> <Plug>SkipOccurrence
-xmap <C-p> <Plug>RemoveOccurrence
+nmap <C-x> <Plug>NextWholeOccurrence
+xmap <C-x> <Plug>NextWholeOccurrence
+nmap g<C-x> <Plug>NextOccurrence
+xmap g<C-x> <Plug>NextOccurrence
+xmap <C-s> <Plug>SkipOccurrence
+"xmap <C-p> <Plug>RemoveOccurrence
 
 " Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
 " <A-n> is used to enter accented text e.g. ñ
-nmap <leader><C-n> <Plug>AllWholeOccurrences
-xmap <leader><C-n> <Plug>AllWholeOccurrences
-nmap <leader>g<C-n> <Plug>AllOccurrences
-xmap <leader>g<C-n> <Plug>AllOccurrences
+nmap <leader><C-x> <Plug>AllWholeOccurrences
+xmap <leader><C-x> <Plug>AllWholeOccurrences
+nmap <leader>g<C-x> <Plug>AllOccurrences
+xmap <leader>g<C-x> <Plug>AllOccurrences
 
 
 " CamelCaseMotion approximation (obsolete with proper CamelCaseMotoin plugin)
@@ -335,7 +345,6 @@ nmap <Space>aa [cO
 nmap <Space>af [co
 nnoremap ff :s/get\([A-Z]\)\([A-z0-9_]*\)()/\l\1\2/<CR>
 nnoremap g= :action ReformatCode<CR>:action OptimizeImports<CR>
-nmap <c-[> <Action>(Back)
 
 
 """ IdeaVim development stuff
