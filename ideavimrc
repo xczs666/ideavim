@@ -90,16 +90,21 @@ inoremap <C-B> <Left>
 "inoremap <C-K> <Up>
 inoremap <C-F> <Right>
 inoremap <C-\> <C-O>:action CodeCompletion<CR>
+nnoremap <C-\> :action CodeCompletion<CR>
 "nnoremap <C-D> :action EditorDuplicate<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
 nnoremap <c-i> :action GotoImplementation<CR>
 nnoremap <c-o> :action GotoSuperMethod<CR>
-nnoremap <c-j> :action GotoNextError<CR>
-nnoremap <c-k> :action GotoPreviousError<CR>
-nnoremap <c-l> :action ShowIntentionActions<CR>
+nnoremap <c-d> :action GotoNextError<CR>
+nnoremap <c-e> :action GotoPreviousError<CR>
+imap <c-j> <Action>(ShowIntentionActions)
+nnoremap <c-j> :action ShowIntentionActions<CR>
+imap <c-l> <Action>(ClassNameCompletion)
+nnoremap <c-l> :action ClassNameCompletion<CR>
 nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 nnoremap <c-[> :action Back<CR>
+nnoremap <c-k> :action FileStructurePopup<CR>
 
 "Move code up and down
 inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
