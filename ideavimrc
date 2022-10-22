@@ -95,9 +95,9 @@ nnoremap <C-\> :action CodeCompletion<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
 nnoremap <c-i> :action GotoImplementation<CR>
 nnoremap <c-o> :action GotoSuperMethod<CR>
-nnoremap <c-d> :action GotoNextError<CR>
 nnoremap <c-e> :action GotoPreviousError<CR>
-imap <c-j> <Action>(ShowIntentionActions)
+nnoremap <c-d> :action GotoNextError<CR>
+imap <c-d> <Action>(GotoNextError)
 nnoremap <c-j> :action ShowIntentionActions<CR>
 imap <c-l> <Action>(ClassNameCompletion)
 nnoremap <c-l> :action ClassNameCompletion<CR>
@@ -105,6 +105,7 @@ nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 nnoremap <c-[> :action Back<CR>
 nnoremap <c-k> :action FileStructurePopup<CR>
+imap <c-r> <Action>(RenameElement)
 
 "Move code up and down
 inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
