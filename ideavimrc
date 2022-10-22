@@ -74,13 +74,12 @@ nmap s <Plug>(easymotion-s2)
 "set sneak
 
 " [count]gc{motion}, o_gc, v_gc, gcc
-Plug 'tpope/vim-commentary'
+"Plug 'tpope/vim-commentary'
 
 Plug 'vim-scripts/argtextobj.vim' " aa, ia
 
 """""""" map
 inoremap jk <esc>
-inoremap kj <esc>
 "inoremap <C-A> <Home>
 "inoremap <C-E> <End>
 inoremap <c-a> <c-o>^
@@ -239,7 +238,7 @@ nnoremap <Space>ms :action MakeStatic<CR>
 nnoremap <Space>cs :action ChangeSignature<CR>
 
 """""""""""""""""""Jump articles"""""""""""""""""""""""""""
-nnoremap gc :action GotoClass<CR>
+nnoremap gc gg:action MethodDown<CR>
 nnoremap gi :action GotoImplementation<CR>
 nnoremap gs :action GotoSuperMethod<CR>
 nnoremap gt :action GotoTest<CR>
@@ -342,14 +341,20 @@ nmap S ysiW
 
 """"""""""""""""""""customer java map""""""""""""""""""""""""""
 " 为属性增加@Autowired
-vnoremap aw :s/\( *\)\(.*\)/\1@Autowired\r\1\2/<CR>
+nnoremap <Space>aw :s/\v( +)private( final \| )([A-z_]+) ([A-z0-9_]+).*;/\1@Autowired\r\1private \3 \4;/<CR>
+vnoremap <Space>aw :s/\v( +)private( final \| )([A-z_]+) ([A-z0-9_]+).*;/\1@Autowired\r\1private \3 \4;/<CR>
 " 跳转到自己类上
-nnoremap [c :action MethodUp<CR>[{
+nnoremap [c gg:action MethodDown<CR>
 " class add annotation
 nmap <Space>aa [cO
 " class add field
 nmap <Space>af [co
-nnoremap ff :s/get\([A-Z]\)\([A-z0-9_]*\)()/\l\1\2/<CR>
+nmap <Space>ac [cO@Component<Esc>
+nmap <Space>as [cO@Service<Esc>
+nmap <Space>al [cO@Slf4j<Esc>
+nmap <Space>ai [ct{i
+nnoremap <Space>fu bbdiwxxxx~wxxb
+nnoremap <Space>fa yiwgg:action MethodDown<CR>o@Autowired<Enter>private <Esc>pb~A <Esc>pA;<Esc>``
 nnoremap g= :action ReformatCode<CR>:action OptimizeImports<CR>
 
 
