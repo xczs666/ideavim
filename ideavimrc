@@ -8,7 +8,9 @@ set nocompatible              " be iMproved, required
 set number
 set relativenumber
 set showcmd
+set incsearch
 set ignorecase
+set smartcase " no ignore case when pattern is uppercase
 set keep-english-in-normal
 filetype off                  " required
 """ IdeaVim options
@@ -16,6 +18,13 @@ filetype off                  " required
 set ideajoin
 " Map vim marks to IDEA global marks
 set ideamarks
+" Define the mode that would be enabled during
+"  the refactoring (renaming, live template, introduce variable, etc)
+"     Use one of the following values:
+"     - keep  - keep the mode that was enabled before starting a refactoring
+"     - select - start refactoring in select mode
+"     - visual - start refactoring in visual mode
+set idearefactormode=keep
 
 " set the runtime path to include Vundle and initialize
 "set rtp+=~/.vim/bundle/vundle
@@ -88,7 +97,8 @@ inoremap <C-B> <Left>
 "inoremap <C-J> <Down>
 "inoremap <C-K> <Up>
 inoremap <C-F> <Right>
-inoremap <C-\> <C-O>:action CodeCompletion<CR>
+"inoremap <C-\> <C-O>:action CodeCompletion<CR>
+imap <C-\> <Action>(CodeCompletion)
 nnoremap <C-\> :action CodeCompletion<CR>
 "nnoremap <C-D> :action EditorDuplicate<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
@@ -159,7 +169,7 @@ nnoremap <Space>kn :action ContextRun<CR>
 nnoremap <Space>kc :action RunClass<CR>
 nnoremap <Space>kf :action RerunFailedTests<CR>
 
-nnoremap <Space>f :action GotoFile<CR>
+nnoremap <leader>f :action GotoFile<CR>
 nnoremap <leader>a :action GotoAction<CR>
 nnoremap <Space>h :action HideAllWindows<CR>
 nnoremap <Space>w :action GotoNextError<CR>
@@ -243,7 +253,7 @@ nnoremap gi :action GotoImplementation<CR>
 nnoremap gs :action GotoSuperMethod<CR>
 nnoremap gt :action GotoTest<CR>
 
-nnoremap <leader>f :action FindInPath<CR>
+"nnoremap <leader>f :action FindInPath<CR>
 
 
 """"""""""""""""""""""""""""""""""""""Information""""""""""""""""""""""""""""""""""""""
@@ -356,6 +366,7 @@ nmap <Space>ai [ct{i
 nnoremap <Space>fu bbdiwxxxx~wxxb
 nnoremap <Space>fa yiwgg:action MethodDown<CR>o@Autowired<Enter>private <Esc>pb~A <Esc>pA;<Esc>``
 nnoremap g= :action ReformatCode<CR>:action OptimizeImports<CR>
+nnoremap <Space>pn /[,)]<CR>bb
 
 
 """ IdeaVim development stuff
