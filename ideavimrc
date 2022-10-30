@@ -2,6 +2,7 @@
 " https://github.com/JetBrains/ideavim/discussions/303
 set clipboard+=unnamed,ideaput
 let mapleader=","
+set notimeout
 set timeoutlen=5000
 
 set nocompatible              " be iMproved, required
@@ -55,10 +56,14 @@ Plug 'preservim/nerdtree'
 set NERDTree
 
 " <A-n>, <A-x>, <A-p>, g<A-n>
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 set multiple-cursors
 
+" ms/ mcr mcv mcd
 set multicursor
+"nmap q <Plug>(multicursor-ms/)
+nmap z <Plug>(multicursor-mcv)
+nmap Z <Plug>(multicursor-mcr)
 
 "" ys ysiw cs ds
 Plug 'vim-surround'
@@ -86,6 +91,10 @@ nmap s <Plug>(easymotion-s2)
 "Plug 'tpope/vim-commentary'
 
 Plug 'vim-scripts/argtextobj.vim' " aa, ia
+
+set which-key
+" make the popup appear much slower
+let g:WhichKey_DefaultDelay = 300
 
 """""""" map
 inoremap jk <esc>
@@ -156,24 +165,31 @@ nnoremap <leader>e :e ~/.ideavimrc<CR>
 nnoremap <leader>r :action IdeaVim.ReloadVimRc.reload<CR>
 "nnoremap <leader>m :action CMake.ReloadCMakeProject<CR>
 "nnoremap <Space>km :action CMake.ReloadCMakeProject<CR>
-nnoremap <leader>n :action ContextRun<CR>
-nnoremap <leader>b :action ShowNavBar<CR>
+"nnoremap <leader>b :action ShowNavBar<CR>
 
-nnoremap <leader>c :action ChooseRunConfiguration<CR>
-nnoremap <leader>d :action ChooseDebugConfiguration<CR>
 nnoremap <leader>s :action FileStructurePopup<CR>
 nnoremap <Space>sp :action FileStructurePopup<CR>
+let g:WhichKeyDesc_FileStructurePopup="<Space>sp FileStructurePopup"
 nnoremap <Space>r :action RenameElement<CR>
+let g:WhichKeyDesc_RenameElement="<Space>r RenameElement"
 nnoremap <Space>kr :action Run<CR>
+let g:WhichKeyDesc_Run="<Space>kr Run"
 nnoremap <Space>kn :action ContextRun<CR>
+let g:WhichKeyDesc_ContextRun="<Space>kn ContextRun"
 nnoremap <Space>kc :action RunClass<CR>
+let g:WhichKeyDesc_RunClass="<Space>kc RunClass"
 nnoremap <Space>kf :action RerunFailedTests<CR>
+let g:WhichKeyDesc_RerunFailedTests="<Space>kf RerunFailedTests"
+nnoremap <Space>kh :action ChooseRunConfiguration<CR>
+let g:WhichKeyDesc_ChooseRunConfiguration="<Space>kh ChooseRunConfiguration"
+nnoremap <Space>kd :action ChooseDebugConfiguration<CR>
+let g:WhichKeyDesc_ChooseDebugConfiguration="<Space>kd ChooseDebugConfiguration"
 
 nnoremap <leader>f :action GotoFile<CR>
 nnoremap <leader>a :action GotoAction<CR>
 nnoremap <Space>h :action HideAllWindows<CR>
-nnoremap <Space>w :action GotoNextError<CR>
-nnoremap <Space>b :action GotoPreviousError<CR>
+"nnoremap <Space>w :action GotoNextError<CR>
+"nnoremap <Space>b :action GotoPreviousError<CR>
 "nnoremap ge :action GotoNextError<CR>
 "nnoremap gE :action GotoPreviousError<CR>
 nnoremap ]e :action GotoNextError<CR>
@@ -183,7 +199,7 @@ nnoremap <leader>l :action RecentLocations<CR>
 nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
 "nnoremap <Space>u :action FindUsages<CR>
 nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
-nnoremap <Space>u :action ShowUsages<CR>
+"nnoremap <Space>u :action ShowUsages<CR>
 nnoremap <Space>sk :action TypeHierarchy<CR>
 nnoremap <Space>sj :action CallHierarchy<CR>
 
@@ -215,32 +231,49 @@ vnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
 
 nnoremap <Space>il :action Inline<CR>
 vnoremap <Space>il :action Inline<CR>
+let g:WhichKeyDesc_inline="<Space>il Inline"
 nnoremap <Space>iv :action IntroduceVariable<CR>
 vnoremap <Space>iv :action IntroduceVariable<CR>
+let g:WhichKeyDesc_introduce_variable="<Space>iv IntroduceVariable"
 nnoremap <Space>ip :action IntroduceParameter<CR>
+let g:WhichKeyDesc_introduce_parameter="<Space>ip IntroduceParameter"
 nnoremap <Space>iF :action IntroduceFunctionalParameter<CR>
+let g:WhichKeyDesc_introduce_functional_parameter="<Space>iF IntroduceFunctionalParameter"
 nnoremap <Space>io :action IntroduceParameterObject<CR>
+let g:WhichKeyDesc_introduce_parameter_object="<Space>io IntroduceParameterObject"
 nnoremap <Space>if :action IntroduceField<CR>
+let g:WhichKeyDesc_introduce_field="<Space>if IntroduceField"
 nnoremap <Space>ic :action IntroduceConstant<CR>
+let g:WhichKeyDesc_introduce_constant="<Space>ic IntroduceConstant"
 nnoremap <Space>em :action ExtractMethod<CR>
 vnoremap <Space>em :action ExtractMethod<CR>
+let g:WhichKeyDesc_extract_method="<Space>em ExtractMethod"
 nnoremap <Space>eo :action ReplaceMethodWithMethodObject<CR> " 提取到内部类方法
 vnoremap <Space>eo :action ReplaceMethodWithMethodObject<CR>
+let g:WhichKeyDesc_replace_method_with_method_object="<Space>eo ReplaceMethodWithMethodObject"
 nnoremap <Space>ec :action ExtractClass<CR>
+let g:WhichKeyDesc_extract_class="<Space>ec ExtractClass"
 nnoremap <Space>es :action ExtractSuperclass<CR>
+let g:WhichKeyDesc_extract_superclass="<Space>es ExtractSuperclass"
 nnoremap <Space>ei :action ExtractInterface<CR>
+let g:WhichKeyDesc_extract_interface="<Space>ei ExtractInterface"
 nnoremap <Space>ef :action EncapsulateFields<CR>
+let g:WhichKeyDesc_encapsulate_fields="<Space>ef EncapsulateFields"
 nnoremap <Space>mv :action Move<CR>
 vnoremap <Space>mv :action Move<CR>
+let g:WhichKeyDesc_move="<Space>mv Move"
 nnoremap <Space>mu :action MembersPullUp<CR>
 vnoremap <Space>mu :action MembersPullUp<CR>
+let g:WhichKeyDesc_member_pull_up="<Space>mu MembersPullUp"
 nnoremap <Space>md :action MemberPushDown<CR>
 vnoremap <Space>md :action MemberPushDown<CR>
+let g:WhichKeyDesc_member_push_down="<Space>md MemberPushDown"
 nnoremap <Space>ai :action AnonymousToInner<CR>
 vnoremap <Space>ai :action AnonymousToInner<CR>
+let g:WhichKeyDesc_anonymous_to_inner="<Space>ai AnonymousToInner"
 
 nnoremap <Space>ms :action MakeStatic<CR>
-
+let g:WhichKeyDesc_make_static="<Space>ms MakeStatic"
 
 
 
@@ -345,6 +378,7 @@ nnoremap ! :call Invert(0)<CR>
 vnoremap ! :<C-u>call Invert(1)<CR>
 " 删除方法 ap-段落
 nnoremap dam :action MethodUp<CR>f{vi{:g/^$/d<CR>dap
+let g:WhichKeyDesc_delete_method="dam delete method"
 " surround
 nmap S ysiW
 
@@ -353,21 +387,36 @@ nmap S ysiW
 " 为属性增加@Autowired
 nnoremap <Space>aw :s/\v( +)private( final \| )([A-z_]+) ([A-z0-9_]+).*;/\1@Autowired\r\1private \3 \4;/<CR>
 vnoremap <Space>aw :s/\v( +)private( final \| )([A-z_]+) ([A-z0-9_]+).*;/\1@Autowired\r\1private \3 \4;/<CR>
+let g:WhichKeyDesc_autowired="<Space>aw add @Autowired and format"
 " 跳转到自己类上
 nnoremap [c gg:action MethodDown<CR>
+let g:WhichKeyDesc_goto_own_class="[c goto own class"
 " class add annotation
 nmap <Space>aa [cO
+let g:WhichKeyDesc_add_annotation="<Space>aa add annotation"
 " class add field
 nmap <Space>af [co
+let g:WhichKeyDesc_add_field="<Space>af add field"
 nmap <Space>ac [cO@Component<Esc>
+let g:WhichKeyDesc_add_component="<Space>ac add @Component"
 nmap <Space>as [cO@Service<Esc>
+let g:WhichKeyDesc_add_service="<Space>as add @Service"
 nmap <Space>al [cO@Slf4j<Esc>
+let g:WhichKeyDesc_add_log="<Space>al add @Slf4j"
 nmap <Space>ai [ct{i
+let g:WhichKeyDesc_add_implements="<Space>ai add implements"
 nnoremap <Space>fu bbdiwxxxx~wxxb
+let g:WhichKeyDesc_variable_unwrap="<Space>fu variable unwrap"
 nnoremap <Space>fa yiwgg:action MethodDown<CR>o@Autowired<Enter>private <Esc>pb~A <Esc>pA;<Esc>``
+let g:WhichKeyDesc_variable_to_field="<Space>fa variable to field"
 nnoremap g= :action ReformatCode<CR>:action OptimizeImports<CR>
+let g:WhichKeyDesc_format_file="g= format file"
 nnoremap <Space>pn /[,)]<CR>bb
+let g:WhichKeyDesc_next_parameter="<Space>pn next parameter"
 
+" easy javadoc
+nnoremap <Space>dg :action javadoc.generator<CR>
+nmap <Space>da [c<Action>(javadoc.generatorAll)
 
 """ IdeaVim development stuff
 set ideastrictmode
