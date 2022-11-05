@@ -62,7 +62,7 @@ set multiple-cursors
 " ms/ mcr mcv mcd
 set multicursor
 "nmap q <Plug>(multicursor-ms/)
-nmap z <Plug>(multicursor-mcv)
+"nmap z <Plug>(multicursor-mcv)
 nmap Z <Plug>(multicursor-mcr)
 
 "" ys ysiw cs ds
@@ -94,7 +94,7 @@ Plug 'vim-scripts/argtextobj.vim' " aa, ia
 
 set which-key
 " make the popup appear much slower
-let g:WhichKey_DefaultDelay = 300
+let g:WhichKey_DefaultDelay = 500
 
 """""""" map
 inoremap jk <esc>
@@ -413,6 +413,9 @@ nnoremap g= :action ReformatCode<CR>:action OptimizeImports<CR>
 let g:WhichKeyDesc_format_file="g= format file"
 nnoremap <Space>pn /[,)]<CR>bb
 let g:WhichKeyDesc_next_parameter="<Space>pn next parameter"
+" 寄存器，宏t 全参构造器转为builder
+let @t="0jddkPj0:s/^[ ,]*//<CR>v/\\(, \\\|$\\)<CR>hdkt=i(<Esc>pa)<Esc>ld$:s/^\\( *\\)this/\\1/<CR>j0"
+
 
 " easy javadoc
 nnoremap <Space>dg :action javadoc.generator<CR>
