@@ -416,6 +416,7 @@ let g:WhichKeyDesc_next_parameter="<Space>pn next parameter"
 " 寄存器，宏t 全参构造器转为builder
 let @t="0jddkPj0:s/^[ ,]*//<CR>v/\\(, \\\|$\\)<CR>hdkt=i(<Esc>pa)<Esc>ld$:s/^\\( *\\)this/\\1/<CR>j0"
 
+nnoremap <silent> vv <C-w>v
 
 " easy javadoc
 nnoremap <Space>dg :action javadoc.generator<CR>
