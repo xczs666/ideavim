@@ -1,7 +1,8 @@
 " `:actionlist` command show all Intellij action. :-)
 " https://github.com/JetBrains/ideavim/discussions/303
 set clipboard+=unnamed,ideaput
-let mapleader=","
+let mapleader="\<Space>"
+let maplocalleader=","
 set notimeout
 set timeoutlen=5000
 
@@ -158,127 +159,127 @@ nmap gL <Action>(QuickImplementations)
 nmap gy <Action>(ShowErrorDescription)
 
 "inoremap <c-l> <Esc>:action EditorCompleteStatement<CR>
-nnoremap <leader>t :action ActivateTerminalToolWindow<CR>
-"nnoremap <leader>t :action TerminalOpenInTerminal<CR>
-nnoremap <Space>q :action HideActiveWindow<CR>
-nnoremap <leader>e :e ~/.ideavimrc<CR>
-nnoremap <leader>r :action IdeaVim.ReloadVimRc.reload<CR>
-"nnoremap <leader>m :action CMake.ReloadCMakeProject<CR>
-"nnoremap <Space>km :action CMake.ReloadCMakeProject<CR>
-"nnoremap <leader>b :action ShowNavBar<CR>
+nnoremap ,t :action ActivateTerminalToolWindow<CR>
+"nnoremap ,t :action TerminalOpenInTerminal<CR>
+nnoremap <leader>q :action HideActiveWindow<CR>
+nnoremap ,e :e ~/.ideavimrc<CR>
+nnoremap ,r :action IdeaVim.ReloadVimRc.reload<CR>
+"nnoremap ,m :action CMake.ReloadCMakeProject<CR>
+"nnoremap <leader>km :action CMake.ReloadCMakeProject<CR>
+"nnoremap ,b :action ShowNavBar<CR>
 
-nnoremap <leader>s :action FileStructurePopup<CR>
-nnoremap <Space>sp :action FileStructurePopup<CR>
-let g:WhichKeyDesc_FileStructurePopup="<Space>sp FileStructurePopup"
-nnoremap <Space>r :action RenameElement<CR>
-let g:WhichKeyDesc_RenameElement="<Space>r RenameElement"
-nnoremap <Space>kr :action Run<CR>
-let g:WhichKeyDesc_Run="<Space>kr Run"
-nnoremap <Space>kn :action ContextRun<CR>
-let g:WhichKeyDesc_ContextRun="<Space>kn ContextRun"
-nnoremap <Space>kc :action RunClass<CR>
-let g:WhichKeyDesc_RunClass="<Space>kc RunClass"
-nnoremap <Space>kf :action RerunFailedTests<CR>
-let g:WhichKeyDesc_RerunFailedTests="<Space>kf RerunFailedTests"
-nnoremap <Space>kh :action ChooseRunConfiguration<CR>
-let g:WhichKeyDesc_ChooseRunConfiguration="<Space>kh ChooseRunConfiguration"
-nnoremap <Space>kd :action ChooseDebugConfiguration<CR>
-let g:WhichKeyDesc_ChooseDebugConfiguration="<Space>kd ChooseDebugConfiguration"
+"nnoremap ,s :action FileStructurePopup<CR>
+"nnoremap <leader>sp :action FileStructurePopup<CR>
+let g:WhichKeyDesc_FileStructurePopup="<leader>sp FileStructurePopup"
+nnoremap <leader>r :action RenameElement<CR>
+let g:WhichKeyDesc_RenameElement="<leader>r RenameElement"
+nnoremap <leader>kr :action Run<CR>
+let g:WhichKeyDesc_Run="<leader>kr Run"
+nnoremap <leader>kn :action ContextRun<CR>
+let g:WhichKeyDesc_ContextRun="<leader>kn ContextRun"
+nnoremap <leader>kc :action RunClass<CR>
+let g:WhichKeyDesc_RunClass="<leader>kc RunClass"
+nnoremap <leader>kf :action RerunFailedTests<CR>
+let g:WhichKeyDesc_RerunFailedTests="<leader>kf RerunFailedTests"
+nnoremap <leader>kh :action ChooseRunConfiguration<CR>
+let g:WhichKeyDesc_ChooseRunConfiguration="<leader>kh ChooseRunConfiguration"
+nnoremap <leader>kd :action ChooseDebugConfiguration<CR>
+let g:WhichKeyDesc_ChooseDebugConfiguration="<leader>kd ChooseDebugConfiguration"
 
-nnoremap <leader>f :action GotoFile<CR>
-nnoremap <leader>a :action GotoAction<CR>
-nnoremap <Space>h :action HideAllWindows<CR>
-"nnoremap <Space>w :action GotoNextError<CR>
-"nnoremap <Space>b :action GotoPreviousError<CR>
+nnoremap ,f :action GotoFile<CR>
+nnoremap ,a :action GotoAction<CR>
+nnoremap <leader>h :action HideAllWindows<CR>
+"nnoremap <leader>w :action GotoNextError<CR>
+"nnoremap <leader>b :action GotoPreviousError<CR>
 "nnoremap ge :action GotoNextError<CR>
 "nnoremap gE :action GotoPreviousError<CR>
 nnoremap ]e :action GotoNextError<CR>
 nnoremap [e :action GotoPreviousError<CR>
-noremap <Space>sw :action SurroundWith<CR>
-nnoremap <leader>l :action RecentLocations<CR>
-nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
-"nnoremap <Space>u :action FindUsages<CR>
+noremap <leader>sw :action SurroundWith<CR>
+nnoremap ,l :action RecentLocations<CR>
+nnoremap ,h  :action LocalHistory.ShowHistory<CR>
+"nnoremap <leader>u :action FindUsages<CR>
 nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
-"nnoremap <Space>u :action ShowUsages<CR>
-nnoremap <Space>sk :action TypeHierarchy<CR>
-nnoremap <Space>sj :action CallHierarchy<CR>
+"nnoremap <leader>u :action ShowUsages<CR>
+nnoremap <leader>sk :action TypeHierarchy<CR>
+nnoremap <leader>sj :action CallHierarchy<CR>
 
 "Refactor
-nnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
-vnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
-"nnoremap <Space>e :action ReformatCode<CR>
-"nnoremap <Space>n :action Inline<CR>
-"vnoremap <Space>n :action Inline<CR>
-"nnoremap <Space>m :action ExtractMethod<CR>
-"vnoremap <Space>m :action ExtractMethod<CR>
-"nnoremap <Space>p :action IntroduceParameter<CR>
-"nnoremap <Space>P :action ReplaceMethodWithMethodObject<CR> " 提取到内部类方法
-"vnoremap <Space>P :action ReplaceMethodWithMethodObject<CR>
-"nnoremap <Space>v :action IntroduceVariable<CR>
-"vnoremap <Space>v :action IntroduceVariable<CR>
-"nnoremap <Space>ec :action ExtractClass<CR>
-"nnoremap <Space>eo :action Move<CR>
-"nnoremap <Space>ei :action ExtractInterface<CR>
-"nnoremap <Space>ef :action EncapsulateFields<CR>
-"nnoremap <Space>ed :action MemberPushDown<CR>
-"nnoremap <Space>eu :action MembersPullUp<CR>
-"nnoremap <Space>ic :action IntroduceConstant<CR>
-"nnoremap <Space>if :action IntroduceField<CR>
-"nnoremap <Space>ip :action IntroduceParameterObject<CR>
-"nnoremap <Space>st :action MakeStatic<CR>
+nnoremap <leader>t :action Refactorings.QuickListPopupAction<CR>
+vnoremap <leader>t :action Refactorings.QuickListPopupAction<CR>
+"nnoremap <leader>e :action ReformatCode<CR>
+"nnoremap <leader>n :action Inline<CR>
+"vnoremap <leader>n :action Inline<CR>
+"nnoremap <leader>m :action ExtractMethod<CR>
+"vnoremap <leader>m :action ExtractMethod<CR>
+"nnoremap <leader>p :action IntroduceParameter<CR>
+"nnoremap <leader>P :action ReplaceMethodWithMethodObject<CR> " 提取到内部类方法
+"vnoremap <leader>P :action ReplaceMethodWithMethodObject<CR>
+"nnoremap <leader>v :action IntroduceVariable<CR>
+"vnoremap <leader>v :action IntroduceVariable<CR>
+"nnoremap <leader>ec :action ExtractClass<CR>
+"nnoremap <leader>eo :action Move<CR>
+"nnoremap <leader>ei :action ExtractInterface<CR>
+"nnoremap <leader>ef :action EncapsulateFields<CR>
+"nnoremap <leader>ed :action MemberPushDown<CR>
+"nnoremap <leader>eu :action MembersPullUp<CR>
+"nnoremap <leader>ic :action IntroduceConstant<CR>
+"nnoremap <leader>if :action IntroduceField<CR>
+"nnoremap <leader>ip :action IntroduceParameterObject<CR>
+"nnoremap <leader>st :action MakeStatic<CR>
 
 
 
-nnoremap <Space>il :action Inline<CR>
-vnoremap <Space>il :action Inline<CR>
-let g:WhichKeyDesc_inline="<Space>il Inline"
-nnoremap <Space>iv :action IntroduceVariable<CR>
-vnoremap <Space>iv :action IntroduceVariable<CR>
-let g:WhichKeyDesc_introduce_variable="<Space>iv IntroduceVariable"
-nnoremap <Space>ip :action IntroduceParameter<CR>
-let g:WhichKeyDesc_introduce_parameter="<Space>ip IntroduceParameter"
-nnoremap <Space>iF :action IntroduceFunctionalParameter<CR>
-let g:WhichKeyDesc_introduce_functional_parameter="<Space>iF IntroduceFunctionalParameter"
-nnoremap <Space>io :action IntroduceParameterObject<CR>
-let g:WhichKeyDesc_introduce_parameter_object="<Space>io IntroduceParameterObject"
-nnoremap <Space>if :action IntroduceField<CR>
-let g:WhichKeyDesc_introduce_field="<Space>if IntroduceField"
-nnoremap <Space>ic :action IntroduceConstant<CR>
-let g:WhichKeyDesc_introduce_constant="<Space>ic IntroduceConstant"
-nnoremap <Space>em :action ExtractMethod<CR>
-vnoremap <Space>em :action ExtractMethod<CR>
-let g:WhichKeyDesc_extract_method="<Space>em ExtractMethod"
-nnoremap <Space>eo :action ReplaceMethodWithMethodObject<CR> " 提取到内部类方法
-vnoremap <Space>eo :action ReplaceMethodWithMethodObject<CR>
-let g:WhichKeyDesc_replace_method_with_method_object="<Space>eo ReplaceMethodWithMethodObject"
-nnoremap <Space>ec :action ExtractClass<CR>
-let g:WhichKeyDesc_extract_class="<Space>ec ExtractClass"
-nnoremap <Space>es :action ExtractSuperclass<CR>
-let g:WhichKeyDesc_extract_superclass="<Space>es ExtractSuperclass"
-nnoremap <Space>ei :action ExtractInterface<CR>
-let g:WhichKeyDesc_extract_interface="<Space>ei ExtractInterface"
-nnoremap <Space>ef :action EncapsulateFields<CR>
-let g:WhichKeyDesc_encapsulate_fields="<Space>ef EncapsulateFields"
-nnoremap <Space>mv :action Move<CR>
-vnoremap <Space>mv :action Move<CR>
-let g:WhichKeyDesc_move="<Space>mv Move"
-nnoremap <Space>mu :action MembersPullUp<CR>
-vnoremap <Space>mu :action MembersPullUp<CR>
-let g:WhichKeyDesc_member_pull_up="<Space>mu MembersPullUp"
-nnoremap <Space>md :action MemberPushDown<CR>
-vnoremap <Space>md :action MemberPushDown<CR>
-let g:WhichKeyDesc_member_push_down="<Space>md MemberPushDown"
-nnoremap <Space>ai :action AnonymousToInner<CR>
-vnoremap <Space>ai :action AnonymousToInner<CR>
-let g:WhichKeyDesc_anonymous_to_inner="<Space>ai AnonymousToInner"
+nnoremap <leader>il :action Inline<CR>
+vnoremap <leader>il :action Inline<CR>
+let g:WhichKeyDesc_inline="<leader>il Inline"
+nnoremap <leader>iv :action IntroduceVariable<CR>
+vnoremap <leader>iv :action IntroduceVariable<CR>
+let g:WhichKeyDesc_introduce_variable="<leader>iv IntroduceVariable"
+nnoremap <leader>ip :action IntroduceParameter<CR>
+let g:WhichKeyDesc_introduce_parameter="<leader>ip IntroduceParameter"
+nnoremap <leader>iF :action IntroduceFunctionalParameter<CR>
+let g:WhichKeyDesc_introduce_functional_parameter="<leader>iF IntroduceFunctionalParameter"
+nnoremap <leader>io :action IntroduceParameterObject<CR>
+let g:WhichKeyDesc_introduce_parameter_object="<leader>io IntroduceParameterObject"
+nnoremap <leader>if :action IntroduceField<CR>
+let g:WhichKeyDesc_introduce_field="<leader>if IntroduceField"
+nnoremap <leader>ic :action IntroduceConstant<CR>
+let g:WhichKeyDesc_introduce_constant="<leader>ic IntroduceConstant"
+nnoremap <leader>em :action ExtractMethod<CR>
+vnoremap <leader>em :action ExtractMethod<CR>
+let g:WhichKeyDesc_extract_method="<leader>em ExtractMethod"
+nnoremap <leader>eo :action ReplaceMethodWithMethodObject<CR> " 提取到内部类方法
+vnoremap <leader>eo :action ReplaceMethodWithMethodObject<CR>
+let g:WhichKeyDesc_replace_method_with_method_object="<leader>eo ReplaceMethodWithMethodObject"
+nnoremap <leader>ec :action ExtractClass<CR>
+let g:WhichKeyDesc_extract_class="<leader>ec ExtractClass"
+nnoremap <leader>es :action ExtractSuperclass<CR>
+let g:WhichKeyDesc_extract_superclass="<leader>es ExtractSuperclass"
+nnoremap <leader>ei :action ExtractInterface<CR>
+let g:WhichKeyDesc_extract_interface="<leader>ei ExtractInterface"
+nnoremap <leader>ef :action EncapsulateFields<CR>
+let g:WhichKeyDesc_encapsulate_fields="<leader>ef EncapsulateFields"
+nnoremap <leader>mv :action Move<CR>
+vnoremap <leader>mv :action Move<CR>
+let g:WhichKeyDesc_move="<leader>mv Move"
+nnoremap <leader>mu :action MembersPullUp<CR>
+vnoremap <leader>mu :action MembersPullUp<CR>
+let g:WhichKeyDesc_member_pull_up="<leader>mu MembersPullUp"
+nnoremap <leader>md :action MemberPushDown<CR>
+vnoremap <leader>md :action MemberPushDown<CR>
+let g:WhichKeyDesc_member_push_down="<leader>md MemberPushDown"
+nnoremap <leader>ai :action AnonymousToInner<CR>
+vnoremap <leader>ai :action AnonymousToInner<CR>
+let g:WhichKeyDesc_anonymous_to_inner="<leader>ai AnonymousToInner"
 
-nnoremap <Space>ms :action MakeStatic<CR>
-let g:WhichKeyDesc_make_static="<Space>ms MakeStatic"
+nnoremap <leader>ms :action MakeStatic<CR>
+let g:WhichKeyDesc_make_static="<leader>ms MakeStatic"
 
 
 
-"nnoremap <Space>RF :action RenameFile<CR>
-nnoremap <Space>cs :action ChangeSignature<CR>
+"nnoremap <leader>RF :action RenameFile<CR>
+nnoremap <leader>cs :action ChangeSignature<CR>
 
 """""""""""""""""""Jump articles"""""""""""""""""""""""""""
 nnoremap gc gg:action MethodDown<CR>
@@ -286,38 +287,38 @@ nnoremap gi :action GotoImplementation<CR>
 nnoremap gs :action GotoSuperMethod<CR>
 nnoremap gt :action GotoTest<CR>
 
-"nnoremap <leader>f :action FindInPath<CR>
+"nnoremap ,f :action FindInPath<CR>
 
 
 """"""""""""""""""""""""""""""""""""""Information""""""""""""""""""""""""""""""""""""""
-"nnoremap <Space>i :action ShowIntentionActions<CR>
-nnoremap <Space>ed :action ShowErrorDescription<CR>
-"nnoremap <Space>ti :action ExpressionTypeInfo<CR>
-nnoremap <Space>pi :action ParameterInfo<CR>
-nnoremap <Space>jd :action QuickJavaDoc<CR>
-"nnoremap <Space>fs mm`m:action FileStructurePopup<CR>
-nnoremap <Space>sd :action ShowUmlDiagram<CR>
-nnoremap <Space>ch :action CallHierarchy<CR>
-"nnoremap <Space>fu :action FindUsages<CR>
-nnoremap <Space>su :action ShowUsages<CR>
-nnoremap <Space>mh :action MethodHierarchy<CR>
-"nnoremap <Space>ss :action ShowSettings<CR>
+"nnoremap <leader>i :action ShowIntentionActions<CR>
+nnoremap <leader>ed :action ShowErrorDescription<CR>
+"nnoremap <leader>ti :action ExpressionTypeInfo<CR>
+nnoremap <leader>pi :action ParameterInfo<CR>
+nnoremap <leader>jd :action QuickJavaDoc<CR>
+"nnoremap <leader>fs mm`m:action FileStructurePopup<CR>
+nnoremap <leader>sd :action ShowUmlDiagram<CR>
+nnoremap <leader>ch :action CallHierarchy<CR>
+"nnoremap <leader>fu :action FindUsages<CR>
+nnoremap <leader>su :action ShowUsages<CR>
+nnoremap <leader>mh :action MethodHierarchy<CR>
+"nnoremap <leader>ss :action ShowSettings<CR>
 
 """"""""""""""""""""""""""""""""""" bookmarks and buffer """""""""""""""""""""""""""""""
-nnoremap <leader>bb :action Bookmarks<CR>
-nnoremap <leader>bs :action ShowBookmarks<CR>
-nnoremap <leader>bt :action ToggleBookmark<CR>
-nnoremap <leader>bf :action AddToFavorites<CR>
-nnoremap <leader>bn :action GotoNextBookmark<CR>
-nnoremap <leader>bp :action GotoPreviousBookmark<CR>
+nnoremap ,bb :action Bookmarks<CR>
+nnoremap ,bs :action ShowBookmarks<CR>
+nnoremap ,bt :action ToggleBookmark<CR>
+nnoremap ,bf :action AddToFavorites<CR>
+nnoremap ,bn :action GotoNextBookmark<CR>
+nnoremap ,bp :action GotoPreviousBookmark<CR>
 
 
 if &ide =~? 'intellij idea'
 elseif &ide =~? 'clion'
-  nnoremap <Space>v :action CIDR.Lang.IntroduceVariable<CR>
+  nnoremap <leader>v :action CIDR.Lang.IntroduceVariable<CR>
 elseif &ide =~? 'android studio'
-  nnoremap <Space>kn :action RunContextGroup<CR>
-  nnoremap <leader>n :action RunContextGroup<CR>
+  nnoremap <leader>kn :action RunContextGroup<CR>
+  nnoremap ,n :action RunContextGroup<CR>
 endif
 
 " NERDTree
@@ -333,18 +334,18 @@ xmap <C-s> <Plug>SkipOccurrence
 
 " Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
 " <A-n> is used to enter accented text e.g. ñ
-nmap <leader><C-x> <Plug>AllWholeOccurrences
-xmap <leader><C-x> <Plug>AllWholeOccurrences
-nmap <leader>g<C-x> <Plug>AllOccurrences
-xmap <leader>g<C-x> <Plug>AllOccurrences
+nmap ,<C-x> <Plug>AllWholeOccurrences
+xmap ,<C-x> <Plug>AllWholeOccurrences
+nmap ,g<C-x> <Plug>AllOccurrences
+xmap ,g<C-x> <Plug>AllOccurrences
 
 
 " CamelCaseMotion approximation (obsolete with proper CamelCaseMotoin plugin)
-" Missing inner word motions e.g. i<leader>w
-" nmap <leader>w [w
-" nmap <leader>b [b
-" nmap <leader>e ]w
-" nmap <leader>ge ]b
+" Missing inner word motions e.g. i,w
+" nmap ,w [w
+" nmap ,b [b
+" nmap ,e ]w
+" nmap ,ge ]b
 
 
 function! Invert(calledFromVisual)
@@ -385,42 +386,42 @@ nmap S ysiW
 
 """"""""""""""""""""customer java map""""""""""""""""""""""""""
 " 为属性增加@Autowired
-nnoremap <Space>aw :s/\v( +)private( final \| )([A-z_]+) ([A-z0-9_]+).*;/\1@Autowired\r\1private \3 \4;/<CR>
-vnoremap <Space>aw :s/\v( +)private( final \| )([A-z_]+) ([A-z0-9_]+).*;/\1@Autowired\r\1private \3 \4;/<CR>
-let g:WhichKeyDesc_autowired="<Space>aw add @Autowired and format"
+nnoremap <leader>aw :s/\v( +)private( final \| )([A-z_]+) ([A-z0-9_]+).*;/\1@Autowired\r\1private \3 \4;/<CR>
+vnoremap <leader>aw :s/\v( +)private( final \| )([A-z_]+) ([A-z0-9_]+).*;/\1@Autowired\r\1private \3 \4;/<CR>
+let g:WhichKeyDesc_autowired="<leader>aw add @Autowired and format"
 " 跳转到自己类上
 nnoremap [c gg:action MethodDown<CR>
 let g:WhichKeyDesc_goto_own_class="[c goto own class"
 " class add annotation
-nmap <Space>aa [cO
-let g:WhichKeyDesc_add_annotation="<Space>aa add annotation"
+nmap <leader>aa [cO
+let g:WhichKeyDesc_add_annotation="<leader>aa add annotation"
 " class add field
-nmap <Space>af [co
-let g:WhichKeyDesc_add_field="<Space>af add field"
-nmap <Space>ac [cO@Component<Esc>
-let g:WhichKeyDesc_add_component="<Space>ac add @Component"
-nmap <Space>as [cO@Service<Esc>
-let g:WhichKeyDesc_add_service="<Space>as add @Service"
-nmap <Space>al [cO@Slf4j<Esc>
-let g:WhichKeyDesc_add_log="<Space>al add @Slf4j"
-nmap <Space>ai [ct{i
-let g:WhichKeyDesc_add_implements="<Space>ai add implements"
-nnoremap <Space>fu bbdiwxxxx~wxxb
-let g:WhichKeyDesc_variable_unwrap="<Space>fu variable unwrap"
-nnoremap <Space>fa yiwgg:action MethodDown<CR>o@Autowired<Enter>private <Esc>pb~A <Esc>pA;<Esc>``
-let g:WhichKeyDesc_variable_to_field="<Space>fa variable to field"
+nmap <leader>af [co
+let g:WhichKeyDesc_add_field="<leader>af add field"
+nmap <leader>ac [cO@Component<Esc>
+let g:WhichKeyDesc_add_component="<leader>ac add @Component"
+nmap <leader>as [cO@Service<Esc>
+let g:WhichKeyDesc_add_service="<leader>as add @Service"
+nmap <leader>al [cO@Slf4j<Esc>
+let g:WhichKeyDesc_add_log="<leader>al add @Slf4j"
+nmap <leader>ai [ct{i
+let g:WhichKeyDesc_add_implements="<leader>ai add implements"
+nnoremap <leader>fu bbdiwxxxx~wxxb
+let g:WhichKeyDesc_variable_unwrap="<leader>fu variable unwrap"
+nnoremap <leader>fa yiwgg:action MethodDown<CR>o@Autowired<Enter>private <Esc>pb~A <Esc>pA;<Esc>``
+let g:WhichKeyDesc_variable_to_field="<leader>fa variable to field"
 nnoremap g= :action ReformatCode<CR>:action OptimizeImports<CR>
 let g:WhichKeyDesc_format_file="g= format file"
-nnoremap <Space>pn /[,)]<CR>bb
-let g:WhichKeyDesc_next_parameter="<Space>pn next parameter"
+nnoremap <leader>pn /[,)]<CR>bb
+let g:WhichKeyDesc_next_parameter="<leader>pn next parameter"
 " 寄存器，宏t 全参构造器转为builder
 let @t="0jddkPj0:s/^[ ,]*//<CR>v/\\(, \\\|$\\)<CR>hdkt=i(<Esc>pa)<Esc>ld$:s/^\\( *\\)this/\\1/<CR>j0"
 
 nnoremap <silent> vv <C-w>v
 
 " easy javadoc
-nnoremap <Space>dg :action javadoc.generator<CR>
-nmap <Space>da [c<Action>(javadoc.generatorAll)
+nnoremap <leader>dg :action javadoc.generator<CR>
+nmap <leader>da [c<Action>(javadoc.generatorAll)
 
 """ IdeaVim development stuff
 set ideastrictmode
