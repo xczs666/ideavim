@@ -118,7 +118,8 @@ nnoremap <c-e> :action GotoPreviousError<CR>
 nnoremap <c-d> :action GotoNextError<CR>
 imap <c-d> <Action>(GotoNextError)
 nnoremap <c-j> :action ShowIntentionActions<CR>
-imap <c-l> <Action>(ClassNameCompletion)
+"imap <c-l> <Action>(ClassNameCompletion)
+imap <c-l> <Action>(SmartTypeCompletion)
 nnoremap <c-l> :action ClassNameCompletion<CR>
 nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
@@ -145,6 +146,8 @@ nmap ]g <Action>(VcsShowNextChangeMarker)
 nmap [g <Action>(VcsShowPrevChangeMarker)
 " Not from vim-gitgutter. ={motion} is for indenting. =c does nothing
 nmap =g <Action>(VcsShowCurrentChangeMarker)
+nmap <leader>ga <Action>(Annotate)
+nmap <leader>gb <Action>(Vcs.RollbackChangedLines)
 
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
 nmap ]q <Action>(GotoNextElementUnderCaretUsage)
