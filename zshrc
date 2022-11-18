@@ -83,6 +83,9 @@ plugins=(
     brew
     git
     git-flow
+	# git clone https://github.com/bobthecow/git-flow-completion ~/.oh-my-zsh/custom/plugins/git-flow-completion
+	# rm /opt/homebrew/share/zsh/site-functions/_git && rm "$ZSH_COMPDUMP" && exec zsh
+	git-flow-completion
     zsh-syntax-highlighting
     zsh-autosuggestions
     docker
