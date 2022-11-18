@@ -187,7 +187,7 @@ export FZF_ALT_C_COMMAND="fd -I -t d --color=always"
 # HSTR configuration - add this to ~/.zshrc
 alias hh=hstr                    # hh to be alias for hstr
 setopt histignorespace           # skip cmds w/ leading space from history
-export HSTR_CONFIG=hicolor       # get more colors
+export HSTR_CONFIG=hicolor,raw-history-view       # get more colors
 bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
 
 export PATH=$PATH:$HOME/async-profiler-2.7-macos
