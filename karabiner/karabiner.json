@@ -300,7 +300,7 @@
                                 ],
                                 "to_if_alone": [
                                     {
-                                        "hold_down_milliseconds": 500,
+                                        "hold_down_milliseconds": 100,
                                         "key_code": "escape"
                                     }
                                 ],
@@ -375,38 +375,7 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": [
-                        {
-                            "from": {
-                                "apple_vendor_top_case_key_code": "keyboard_fn"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "left_shift"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "left_shift"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "caps_lock"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "right_command"
-                            },
-                            "to": [
-                                {
-                                    "apple_vendor_top_case_key_code": "keyboard_fn"
-                                }
-                            ]
-                        }
-                    ],
+                    "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 },
                 {
@@ -442,16 +411,6 @@
                             "to": [
                                 {
                                     "key_code": "left_shift"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "left_shift"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "caps_lock"
                                 }
                             ]
                         }
@@ -608,6 +567,26 @@
                     "to": [
                         {
                             "key_code": "left_control"
+                        }
+                    ]
+                },
+                {
+                    "from": {
+                        "key_code": "left_shift"
+                    },
+                    "to": [
+                        {
+                            "key_code": "caps_lock"
+                        }
+                    ]
+                },
+                {
+                    "from": {
+                        "key_code": "right_command"
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_shift"
                         }
                     ]
                 }
