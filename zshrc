@@ -154,12 +154,13 @@ export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$CLASSPATH
 alias ls='ls -FG'
 alias l='ls -ltr'
 alias du='du -h -d 0'
-alias vi='/opt/homebrew/bin/vim'
+alias vi='nvim'
 alias rm='trash-put'
 alias fd='fd -I -c auto'
 alias tm='tmux'
 alias tnew='tmux new -s '
 alias ta='tmux at '
+alias lg='lazygit'
 
 export M2_HOME=/opt/homebrew/opt/maven
 export M2=$M2_HOME/bin
