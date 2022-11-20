@@ -136,7 +136,7 @@ export HOMEBREW_NO_AUTO_UPDATE=true
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   autoload -Uz compinit
-  compinit
+  compinit -u
 fi
 
 
@@ -201,3 +201,4 @@ eval "$(op completion zsh)"; compdef _op op
 
 eval "$(jira --completion-script-zsh)"
 
+export PATH="/usr/local/sbin:$PATH"
