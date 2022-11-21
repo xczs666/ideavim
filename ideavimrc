@@ -162,7 +162,7 @@ nmap gL <Action>(QuickImplementations)
 nmap gy <Action>(ShowErrorDescription)
 
 "inoremap <c-l> <Esc>:action EditorCompleteStatement<CR>
-nnoremap ,t :action ActivateTerminalToolWindow<CR>
+nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
 "nnoremap ,t :action TerminalOpenInTerminal<CR>
 nnoremap <leader>q :action HideActiveWindow<CR>
 nnoremap ,e :e ~/.ideavimrc<CR>
@@ -325,7 +325,7 @@ elseif &ide =~? 'android studio'
 endif
 
 " NERDTree
-nnoremap <C-T> :NERDTreeFind<CR>
+nnoremap ,t :NERDTreeFind<CR>
 
 " Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
 nmap <C-x> <Plug>NextWholeOccurrence

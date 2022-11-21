@@ -161,6 +161,7 @@ alias tm='tmux'
 alias tnew='tmux new -s '
 alias ta='tmux at '
 alias lg='lazygit'
+alias tls='tmux ls && read session && tmux attach -t ${session:-default} || tmux new -s ${session:-default}'
 
 export M2_HOME=/opt/homebrew/opt/maven
 export M2=$M2_HOME/bin
@@ -202,3 +203,4 @@ eval "$(op completion zsh)"; compdef _op op
 eval "$(jira --completion-script-zsh)"
 
 export PATH="/usr/local/sbin:$PATH"
+export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
