@@ -114,17 +114,17 @@ nnoremap <C-\> :action CodeCompletion<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
 nnoremap <c-i> :action GotoImplementation<CR>
 nnoremap <c-o> :action GotoSuperMethod<CR>
-nnoremap <c-e> :action GotoPreviousError<CR>
-nnoremap <c-d> :action GotoNextError<CR>
+nnoremap <c-k> :action GotoPreviousError<CR>
+nnoremap <c-j> :action GotoNextError<CR>
 imap <c-d> <Action>(GotoNextError)
-nnoremap <c-j> :action ShowIntentionActions<CR>
+nnoremap <c-s> :action ShowIntentionActions<CR>
 "imap <c-l> <Action>(ClassNameCompletion)
 imap <c-l> <Action>(SmartTypeCompletion)
 nnoremap <c-l> :action ClassNameCompletion<CR>
 nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 nnoremap <c-[> :action Back<CR>
-nnoremap <c-k> :action FileStructurePopup<CR>
+"nnoremap <c-k> :action FileStructurePopup<CR>
 imap <c-r> <Action>(RenameElement)
 
 "Move code up and down
@@ -333,7 +333,7 @@ nmap <C-x> <Plug>NextWholeOccurrence
 xmap <C-x> <Plug>NextWholeOccurrence
 nmap g<C-x> <Plug>NextOccurrence
 xmap g<C-x> <Plug>NextOccurrence
-xmap <C-s> <Plug>SkipOccurrence
+"xmap <C-s> <Plug>SkipOccurrence
 "xmap <C-p> <Plug>RemoveOccurrence
 
 " Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
