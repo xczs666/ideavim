@@ -351,6 +351,24 @@ xmap ,g<C-x> <Plug>AllOccurrences
 " nmap ,e ]w
 " nmap ,ge ]b
 
+" plugin StringManipulation
+" crc camelCase
+nnoremap <leader>crc :action StringManipulation.ToCamelCase<CR>
+vnoremap <leader>crc :action StringManipulation.ToCamelCase<CR>
+" crm MixedCase
+nnoremap <leader>crm :action StringManipulation.ToPascalCase<CR>
+vnoremap <leader>crm :action StringManipulation.ToPascalCase<CR>
+" crs snake_case
+nnoremap <leader>crs :action StringManipulation.ToSnakeCase<CR>
+vnoremap <leader>crs :action StringManipulation.ToSnakeCase<CR>
+" cru UPPER_CASE
+nnoremap <leader>cru :action StringManipulation.ToScreamingSnakeCase<CR>
+vnoremap <leader>cru :action StringManipulation.ToScreamingSnakeCase<CR>
+" cr- dash-case
+nnoremap <leader>cru :action StringManipulation.ToKebabCase<CR>
+vnoremap <leader>cru :action StringManipulation.ToKebabCase<CR>
+
+
 
 function! Invert(calledFromVisual)
   let antonyms = ['true', 'false', 'after', 'before', 'start', 'end', 'left', 'right', 'first', 'last',
