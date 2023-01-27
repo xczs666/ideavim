@@ -133,13 +133,6 @@ setopt autolist
 # eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_NO_AUTO_UPDATE=true
 
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  autoload -Uz compinit
-  compinit -u
-fi
-
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -162,6 +155,8 @@ alias tnew='tmux new -s '
 alias ta='tmux at '
 alias lg='lazygit'
 alias tls='tmux ls && read session && tmux attach -t ${session:-default} || tmux new -s ${session:-default}'
+alias proxy='export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890'
+alias unproxy='unset https_proxy;unset http_proxy;unset all_proxy'
 
 export M2_HOME=/opt/homebrew/opt/maven
 export M2=$M2_HOME/bin
@@ -199,8 +194,12 @@ export PATH=$PATH:$HOME/async-profiler-2.7-macos
 
 # 1password
 eval "$(op completion zsh)"; compdef _op op
-
 eval "$(jira --completion-script-zsh)"
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  autoload -Uz compinit
+  compinit -u
+fi
 
 export PATH="/usr/local/sbin:$PATH"
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
