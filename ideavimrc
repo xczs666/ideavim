@@ -151,6 +151,8 @@ nmap <leader>sp <Action>(FileStructurePopup)
 nmap <leader>gb <Action>(Vcs.RollbackChangedLines)
 
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
+nmap <c-s-]> <Action>(GotoNextElementUnderCaretUsage)
+nmap <c-s-[> <Action>(GotoPrevElementUnderCaretUsage)
 nmap ]q <Action>(GotoNextElementUnderCaretUsage)
 nmap [q <Action>(GotoPrevElementUnderCaretUsage)
 
@@ -192,7 +194,7 @@ let g:WhichKeyDesc_ChooseDebugConfiguration="<leader>kd ChooseDebugConfiguration
 
 nnoremap ,f :action GotoFile<CR>
 nnoremap ,a :action GotoAction<CR>
-nnoremap <leader>h :action HideAllWindows<CR>
+nnoremap <leader>hw :action HideAllWindows<CR>
 "nnoremap <leader>w :action GotoNextError<CR>
 "nnoremap <leader>b :action GotoPreviousError<CR>
 "nnoremap ge :action GotoNextError<CR>
@@ -234,6 +236,9 @@ vnoremap <leader>t :action Refactorings.QuickListPopupAction<CR>
 
 
 
+nnoremap <leader>hl :action HighlightUsagesInFile<CR>
+vnoremap <leader>hl :action HighlightUsagesInFile<CR>
+let g:WhichKeyDesc_inline="<leader>hl HighlightUsagesInFile"
 nnoremap <leader>il :action Inline<CR>
 vnoremap <leader>il :action Inline<CR>
 let g:WhichKeyDesc_inline="<leader>il Inline"
