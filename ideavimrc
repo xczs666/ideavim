@@ -86,6 +86,9 @@ set easymotion
 let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-s2)
 
+" AceJump
+nmap <c-;> <Action>(AceAction)
+
 "set sneak
 
 " [count]gc{motion}, o_gc, v_gc, gcc
@@ -126,7 +129,6 @@ vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 nnoremap <c-[> :action Back<CR>
 "nnoremap <c-k> :action FileStructurePopup<CR>
 imap <c-r> <Action>(RenameElement)
-
 "Move code up and down
 inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
 inoremap <c-k> <Esc>:action MoveStatementUp<CR>i
