@@ -86,8 +86,7 @@ set easymotion
 let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-s2)
 
-" AceJump
-nmap <c-;> <Action>(AceAction)
+" AceJump need config <c-;> use idea
 
 "set sneak
 
@@ -101,7 +100,6 @@ set which-key
 let g:WhichKey_DefaultDelay = 500
 
 """""""" map
-inoremap jk <esc>
 "inoremap <C-A> <Home>
 "inoremap <C-E> <End>
 inoremap <c-a> <c-o>^
@@ -437,6 +435,10 @@ nmap <leader>ai [ct{i
 let g:WhichKeyDesc_add_implements="<leader>ai add implements"
 nnoremap <leader>fu bbdiwxxxx~wxxb
 let g:WhichKeyDesc_variable_unwrap="<leader>fu variable unwrap"
+nnoremap <leader>Fm F=w
+let g:WhichKeyDesc_back_forward_method="<leader>Fm back forward method"
+nnoremap <leader>fm f=w
+let g:WhichKeyDesc_forward_method="<leader>fm forward method"
 nnoremap <leader>fa yiwgg:action MethodDown<CR>o@Autowired<Enter>private <Esc>pb~A <Esc>pA;<Esc>``
 let g:WhichKeyDesc_variable_to_field="<leader>fa variable to field"
 nnoremap g= :action ReformatCode<CR>:action OptimizeImports<CR>
