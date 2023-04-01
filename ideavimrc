@@ -168,6 +168,7 @@ nmap gy <Action>(ShowErrorDescription)
 nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
 "nnoremap ,t :action TerminalOpenInTerminal<CR>
 nnoremap <leader>q :action HideActiveWindow<CR>
+nmap <c-m> <Action>(HideSideWindows)
 nnoremap ,e :e ~/.ideavimrc<CR>
 nnoremap ,r :action IdeaVim.ReloadVimRc.reload<CR>
 "nnoremap ,m :action CMake.ReloadCMakeProject<CR>
