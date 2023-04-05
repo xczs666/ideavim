@@ -151,10 +151,15 @@ nmap <leader>sp <Action>(FileStructurePopup)
 nmap <leader>gb <Action>(Vcs.RollbackChangedLines)
 
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
-nmap <c-s-]> <Action>(GotoNextElementUnderCaretUsage)
-nmap <c-s-[> <Action>(GotoPrevElementUnderCaretUsage)
+" nmap <c-s-]> <Action>(GotoNextElementUnderCaretUsage)
+" nmap <c-s-[> <Action>(GotoPrevElementUnderCaretUsage)
+nmap <c-d-]> <Action>(GotoNextElementUnderCaretUsage)
+nmap <c-d-[> <Action>(GotoPrevElementUnderCaretUsage)
 nmap ]q <Action>(GotoNextElementUnderCaretUsage)
 nmap [q <Action>(GotoPrevElementUnderCaretUsage)
+nnoremap <c-d-9> F(
+nnoremap <c-d-0> f)
+nnoremap <c-d--> %
 
 nmap <c-]> <Action>(GotoDeclaration)
 "nmap gb <Action>(Back)
@@ -168,7 +173,7 @@ nmap gy <Action>(ShowErrorDescription)
 nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
 "nnoremap ,t :action TerminalOpenInTerminal<CR>
 nnoremap <leader>q :action HideActiveWindow<CR>
-nmap <c-m> <Action>(HideSideWindows)
+"nmap <c-m> <Action>(HideSideWindows)
 nnoremap ,e :e ~/.ideavimrc<CR>
 nnoremap ,r :action IdeaVim.ReloadVimRc.reload<CR>
 "nnoremap ,m :action CMake.ReloadCMakeProject<CR>
