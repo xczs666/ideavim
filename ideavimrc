@@ -54,11 +54,10 @@ set idearefactormode=keep
 "m     | Display the NERDTree menu
 "q     | Close the NERDTree window
 Plug 'preservim/nerdtree'
-set NERDTree
 
 " <A-n>, <A-x>, <A-p>, g<A-n>
-" Plug 'terryma/vim-multiple-cursors'
-set multiple-cursors
+ Plug 'terryma/vim-multiple-cursors'
+"set multiple-cursors
 
 " ms/ mcr mcv mcd
 set multicursor
@@ -68,25 +67,26 @@ nmap Z <Plug>(multicursor-mcr)
 
 "" ys ysiw cs ds
 Plug 'vim-surround'
-set surround
 
 Plug 'chrisbra/matchit'
-set matchit
 
 "cx, cxx, X, cxc
 Plug 'vim-exchange'
-set exchange
+"set exchange
+
 "" gr grr
 Plug 'vim-scripts/ReplaceWithRegister'
-set ReplaceWithRegister
+"set ReplaceWithRegister
 
-set easymotion
+Plug 'easymotion/vim-easymotion'
+" set easymotion
 " easymotion插件
 " 忽略大小写
 let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-s2)
 
 " AceJump need config <c-;> use idea
+sethandler <c-;> a:ide
 
 "set sneak
 
@@ -94,6 +94,9 @@ nmap s <Plug>(easymotion-s2)
 "Plug 'tpope/vim-commentary'
 
 Plug 'vim-scripts/argtextobj.vim' " aa, ia
+
+" IdeaVim-Quickscope plugin.高亮f,t
+set quickscope
 
 set which-key
 " make the popup appear much slower
