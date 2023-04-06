@@ -103,6 +103,14 @@ set which-key
 let g:WhichKey_DefaultDelay = 500
 
 """""""" map
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
+" Go to the first non-blank character of a line
+noremap 0 ^
+" Just in case you need to go to the very beginning of a line
+noremap ^ 0
 "inoremap <C-A> <Home>
 "inoremap <C-E> <End>
 inoremap <c-a> <c-o>^
