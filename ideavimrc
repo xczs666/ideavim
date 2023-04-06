@@ -160,6 +160,9 @@ nmap =g <Action>(VcsShowCurrentChangeMarker)
 nmap <leader>ga <Action>(Annotate)
 nmap <leader>sp <Action>(FileStructurePopup)
 nmap <leader>gb <Action>(Vcs.RollbackChangedLines)
+nmap <leader>gh <Action>(Vcs.ShowTabbedFileHistory)
+vmap <leader>gh <Action>(Vcs.ShowHistoryForBlock)
+
 
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
 " nmap <c-s-]> <Action>(GotoNextElementUnderCaretUsage)
@@ -392,6 +395,22 @@ vnoremap <leader>cru :action StringManipulation.ToKebabCase<CR>
 
 
 
+function! ToggleIsNot()
+    " let l:word = expand('<cword>')
+    normal "wyiw
+    let l:word = @w
+    if l:word[0:4] ==# 'isNot'
+        let l:new_word = 'is' . l:word[5:]
+    elseif l:word[0:1] ==# 'is'
+        let l:new_word = 'isNot' . l:word[2:]
+    else
+        echo "No matching prefix found."
+        return
+    endif
+
+    execute "normal ciw" . l:new_word
+endfunction
+
 function! Invert(calledFromVisual)
   let antonyms = ['true', 'false', 'after', 'before', 'start', 'end', 'left', 'right', 'first', 'last',
                  \'True', 'False', 'After', 'Before', 'Start', 'End', 'Left', 'Right', 'First', 'Last',
@@ -418,7 +437,8 @@ endfunction
 
 
 " 翻转关键字
-nnoremap ! :call Invert(0)<CR>
+"nnoremap ! :call Invert(0)<CR>
+nnoremap ! :call ToggleIsNot()<CR>
 " 指定部分字符翻转
 vnoremap ! :<C-u>call Invert(1)<CR>
 " 删除方法 ap-段落
