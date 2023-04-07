@@ -639,23 +639,38 @@
                         ]
                     },
                     {
-                        "description": "left_command+ctrl to caps_lock",
+                        "description": "Map Command+Control to Caps Lock",
                         "manipulators": [
                             {
+                                "type": "basic",
                                 "from": {
                                     "key_code": "left_control",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_command"
+                                        ],
+                                        "optional": [
+                                            "any"
                                         ]
                                     }
                                 },
-                                "to": [
+                                "to_if_alone": [
                                     {
                                         "key_code": "caps_lock"
                                     }
                                 ],
-                                "type": "basic"
+                                "to_if_held_down": [
+                                    {
+                                        "key_code": "caps_lock"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "any",
+                                        "value": 1
+                                    }
+                                ]
                             }
                         ]
                     },

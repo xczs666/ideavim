@@ -162,6 +162,9 @@ nmap <leader>sp <Action>(FileStructurePopup)
 nmap <leader>gb <Action>(Vcs.RollbackChangedLines)
 nmap <leader>gh <Action>(Vcs.ShowTabbedFileHistory)
 vmap <leader>gh <Action>(Vcs.ShowHistoryForBlock)
+nmap <leader>gi <Action>(Gitflow.InitRepo)
+nmap <leader>gf <Action>(Gitflow.OpenGitflowPopup)
+
 
 
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
@@ -174,6 +177,8 @@ nmap [q <Action>(GotoPrevElementUnderCaretUsage)
 nnoremap <c-d-9> F(
 nnoremap <c-d-0> f)
 nnoremap <c-d--> %
+imap <d-i> <Action>(EditorContextInfo)
+nmap <d-i> <Action>(EditorContextInfo)
 
 nmap <c-]> <Action>(GotoDeclaration)
 "nmap gb <Action>(Back)
@@ -214,7 +219,7 @@ let g:WhichKeyDesc_ChooseDebugConfiguration="<leader>kd ChooseDebugConfiguration
 
 nnoremap ,f :action GotoFile<CR>
 nnoremap ,a :action GotoAction<CR>
-nnoremap <leader>hw :action HideAllWindows<CR>
+nnoremap <leader>hw :action HideSideWindows<CR>
 "nnoremap <leader>w :action GotoNextError<CR>
 "nnoremap <leader>b :action GotoPreviousError<CR>
 "nnoremap ge :action GotoNextError<CR>
@@ -441,6 +446,9 @@ endfunction
 nnoremap ! :call ToggleIsNot()<CR>
 " 指定部分字符翻转
 vnoremap ! :<C-u>call Invert(1)<CR>
+" 单词跳转
+nnoremap <leader>w [w
+nnoremap <leader>b [b
 " 删除方法 ap-段落
 nnoremap dam :action MethodUp<CR>f{vi{:g/^$/d<CR>dap
 let g:WhichKeyDesc_delete_method="dam delete method"
