@@ -216,6 +216,7 @@ nnoremap <leader>kh :action ChooseRunConfiguration<CR>
 let g:WhichKeyDesc_ChooseRunConfiguration="<leader>kh ChooseRunConfiguration"
 nnoremap <leader>kd :action ChooseDebugConfiguration<CR>
 let g:WhichKeyDesc_ChooseDebugConfiguration="<leader>kd ChooseDebugConfiguration"
+nmap <leader>km <Action>(Maven.ExecuteGoal)
 
 nnoremap ,f :action GotoFile<CR>
 nnoremap ,a :action GotoAction<CR>
