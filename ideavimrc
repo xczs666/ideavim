@@ -1,11 +1,27 @@
 " `:actionlist` command show all Intellij action. :-)
 " https://github.com/JetBrains/ideavim/discussions/303
-set clipboard+=unnamed,ideaput
+"=============================================================
+" 基础键位说明
+"=============================================================
+" M->cmd, A->win option, D->mac option, C->control
+" <ESC> - escape, <BS> - backspace
 let mapleader="\<Space>"
 let maplocalleader=","
+
+"=============================================================
+" 基础设置
+"=============================================================
+set clipboard+=unnamed,ideaput
 set notimeout
 set timeoutlen=5000
 
+"垂直滚动时，光标距离顶部/底部的位置(单位：行)
+set scrolloff=5
+"禁用错误提示音
+set visualbell
+set noerrorbells
+" 当“on”时，一些命令将光标移动到该行的第一个非空白处。 关闭时，光标将保留在同一列中（如果可能）
+set startofline=on
 set nocompatible              " be iMproved, required
 set number
 set relativenumber
@@ -13,6 +29,8 @@ set showcmd
 set incsearch
 set ignorecase
 set smartcase " no ignore case when pattern is uppercase
+" 显示匹配括号
+set showmatch
 set keep-english-in-normal
 filetype off                  " required
 """ IdeaVim options
@@ -84,16 +102,16 @@ Plug 'easymotion/vim-easymotion'
 " 忽略大小写
 let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-s2)
-
-" AceJump need config <c-;> use idea
-sethandler <c-;> a:ide
+let g:EasyMotion_override_acejump = 0
 
 "set sneak
 
 " [count]gc{motion}, o_gc, v_gc, gcc
 "Plug 'tpope/vim-commentary'
 
+"文本对象编辑 https://www.vim.org/scripts/script.php?script_id=2699
 Plug 'vim-scripts/argtextobj.vim' " aa, ia
+let g:argtextobj_pairs="[:],(:),<:>"
 
 " IdeaVim-Quickscope plugin.高亮f,t
 set quickscope
@@ -103,8 +121,12 @@ set which-key
 let g:WhichKey_DefaultDelay = 500
 
 """""""" map
+"visual 模式 下 按* 号 搜索 光标选中的内容(对已选中的内容进行查找)
+vmap * "ry/<C-R>r<CR>
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+vmap n nzz
+vmap N Nzz
 nnoremap n nzzzv
 nnoremap N Nzzzv
 " Go to the first non-blank character of a line
@@ -119,9 +141,17 @@ inoremap <C-B> <Left>
 "inoremap <C-J> <Down>
 "inoremap <C-K> <Up>
 inoremap <C-F> <Right>
+
+"=============================================================
+" 个人习惯
+"=============================================================
+"选中引号内
+nmap <Leader>v vi"
 "inoremap <C-\> <C-O>:action CodeCompletion<CR>
 imap <C-\> <Action>(CodeCompletion)
 nnoremap <C-\> :action CodeCompletion<CR>
+imap <C-Space> <Action>(CodeCompletion)
+nnoremap <C-Space> :action CodeCompletion<CR>
 "nnoremap <C-D> :action EditorDuplicate<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
 nnoremap <c-i> :action GotoImplementation<CR>
@@ -133,9 +163,11 @@ nnoremap <c-s> :action ShowIntentionActions<CR>
 "imap <c-l> <Action>(ClassNameCompletion)
 imap <c-l> <Action>(SmartTypeCompletion)
 nnoremap <c-l> :action ClassNameCompletion<CR>
+imap <c-cr> <Action>(SmartTypeCompletion)
+nnoremap <c-cr> :action SmartTypeCompletion<CR>
 nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
-nnoremap <c-[> :action Back<CR>
+"nnoremap <c-[> :action Back<CR>
 "nnoremap <c-k> :action FileStructurePopup<CR>
 imap <c-r> <Action>(RenameElement)
 "Move code up and down
@@ -261,7 +293,12 @@ vnoremap <leader>t :action Refactorings.QuickListPopupAction<CR>
 "nnoremap <leader>st :action MakeStatic<CR>
 
 
-
+" 选择模式扩大选择范围
+vmap v <Action>(EditorSelectWord)
+" 选择模式缩小选择范围
+vmap V <Action>(EditorUnSelectWord)
+" 打开最近项目
+nmap <Leader><Leader>o <Action>(RecentProjectListGroup)
 nnoremap <leader>hl :action HighlightUsagesInFile<CR>
 vnoremap <leader>hl :action HighlightUsagesInFile<CR>
 let g:WhichKeyDesc_inline="<leader>hl HighlightUsagesInFile"
@@ -503,3 +540,15 @@ nmap <leader>da [c<Action>(javadoc.generatorAll)
 """ IdeaVim development stuff
 set ideastrictmode
 
+"=============================================================
+" 默认键位配置
+"=============================================================
+" IEDA
+sethandler <C-;> a:ide
+sethandler <M-i> a:ide
+sethandler <C-n> a:ide
+sethandler <C-p> a:ide
+
+"=============================================================
+" 默认键位配置
+"=============================================================
