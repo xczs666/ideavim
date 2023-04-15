@@ -236,19 +236,27 @@ nnoremap ,r :action IdeaVim.ReloadVimRc.reload<CR>
 let g:WhichKeyDesc_FileStructurePopup="<leader>sp FileStructurePopup"
 nnoremap <leader>r :action RenameElement<CR>
 let g:WhichKeyDesc_RenameElement="<leader>r RenameElement"
-nnoremap <leader>kr :action Run<CR>
-let g:WhichKeyDesc_Run="<leader>kr Run"
-nnoremap <leader>kn :action ContextRun<CR>
-let g:WhichKeyDesc_ContextRun="<leader>kn ContextRun"
-nnoremap <leader>kc :action RunClass<CR>
-let g:WhichKeyDesc_RunClass="<leader>kc RunClass"
+nnoremap <leader>kpr :action Run<CR>
+let g:WhichKeyDesc_Run="<leader>kpr Run"
+nnoremap <leader>kpd :action Debug<CR>
+let g:WhichKeyDesc_Debug="<leader>kpd Debug"
+nnoremap <leader>kmd :action ContextDebug<CR>
+let g:WhichKeyDesc_ContextDebug="<leader>kmd ContextDebug"
+nnoremap <leader>kmr :action ContextRun<CR>
+let g:WhichKeyDesc_ContextRun="<leader>kmr ContextRun"
+nnoremap <leader>krc :action RunClass<CR>
+let g:WhichKeyDesc_RunClass="<leader>krc RunClass"
 nnoremap <leader>kf :action RerunFailedTests<CR>
 let g:WhichKeyDesc_RerunFailedTests="<leader>kf RerunFailedTests"
-nnoremap <leader>kh :action ChooseRunConfiguration<CR>
-let g:WhichKeyDesc_ChooseRunConfiguration="<leader>kh ChooseRunConfiguration"
-nnoremap <leader>kd :action ChooseDebugConfiguration<CR>
-let g:WhichKeyDesc_ChooseDebugConfiguration="<leader>kd ChooseDebugConfiguration"
-nmap <leader>km <Action>(Maven.ExecuteGoal)
+nnoremap <leader>kcr :action ChooseRunConfiguration<CR>
+let g:WhichKeyDesc_ChooseRunConfiguration="<leader>kcr ChooseRunConfiguration"
+nnoremap <leader>kcd :action ChooseDebugConfiguration<CR>
+let g:WhichKeyDesc_ChooseDebugConfiguration="<leader>kcd ChooseDebugConfiguration"
+nnoremap <leader>po :action ToggleLineBreakpoint<CR>
+nnoremap <leader>pv :action ViewBreakpoints<CR>
+
+
+nmap <leader><leader>m <Action>(Maven.ExecuteGoal)
 
 nnoremap ,f :action GotoFile<CR>
 nnoremap ,a :action GotoAction<CR>
