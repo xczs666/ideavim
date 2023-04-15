@@ -161,8 +161,8 @@ nnoremap <c-j> :action GotoNextError<CR>
 imap <c-d> <Action>(GotoNextError)
 nnoremap <c-s> :action ShowIntentionActions<CR>
 "imap <c-l> <Action>(ClassNameCompletion)
-imap <c-l> <Action>(SmartTypeCompletion)
-nnoremap <c-l> :action ClassNameCompletion<CR>
+"imap <c-l> <Action>(SmartTypeCompletion)
+"nnoremap <c-l> :action ClassNameCompletion<CR>
 imap <c-cr> <Action>(SmartTypeCompletion)
 nnoremap <c-cr> :action SmartTypeCompletion<CR>
 nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
