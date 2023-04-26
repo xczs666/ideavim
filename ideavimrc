@@ -121,6 +121,9 @@ set which-key
 let g:WhichKey_DefaultDelay = 500
 
 """""""" map
+noremap <Esc> <nop>
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
 "visual 模式 下 按* 号 搜索 光标选中的内容(对已选中的内容进行查找)
 vmap * "ry/<C-R>r<CR>
 nnoremap <C-d> <C-d>zz
@@ -156,8 +159,8 @@ nnoremap <C-Space> :action CodeCompletion<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
 nnoremap <c-i> :action GotoImplementation<CR>
 nnoremap <c-o> :action GotoSuperMethod<CR>
-nnoremap <c-k> :action GotoPreviousError<CR>
-nnoremap <c-j> :action GotoNextError<CR>
+nnoremap <c-d-p> :action GotoPreviousError<CR>
+nnoremap <c-d-n> :action GotoNextError<CR>
 imap <c-d> <Action>(GotoNextError)
 nnoremap <c-s> :action ShowIntentionActions<CR>
 "imap <c-l> <Action>(ClassNameCompletion)
@@ -171,8 +174,12 @@ vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 "nnoremap <c-k> :action FileStructurePopup<CR>
 imap <c-r> <Action>(RenameElement)
 "Move code up and down
-inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
-inoremap <c-k> <Esc>:action MoveStatementUp<CR>i
+nnoremap <c-j> :m +1<CR>
+nnoremap <c-k> :m -2<CR>
+inoremap <c-j> <Esc>:m +1<CR>gi
+inoremap <c-k> <Esc>:m -2<CR>gi
+"inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
+"inoremap <c-k> <Esc>:action MoveStatementUp<CR>i
 vnoremap J :action MoveStatementDown<CR>
 vnoremap K :action MoveStatementUp<CR>
 
