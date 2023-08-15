@@ -1,9 +1,9 @@
 " `:actionlist` command show all Intellij action. :-)
 " https://github.com/JetBrains/ideavim/discussions/303
-"=============================================================
 " 基础键位说明
 "=============================================================
-" M->cmd, A->win option, D->mac option, C->control
+"=============================================================
+" M->cmd, S-shift, A->win option, D->mac option, C->control
 " <ESC> - escape, <BS> - backspace
 let mapleader="\<Space>"
 let maplocalleader=","
@@ -77,11 +77,11 @@ Plug 'preservim/nerdtree'
  Plug 'terryma/vim-multiple-cursors'
 "set multiple-cursors
 
-" ms/ mcr mcv mcd
-set multicursor
-"nmap q <Plug>(multicursor-ms/)
-"nmap z <Plug>(multicursor-mcv)
-nmap Z <Plug>(multicursor-mcr)
+"" ms/ mcr mcv mcd
+"set multicursor
+""nmap q <Plug>(multicursor-ms/)
+""nmap z <Plug>(multicursor-mcv)
+"nmap Z <Plug>(multicursor-mcr)
 
 "" ys ysiw cs ds
 Plug 'vim-surround'
@@ -121,9 +121,9 @@ set which-key
 let g:WhichKey_DefaultDelay = 500
 
 """""""" map
-noremap <Esc> <nop>
+"noremap <Esc> <nop>
 nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
+"nmap <CR> o<Esc>
 "visual 模式 下 按* 号 搜索 光标选中的内容(对已选中的内容进行查找)
 vmap * "ry/<C-R>r<CR>
 nnoremap <C-d> <C-d>zz
@@ -151,10 +151,10 @@ inoremap <C-F> <Right>
 "选中引号内
 nmap <Leader>v vi"
 "inoremap <C-\> <C-O>:action CodeCompletion<CR>
-imap <C-\> <Action>(CodeCompletion)
-nnoremap <C-\> :action CodeCompletion<CR>
-imap <C-Space> <Action>(CodeCompletion)
-nnoremap <C-Space> :action CodeCompletion<CR>
+"imap <C-\> <Action>(CodeCompletion)
+"nnoremap <C-\> :action CodeCompletion<CR>
+"imap <C-Space> <Action>(SmartTypeCompletion)
+"nnoremap <C-Space> :action SmartTypeCompletion<CR>
 "nnoremap <C-D> :action EditorDuplicate<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
 nnoremap <c-i> :action GotoImplementation<CR>
@@ -166,8 +166,10 @@ nnoremap <c-s> :action ShowIntentionActions<CR>
 "imap <c-l> <Action>(ClassNameCompletion)
 "imap <c-l> <Action>(SmartTypeCompletion)
 "nnoremap <c-l> :action ClassNameCompletion<CR>
-imap <c-cr> <Action>(SmartTypeCompletion)
-nnoremap <c-cr> :action SmartTypeCompletion<CR>
+imap <c-cr> <Action>(CodeCompletion)
+nnoremap <c-cr> :action CodeCompletion<CR>
+imap <C-S-CR> <Action>(SmartTypeCompletion)
+nnoremap <C-S-CR> :action SmartTypeCompletion<CR>
 nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 "nnoremap <c-[> :action Back<CR>
@@ -243,6 +245,7 @@ nnoremap ,r :action IdeaVim.ReloadVimRc.reload<CR>
 let g:WhichKeyDesc_FileStructurePopup="<leader>sp FileStructurePopup"
 nnoremap <leader>r :action RenameElement<CR>
 let g:WhichKeyDesc_RenameElement="<leader>r RenameElement"
+nnoremap <leader>ks :action Stop<CR>
 nnoremap <leader>kpr :action Run<CR>
 let g:WhichKeyDesc_Run="<leader>kpr Run"
 nnoremap <leader>kpd :action Debug<CR>
@@ -286,7 +289,7 @@ nnoremap <leader>sj :action CallHierarchy<CR>
 "Refactor
 nnoremap <leader>t :action Refactorings.QuickListPopupAction<CR>
 vnoremap <leader>t :action Refactorings.QuickListPopupAction<CR>
-"nnoremap <leader>e :action ReformatCode<CR>
+nnoremap <leader>ff :action ReformatCode<CR>
 "nnoremap <leader>n :action Inline<CR>
 "vnoremap <leader>n :action Inline<CR>
 "nnoremap <leader>m :action ExtractMethod<CR>
@@ -370,7 +373,7 @@ nnoremap <leader>cs :action ChangeSignature<CR>
 
 """""""""""""""""""Jump articles"""""""""""""""""""""""""""
 nnoremap gc gg:action MethodDown<CR>
-nnoremap gi :action GotoImplementation<CR>
+"nnoremap gi :action GotoImplementation<CR>
 nnoremap gs :action GotoSuperMethod<CR>
 nnoremap gt :action GotoTest<CR>
 
@@ -451,6 +454,8 @@ vnoremap <leader>cru :action StringManipulation.ToScreamingSnakeCase<CR>
 nnoremap <leader>cru :action StringManipulation.ToKebabCase<CR>
 vnoremap <leader>cru :action StringManipulation.ToKebabCase<CR>
 
+nmap <leader>cl <Action>(RestfulTool.action.OptionForEditor-CopyApiPath)
+nmap <leader>sl <Action>(ActivateEndpointsToolWindow)
 
 
 function! ToggleIsNot()
@@ -561,8 +566,8 @@ set ideastrictmode
 " IEDA
 sethandler <C-;> a:ide
 sethandler <M-i> a:ide
-sethandler <C-n> a:ide
-sethandler <C-p> a:ide
+sethandler <C-n> a:IDE
+sethandler <C-p> a:IDE
 
 "=============================================================
 " 默认键位配置

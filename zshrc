@@ -133,6 +133,12 @@ setopt autolist
 # eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_NO_AUTO_UPDATE=true
 
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  autoload -Uz compinit
+  compinit
+fi
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -153,10 +159,21 @@ alias fd='fd -I -c auto'
 alias tm='tmux'
 alias tnew='tmux new -s '
 alias ta='tmux at '
-alias lg='lazygit'
 alias tls='tmux ls && read session && tmux attach -t ${session:-default} || tmux new -s ${session:-default}'
-alias proxy='export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890'
-alias unproxy='unset https_proxy;unset http_proxy;unset all_proxy'
+#alias lg='lazygit'
+alias cpath='pwd | pbcopy'
+lg() {
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+    lazygit "$@"
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+        cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+        rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
+
+# https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+# change lazygit config directory, default use ~/Library/Application Support/lazygit/config.yml
+export XDG_CONFIG_HOME="$HOME/.config"
 
 export M2_HOME=/opt/homebrew/opt/maven
 export M2=$M2_HOME/bin
@@ -182,6 +199,12 @@ export FZF_DEFAULT_COMMAND="fd -I --color=always"
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -I -t d --color=always"
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # HSTR configuration - add this to ~/.zshrc
@@ -193,13 +216,14 @@ bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode che
 export PATH=$PATH:$HOME/async-profiler-2.7-macos
 
 # 1password
-eval "$(op completion zsh)"; compdef _op op
-eval "$(jira --completion-script-zsh)"
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  autoload -Uz compinit
-  compinit -u
-fi
+# eval "$(op completion zsh)"; compdef _op op
 
-export PATH="/usr/local/sbin:$PATH"
+eval "$(jira --completion-script-zsh)"
+
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+
+export PATH=$PATH:/opt/homebrew/opt/zookeeper/bin/
+
+
+source /Users/chenzhi.xu/.docker/init-zsh.sh || true # Added by Docker Desktop
+
