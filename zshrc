@@ -175,6 +175,9 @@ lg() {
 # change lazygit config directory, default use ~/Library/Application Support/lazygit/config.yml
 export XDG_CONFIG_HOME="$HOME/.config"
 
+alias proxy='export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891'
+alias unproxy='unset https_proxy;unset http_proxy;unset all_proxy'
+
 export M2_HOME=/opt/homebrew/opt/maven
 export M2=$M2_HOME/bin
 
@@ -218,12 +221,16 @@ export PATH=$PATH:$HOME/async-profiler-2.7-macos
 # 1password
 # eval "$(op completion zsh)"; compdef _op op
 
-eval "$(jira --completion-script-zsh)"
+#eval "$(jira --completion-script-zsh)"
 
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
 
 export PATH=$PATH:/opt/homebrew/opt/zookeeper/bin/
 
 
-source /Users/chenzhi.xu/.docker/init-zsh.sh || true # Added by Docker Desktop
+[ -f /Users/chenzhi.xu/.docker/init-zsh.sh ] && source /Users/chenzhi.xu/.docker/init-zsh.sh # Added by Docker Desktop
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
