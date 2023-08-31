@@ -157,8 +157,8 @@ nmap <Leader>v vi"
 "nnoremap <C-Space> :action SmartTypeCompletion<CR>
 "nnoremap <C-D> :action EditorDuplicate<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
-nnoremap <c-i> :action GotoImplementation<CR>
-nnoremap <c-o> :action GotoSuperMethod<CR>
+nnoremap <D-]> :action GotoImplementation<CR>
+nnoremap <D-[> :action GotoSuperMethod<CR>
 nnoremap <c-d-p> :action GotoPreviousError<CR>
 nnoremap <c-d-n> :action GotoNextError<CR>
 imap <c-d> <Action>(GotoNextError)
@@ -206,6 +206,15 @@ vmap <leader>gh <Action>(Vcs.ShowHistoryForBlock)
 nmap <leader>gi <Action>(Gitflow.InitRepo)
 nmap <leader>gf <Action>(Gitflow.OpenGitflowPopup)
 
+nnoremap ma mA
+nnoremap 'a 'A
+nnoremap 'a 'A
+nnoremap ms mS
+nnoremap 's 'S
+nnoremap 's 'S
+nnoremap md mD
+nnoremap 'd 'D
+nnoremap 'd 'D
 
 
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
