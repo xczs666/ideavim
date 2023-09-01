@@ -148,6 +148,7 @@ inoremap <C-F> <Right>
 "=============================================================
 " 个人习惯
 "=============================================================
+nmap <leader><leader> <Action>(AceAction)
 "选中引号内
 nmap <Leader>v vi"
 "inoremap <C-\> <C-O>:action CodeCompletion<CR>
@@ -157,10 +158,20 @@ nmap <Leader>v vi"
 "nnoremap <C-Space> :action SmartTypeCompletion<CR>
 "nnoremap <C-D> :action EditorDuplicate<CR>
 "nnoremap <C-D> :action Compare.SameVersion<CR>
-nnoremap <D-]> :action GotoImplementation<CR>
-nnoremap <D-[> :action GotoSuperMethod<CR>
-nnoremap <c-d-p> :action GotoPreviousError<CR>
-nnoremap <c-d-n> :action GotoNextError<CR>
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+"nnoremap <D-[> :action GotoImplementation<CR>
+nmap <C-]> <Action>(GotoDeclaration)
+nmap <C-[> <Action>(GotoTypeDeclaration)
+nmap gd <Action>(GotoTypeDeclaration)
+nmap <C-j> <Action>(GotoImplementation)
+"nmap <C-l> <Action>(AceAction)
+nnoremap ]e :action GotoNextError<CR>
+nnoremap [e :action GotoPreviousError<CR>
+nmap <C-D-n> <Action>(GotoNextElementUnderCaretUsage)
+nmap <C-D-p> <Action>(GotoPrevElementUnderCaretUsage)
+nmap ]q <Action>(GotoNextElementUnderCaretUsage)
+nmap [q <Action>(GotoPrevElementUnderCaretUsage)
 imap <c-d> <Action>(GotoNextError)
 nnoremap <c-s> :action ShowIntentionActions<CR>
 "imap <c-l> <Action>(ClassNameCompletion)
@@ -174,10 +185,7 @@ nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 "nnoremap <c-[> :action Back<CR>
 "nnoremap <c-k> :action FileStructurePopup<CR>
-imap <c-r> <Action>(RenameElement)
 "Move code up and down
-nnoremap <c-j> :m +1<CR>
-nnoremap <c-k> :m -2<CR>
 inoremap <c-j> <Esc>:m +1<CR>gi
 inoremap <c-k> <Esc>:m -2<CR>gi
 "inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
@@ -220,21 +228,15 @@ nnoremap 'd 'D
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
 " nmap <c-s-]> <Action>(GotoNextElementUnderCaretUsage)
 " nmap <c-s-[> <Action>(GotoPrevElementUnderCaretUsage)
-nmap <c-d-]> <Action>(GotoNextElementUnderCaretUsage)
-nmap <c-d-[> <Action>(GotoPrevElementUnderCaretUsage)
-nmap ]q <Action>(GotoNextElementUnderCaretUsage)
-nmap [q <Action>(GotoPrevElementUnderCaretUsage)
 nnoremap <c-d-9> F(
 nnoremap <c-d-0> f)
 nnoremap <c-d--> %
-imap <d-i> <Action>(EditorContextInfo)
-nmap <d-i> <Action>(EditorContextInfo)
+imap <D-i> <Action>(EditorContextInfo)
+nmap <D-i> <Action>(EditorContextInfo)
+imap <D-p> <Action>(ParameterInfo)
+nmap <D-p> <Action>(ParameterInfo)
 
-nmap <c-]> <Action>(GotoDeclaration)
-"nmap gb <Action>(Back)
-nmap gD <Action>(GotoTypeDeclaration)
-"nmap gf <Action>(Forward)
-nmap gl <Action>(QuickJavaDoc)
+" nmap gl <Action>(QuickJavaDoc)
 nmap gL <Action>(QuickImplementations)
 nmap gy <Action>(ShowErrorDescription)
 
@@ -275,7 +277,7 @@ nnoremap <leader>po :action ToggleLineBreakpoint<CR>
 nnoremap <leader>pv :action ViewBreakpoints<CR>
 
 
-nmap <leader><leader>m <Action>(Maven.ExecuteGoal)
+nmap <leader>ma <Action>(Maven.ExecuteGoal)
 
 nnoremap ,f :action GotoFile<CR>
 nnoremap ,a :action GotoAction<CR>
@@ -284,8 +286,6 @@ nnoremap <leader>hw :action HideSideWindows<CR>
 "nnoremap <leader>b :action GotoPreviousError<CR>
 "nnoremap ge :action GotoNextError<CR>
 "nnoremap gE :action GotoPreviousError<CR>
-nnoremap ]e :action GotoNextError<CR>
-nnoremap [e :action GotoPreviousError<CR>
 noremap <leader>sw :action SurroundWith<CR>
 nnoremap ,l :action RecentLocations<CR>
 nnoremap ,h  :action LocalHistory.ShowHistory<CR>
@@ -325,7 +325,8 @@ vmap v <Action>(EditorSelectWord)
 " 选择模式缩小选择范围
 vmap V <Action>(EditorUnSelectWord)
 " 打开最近项目
-nmap <Leader><Leader>o <Action>(RecentProjectListGroup)
+"nmap <Leader>sf <Action>(RecentProjectListGroup)
+nmap <leader>sf <Action>(FrameSwitchAction)
 nnoremap <leader>hl :action HighlightUsagesInFile<CR>
 vnoremap <leader>hl :action HighlightUsagesInFile<CR>
 let g:WhichKeyDesc_inline="<leader>hl HighlightUsagesInFile"
@@ -382,9 +383,9 @@ nnoremap <leader>cs :action ChangeSignature<CR>
 
 """""""""""""""""""Jump articles"""""""""""""""""""""""""""
 nnoremap gc gg:action MethodDown<CR>
-"nnoremap gi :action GotoImplementation<CR>
+nnoremap gl :action GotoImplementation<CR>
 nnoremap gs :action GotoSuperMethod<CR>
-nnoremap gt :action GotoTest<CR>
+nnoremap ge :action GotoTest<CR>
 
 "nnoremap ,f :action FindInPath<CR>
 
