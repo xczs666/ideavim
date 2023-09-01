@@ -228,8 +228,8 @@ nnoremap 'd 'D
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
 " nmap <c-s-]> <Action>(GotoNextElementUnderCaretUsage)
 " nmap <c-s-[> <Action>(GotoPrevElementUnderCaretUsage)
-nnoremap <c-d-9> F(
-nnoremap <c-d-0> f)
+nnoremap <c-d-9> ?[<(]<CR>
+nnoremap <c-d-0> /[>)]<CR>
 nnoremap <c-d--> %
 imap <D-i> <Action>(EditorContextInfo)
 nmap <D-i> <Action>(EditorContextInfo)
