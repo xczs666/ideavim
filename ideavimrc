@@ -3,7 +3,7 @@
 " 基础键位说明
 "=============================================================
 "=============================================================
-" M->cmd, S-shift, A->win option, D->mac option, C->control
+" M->mac optin, S-shift, A->win option, D->cmd, C->control
 " <ESC> - escape, <BS> - backspace
 let mapleader="\<Space>"
 let maplocalleader=","
@@ -153,7 +153,10 @@ inoremap <C-F> <Right>
 "=============================================================
 "nmap <leader><leader> <Action>(AceAction)
 "选中引号内
-nmap <Leader>v vi"
+"nmap <Leader>v vi"
+nmap <leader>vs :action IntentionActionAsAction_com.intellij.codeInsight.intention.impl.SplitDeclarationAction<CR>
+nmap <leader>vO dd[{P
+nmap <leader>vo <leader>vs<leader>vo
 "inoremap <C-\> <C-O>:action CodeCompletion<CR>
 "imap <C-\> <Action>(CodeCompletion)
 "nnoremap <C-\> :action CodeCompletion<CR>
@@ -169,7 +172,7 @@ nmap <C-[> <Action>(GotoTypeDeclaration)
 nmap gd <Action>(GotoTypeDeclaration)
 nmap <C-j> <Action>(AceAction)
 nmap <C-k> <Action>(GotoImplementation)
-nmap <C-l> <Action>(GotoDeclaration)
+nmap <C-l> <Action>(ShowUsages)
 nmap <C-;> <Action>(GotoTypeDeclaration)
 nmap <C-'> <Action>(GotoSuperMethod)
 "nmap <C-k> <Action>(AceAction)
@@ -188,6 +191,9 @@ imap <c-cr> <Action>(CodeCompletion)
 nnoremap <c-cr> :action CodeCompletion<CR>
 imap <C-S-CR> <Action>(SmartTypeCompletion)
 nnoremap <C-S-CR> :action SmartTypeCompletion<CR>
+imap <C-D-CR> <Action>(ClassNameCompletion)
+nnoremap <C-D-CR> :action ClassNameCompletion<CR>
+
 nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 "nnoremap <c-[> :action Back<CR>
@@ -248,7 +254,8 @@ nmap gL <Action>(QuickImplementations)
 nmap gy <Action>(ShowErrorDescription)
 
 "inoremap <c-l> <Esc>:action EditorCompleteStatement<CR>
-nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
+nmap <C-t>p <Action>(ActivateTerminalToolWindow)
+nmap <C-t>c <Action>(Terminal.OpenInTerminal)
 "nnoremap ,t :action TerminalOpenInTerminal<CR>
 nnoremap <leader>q :action HideActiveWindow<CR>
 "nmap <c-m> <Action>(HideSideWindows)
