@@ -113,6 +113,9 @@ let g:EasyMotion_override_acejump = 0
 Plug 'vim-scripts/argtextobj.vim' " aa, ia
 let g:argtextobj_pairs="[:],(:),<:>"
 
+" ii ai aI
+Plug 'michaeljsmith/vim-indent-object'
+
 " IdeaVim-Quickscope plugin.高亮f,t
 set quickscope
 
@@ -161,11 +164,14 @@ nmap <Leader>v vi"
 nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
 "nnoremap <D-[> :action GotoImplementation<CR>
-nmap <C-]> <Action>(GotoDeclaration)
+nmap <C-]> <Action>(ShowUsages)
 nmap <C-[> <Action>(GotoTypeDeclaration)
 nmap gd <Action>(GotoTypeDeclaration)
 nmap <C-j> <Action>(GotoImplementation)
-"nmap <C-l> <Action>(AceAction)
+nmap <C-k> <Action>(GotoDeclaration)
+nmap <C-l> <Action>(GotoTypeDeclaration)
+nmap <C-;> <Action>(GotoSuperMethod)
+"nmap <C-k> <Action>(AceAction)
 nnoremap ]e :action GotoNextError<CR>
 nnoremap [e :action GotoPreviousError<CR>
 nmap <C-D-n> <Action>(GotoNextElementUnderCaretUsage)
@@ -574,7 +580,7 @@ set ideastrictmode
 " 默认键位配置
 "=============================================================
 " IEDA
-sethandler <C-;> a:ide
+sethandler <C-;> a:vim
 sethandler <M-i> a:ide
 sethandler <C-n> a:IDE
 sethandler <C-p> a:IDE
