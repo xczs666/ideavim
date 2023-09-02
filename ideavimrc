@@ -151,7 +151,7 @@ inoremap <C-F> <Right>
 "=============================================================
 " 个人习惯
 "=============================================================
-nmap <leader><leader> <Action>(AceAction)
+"nmap <leader><leader> <Action>(AceAction)
 "选中引号内
 nmap <Leader>v vi"
 "inoremap <C-\> <C-O>:action CodeCompletion<CR>
@@ -167,10 +167,11 @@ nmap <C-i> <Action>(Forward)
 nmap <C-]> <Action>(ShowUsages)
 nmap <C-[> <Action>(GotoTypeDeclaration)
 nmap gd <Action>(GotoTypeDeclaration)
-nmap <C-j> <Action>(GotoImplementation)
-nmap <C-k> <Action>(GotoDeclaration)
-nmap <C-l> <Action>(GotoTypeDeclaration)
-nmap <C-;> <Action>(GotoSuperMethod)
+nmap <C-j> <Action>(AceAction)
+nmap <C-k> <Action>(GotoImplementation)
+nmap <C-l> <Action>(GotoDeclaration)
+nmap <C-;> <Action>(GotoTypeDeclaration)
+nmap <C-'> <Action>(GotoSuperMethod)
 "nmap <C-k> <Action>(AceAction)
 nnoremap ]e :action GotoNextError<CR>
 nnoremap [e :action GotoPreviousError<CR>
