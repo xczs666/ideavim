@@ -83,26 +83,42 @@ while true; do
     echo -n "请输入数字选择: "
     read choice
 
-    if ! [[ "$choice" =~ ^[0-9]+$ ]]; then
-        echo "错误: 请输入一个整数!"
-        read
-        continue
-    fi
-    for key in "${!map[@]}"; do
-        if [ "$key" -eq "$choice" ]; then
-            if [ "$key" -eq 0 ]; then
-                echo "感谢使用，再见！"
-                exit 0
-            else
-                tmux attach -t "${map["$choice"]}"
-                # 使用 "continue 2" 来跳出第二层循环并继续第一层循环
-                continue 2
+    if [[ "$choice" =~ ^[0-9]+$ ]]; then
+        for key in "${!map[@]}"; do
+            if [ "$key" -eq "$choice" ]; then
+                if [ "$key" -eq 0 ]; then
+                    echo "感谢使用，再见！"
+                    exit 0
+                else
+                    tmux attach -t "${map["$choice"]}"
+                    # 使用 "continue 2" 来跳出第二层循环并继续第一层循环
+                    continue 2
+                fi
             fi
+        done
+        echo "请输入有效选项！"
+    else
+        # 声明一个空数组来存储匹配的结果
+        matches=()
+        for key in "${!map[@]}"; do
+            if [[ "${map[$key]}" == *"$choice"* ]]; then
+                matches+=("${map[$key]}")
+            fi
+        done
+        # 检查匹配结果
+        if [ ${#matches[@]} -eq 0 ]; then
+            echo "未找到匹配项。"
+        elif [ ${#matches[@]} -eq 1 ]; then
+            tmux attach -t "${matches[0]}"
+            continue
+        else
+            echo "多个匹配项:${matches[@]}"
+            #for match in "${matches[@]}"; do
+            #    echo "$match"
+            #done
         fi
-    done
+    fi
 
-    echo "请输入有效选项！"
     read
 done
 
-#echo "key1 对应的值是 ${map["1"]}"
