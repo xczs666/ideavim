@@ -147,6 +147,9 @@ inoremap <C-B> <Left>
 "inoremap <C-J> <Down>
 "inoremap <C-K> <Up>
 inoremap <C-F> <Right>
+imap <M-F> <Action>(EditorNextWord)
+imap <M-B> <Action>(EditorPreviousWord)
+nnoremap <M-F> :action fastRequest.gotoFastRequest<CR>
 
 "=============================================================
 " 个人习惯
@@ -156,7 +159,7 @@ inoremap <C-F> <Right>
 "nmap <Leader>v vi"
 nmap <leader>vs :action IntentionActionAsAction_com.intellij.codeInsight.intention.impl.SplitDeclarationAction<CR>
 nmap <leader>vO dd[{P
-nmap <leader>vo <leader>vs<leader>vo
+nmap <leader>vo <leader>vs<leader>vOj$%
 "inoremap <C-\> <C-O>:action CodeCompletion<CR>
 "imap <C-\> <Action>(CodeCompletion)
 "nnoremap <C-\> :action CodeCompletion<CR>
@@ -167,12 +170,14 @@ nmap <leader>vo <leader>vs<leader>vo
 nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
 "nnoremap <D-[> :action GotoImplementation<CR>
-nmap <C-]> <Action>(ShowUsages)
-nmap <C-[> <Action>(GotoTypeDeclaration)
+nmap <C-]> <Action>(GotoNextError)
+nmap <C-[> <Action>(GotoPreviousError)
+imap <C-]> <Action>(GotoNextError)
+imap <C-[> <Action>(GotoPreviousError)
 nmap gd <Action>(GotoTypeDeclaration)
-nmap <C-j> <Action>(AceAction)
-nmap <C-k> <Action>(GotoImplementation)
-nmap <C-l> <Action>(ShowUsages)
+nmap <C-s> <Action>(AceAction)
+nmap <C-j> <Action>(GotoImplementation)
+nmap <C-k> <Action>(ShowUsages)
 nmap <C-;> <Action>(GotoTypeDeclaration)
 nmap <C-'> <Action>(GotoSuperMethod)
 "nmap <C-k> <Action>(AceAction)
@@ -182,17 +187,21 @@ nmap <C-D-n> <Action>(GotoNextElementUnderCaretUsage)
 nmap <C-D-p> <Action>(GotoPrevElementUnderCaretUsage)
 nmap ]q <Action>(GotoNextElementUnderCaretUsage)
 nmap [q <Action>(GotoPrevElementUnderCaretUsage)
-imap <c-d> <Action>(GotoNextError)
-nnoremap <c-s> :action ShowIntentionActions<CR>
+"imap <C-l> <Action>(GotoNextError)
+"nnoremap <C-l> :action GotoNextError<CR>
+"imap <C-D-l> <Action>(GotoPreviousError)
+"nnoremap <C-D-l> :action GotoPreviousError<CR>
 "imap <c-l> <Action>(ClassNameCompletion)
 "imap <c-l> <Action>(SmartTypeCompletion)
-"nnoremap <c-l> :action ClassNameCompletion<CR>
-imap <c-cr> <Action>(CodeCompletion)
-nnoremap <c-cr> :action CodeCompletion<CR>
-imap <C-S-CR> <Action>(SmartTypeCompletion)
-nnoremap <C-S-CR> :action SmartTypeCompletion<CR>
-imap <C-D-CR> <Action>(ClassNameCompletion)
-nnoremap <C-D-CR> :action ClassNameCompletion<CR>
+nnoremap <c-l> :action GotoDeclaration<CR>
+imap <D-CR> <Action>(EditorCompleteStatement)
+nnoremap <D-CR> :action EditorCompleteStatement<CR>
+imap <C-cr> <Action>(SmartTypeCompletion)
+nmap <C-cr> <Action>(SmartTypeCompletion)
+imap <C-S-CR> <Action>(ClassNameCompletion)
+nnoremap <C-S-CR> :action ClassNameCompletion<CR>
+imap <C-D-cr> <Action>(CodeCompletion)
+nnoremap <C-D-cr> :action CodeCompletion<CR>
 
 nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
 vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
@@ -241,8 +250,11 @@ vnoremap 'd 'D
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
 " nmap <c-s-]> <Action>(GotoNextElementUnderCaretUsage)
 " nmap <c-s-[> <Action>(GotoPrevElementUnderCaretUsage)
-nnoremap <c-d-9> ?[<(]<CR>
-nnoremap <c-d-0> /[>)]<CR>
+nnoremap <c-0> /[<(,]<CR>
+nnoremap <c-9> ?[<(,]<CR>
+nmap <c--> via
+nnoremap <c-d-0> /[>),]<CR>
+nnoremap <c-d-9> ?[>),]<CR>
 nnoremap <c-d--> %
 imap <D-i> <Action>(EditorContextInfo)
 nmap <D-i> <Action>(EditorContextInfo)
@@ -254,8 +266,8 @@ nmap gL <Action>(QuickImplementations)
 nmap gy <Action>(ShowErrorDescription)
 
 "inoremap <c-l> <Esc>:action EditorCompleteStatement<CR>
-nmap <C-t>p <Action>(ActivateTerminalToolWindow)
-nmap <C-t>c <Action>(Terminal.OpenInTerminal)
+nmap <C-,> <Action>(ActivateTerminalToolWindow)
+nmap <C-.> <Action>(Terminal.OpenInTerminal)
 "nnoremap ,t :action TerminalOpenInTerminal<CR>
 nnoremap <leader>q :action HideActiveWindow<CR>
 "nmap <c-m> <Action>(HideSideWindows)
@@ -340,7 +352,10 @@ vmap v <Action>(EditorSelectWord)
 vmap V <Action>(EditorUnSelectWord)
 " 打开最近项目
 "nmap <Leader>sf <Action>(RecentProjectListGroup)
+"nmap <leader>sf <Action>($LRU)
 nmap <leader>sf <Action>(FrameSwitchAction)
+nmap <M-2> <Action>(FrameSwitchAction)
+nmap <leader>sc <Action>(CloseProject)
 nnoremap <leader>hl :action HighlightUsagesInFile<CR>
 vnoremap <leader>hl :action HighlightUsagesInFile<CR>
 let g:WhichKeyDesc_inline="<leader>hl HighlightUsagesInFile"
@@ -399,7 +414,7 @@ nnoremap <leader>cs :action ChangeSignature<CR>
 nnoremap gc gg:action MethodDown<CR>
 nnoremap gl :action GotoImplementation<CR>
 nnoremap gs :action GotoSuperMethod<CR>
-nnoremap ge :action GotoTest<CR>
+"nnoremap ge :action GotoNextError<CR>i
 
 "nnoremap ,f :action FindInPath<CR>
 
