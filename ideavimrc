@@ -160,6 +160,7 @@ nnoremap <M-F> :action fastRequest.gotoFastRequest<CR>
 nmap <leader>vs :action IntentionActionAsAction_com.intellij.codeInsight.intention.impl.SplitDeclarationAction<CR>
 nmap <leader>vO dd[{P
 nmap <leader>vo <leader>vs<leader>vOj$%
+nmap <leader>vB vaBvv
 "inoremap <C-\> <C-O>:action CodeCompletion<CR>
 "imap <C-\> <Action>(CodeCompletion)
 "nnoremap <C-\> :action CodeCompletion<CR>
@@ -271,7 +272,7 @@ nmap <C-.> <Action>(Terminal.OpenInTerminal)
 nnoremap <leader>cp :!echo % \| pbcopy<CR>
 nnoremap <leader>it :!open -a iterm .<CR>
 "nnoremap ,t :action TerminalOpenInTerminal<CR>
-nnoremap <leader>q :action HideActiveWindow<CR>
+nmap <D-ESC> <Action>(HideActiveWindow)
 "nmap <c-m> <Action>(HideSideWindows)
 nnoremap ,e :e ~/.ideavimrc<CR>
 nnoremap ,r :action IdeaVim.ReloadVimRc.reload<CR>
@@ -349,6 +350,8 @@ nnoremap <leader>ff :action ReformatCode<CR>
 
 
 " 选择模式扩大选择范围
+nnoremap <CR> viw
+vmap <CR> <Action>(EditorSelectWord)
 vmap v <Action>(EditorSelectWord)
 " 选择模式缩小选择范围
 vmap V <Action>(EditorUnSelectWord)
@@ -606,6 +609,7 @@ set ideastrictmode
 "=============================================================
 " IEDA
 sethandler <C-;> a:vim
+sethandler <C-'> a:vim
 sethandler <M-i> a:ide
 sethandler <C-n> a:IDE
 sethandler <C-p> a:IDE
