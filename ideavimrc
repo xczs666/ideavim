@@ -113,6 +113,9 @@ let g:EasyMotion_override_acejump = 0
 Plug 'vim-scripts/argtextobj.vim' " aa, ia
 let g:argtextobj_pairs="[:],(:),<:>"
 
+" {,}可以跳转到带空格到行
+Plug 'dbakker/vim-paragraph-motion'
+
 " ii ai aI
 Plug 'michaeljsmith/vim-indent-object'
 
@@ -150,6 +153,7 @@ inoremap <C-F> <Right>
 imap <M-F> <Action>(EditorNextWord)
 imap <M-B> <Action>(EditorPreviousWord)
 nnoremap <M-F> :action fastRequest.gotoFastRequest<CR>
+nnoremap <leader>vi :!neovide %<CR>
 
 "=============================================================
 " 个人习惯
@@ -176,11 +180,13 @@ nmap <C-[> <Action>(GotoPreviousError)
 imap <C-]> <Action>(GotoNextError)
 imap <C-[> <Action>(GotoPreviousError)
 nmap gd <Action>(GotoTypeDeclaration)
-nmap <C-s> <Action>(AceAction)
+"nmap <C-s> <Action>(AceAction)
+nmap <D-s> <Action>(AceAction)
 nmap <C-j> <Action>(GotoImplementation)
 nmap <C-k> <Action>(ShowUsages)
 nmap <C-;> <Action>(GotoTypeDeclaration)
-nmap <C-'> <Action>(GotoSuperMethod)
+"nmap <C-'> <Action>(GotoSuperMethod)
+nmap <leader>ss <Action>(GotoSuperMethod)
 "nmap <C-k> <Action>(AceAction)
 nnoremap ]e :action GotoNextError<CR>
 nnoremap [e :action GotoPreviousError<CR>
@@ -232,6 +238,7 @@ nmap =g <Action>(VcsShowCurrentChangeMarker)
 nmap <leader>ga <Action>(Annotate)
 nmap <leader>sp <Action>(FileStructurePopup)
 nmap <leader>gb <Action>(Vcs.RollbackChangedLines)
+vmap <leader>gb <Action>(Vcs.RollbackChangedLines)
 nmap <leader>gh <Action>(Vcs.ShowTabbedFileHistory)
 vmap <leader>gh <Action>(Vcs.ShowHistoryForBlock)
 nmap <leader>gi <Action>(Gitflow.InitRepo)
@@ -350,11 +357,10 @@ nnoremap <leader>ff :action ReformatCode<CR>
 
 
 " 选择模式扩大选择范围
-nnoremap <CR> viw
+" nnoremap <CR> viw
 vmap <CR> <Action>(EditorSelectWord)
-vmap v <Action>(EditorSelectWord)
 " 选择模式缩小选择范围
-vmap V <Action>(EditorUnSelectWord)
+vmap <BS> <Action>(EditorUnSelectWord)
 " 打开最近项目
 "nmap <Leader>sf <Action>(RecentProjectListGroup)
 "nmap <leader>sf <Action>($LRU)
@@ -409,6 +415,9 @@ let g:WhichKeyDesc_anonymous_to_inner="<leader>ai AnonymousToInner"
 
 nnoremap <leader>ms :action MakeStatic<CR>
 let g:WhichKeyDesc_make_static="<leader>ms MakeStatic"
+nnoremap <leader>ce :let @/=""<CR>
+let g:WhichKeyDesc_clear_search="<leader>ce Clear search"
+set hls
 
 
 
@@ -483,19 +492,19 @@ xmap ,g<C-x> <Plug>AllOccurrences
 
 " plugin StringManipulation
 " crc camelCase
-nnoremap <leader>crc :action StringManipulation.ToCamelCase<CR>
+nnoremap <leader>crc :action StringManipulation.ToCamelCase<CR><Esc>
 vnoremap <leader>crc :action StringManipulation.ToCamelCase<CR>
 " crm MixedCase
-nnoremap <leader>crm :action StringManipulation.ToPascalCase<CR>
+nnoremap <leader>crm :action StringManipulation.ToPascalCase<CR><Esc>
 vnoremap <leader>crm :action StringManipulation.ToPascalCase<CR>
 " crs snake_case
-nnoremap <leader>crs :action StringManipulation.ToSnakeCase<CR>
+nnoremap <leader>crs :action StringManipulation.ToSnakeCase<CR><Esc>
 vnoremap <leader>crs :action StringManipulation.ToSnakeCase<CR>
 " cru UPPER_CASE
-nnoremap <leader>cru :action StringManipulation.ToScreamingSnakeCase<CR>
+nnoremap <leader>cru :action StringManipulation.ToScreamingSnakeCase<CR><Esc>
 vnoremap <leader>cru :action StringManipulation.ToScreamingSnakeCase<CR>
 " cr- dash-case
-nnoremap <leader>cru :action StringManipulation.ToKebabCase<CR>
+nnoremap <leader>cru :action StringManipulation.ToKebabCase<CR><Esc>
 vnoremap <leader>cru :action StringManipulation.ToKebabCase<CR>
 
 nmap <leader>cl <Action>(RestfulTool.action.OptionForEditor-CopyApiPath)
@@ -595,7 +604,7 @@ let g:WhichKeyDesc_next_parameter="<leader>pn next parameter"
 " 寄存器，宏t 全参构造器转为builder
 let @t="0jddkPj0:s/^[ ,]*//<CR>v/\\(, \\\|$\\)<CR>hdkt=i(<Esc>pa)<Esc>ld$:s/^\\( *\\)this/\\1/<CR>j0"
 
-nnoremap <silent> vv <C-w>v
+nnoremap <silent> vv viw
 
 " easy javadoc
 nnoremap <leader>dg :action javadoc.generator<CR>
@@ -609,7 +618,6 @@ set ideastrictmode
 "=============================================================
 " IEDA
 sethandler <C-;> a:vim
-sethandler <C-'> a:vim
 sethandler <M-i> a:ide
 sethandler <C-n> a:IDE
 sethandler <C-p> a:IDE

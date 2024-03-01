@@ -74,6 +74,17 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=$HOME/.zsh_custom
 
+# zsh-vi-mode 配置https://github.com/jeffreytse/zsh-vi-mode
+function zvm_config() {
+  ZVM_VI_SURROUND_BINDKEY=s-prefix
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+  ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+  # 其他插件的bindkey 加载
+  ZVM_INIT_MODE=sourcing
+}
+#function zvm_after_init() {
+#  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#}
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -92,6 +103,16 @@ plugins=(
     docker-compose
     mvn
     autojump
+    # ctrl-o
+    copybuffer
+    copypath
+    # https://github.com/jeffreytse/zsh-vi-mode
+    # git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+    zsh-vi-mode
+    # Ctrl + Shift + Left / Right
+    dircycle
+    you-should-use
+    autoupdate
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -109,6 +130,8 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
+
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -146,8 +169,11 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
-export JAVA_HOME=`/usr/libexec/java_home -v 8`
+# `/usr/libexec/java_home -v 8`
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/
+export JAVA_HOME=/Users/chenzhi.xu/Library/Java/JavaVirtualMachines/corretto-1.8.0_382/Contents/Home/
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$CLASSPATH
+
 
 
 alias ls='ls -FG'
@@ -156,12 +182,13 @@ alias du='du -h -d 0'
 alias vi='nvim'
 alias rm='trash-put'
 alias fd='fd -I -c auto'
-alias tm='tmux'
+alias op='open .'
+#alias tm='tmux'
 alias tnew='tmux new -s '
 alias ta='tmux at '
 alias tls='tmux ls && read session && tmux attach -t ${session:-default} || tmux new -s ${session:-default}'
 #alias lg='lazygit'
-alias cpath='pwd | pbcopy'
+alias cpn='copypath'
 lg() {
     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
     lazygit "$@"
@@ -175,9 +202,6 @@ lg() {
 # change lazygit config directory, default use ~/Library/Application Support/lazygit/config.yml
 export XDG_CONFIG_HOME="$HOME/.config"
 
-alias proxy='export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891'
-alias unproxy='unset https_proxy;unset http_proxy;unset all_proxy'
-
 export M2_HOME=/opt/homebrew/opt/maven
 export M2=$M2_HOME/bin
 
@@ -189,7 +213,7 @@ export M2=$M2_HOME/bin
 # autosuggest-disable：禁用建议。
 # autosuggest-enable：重新启用建议。
 # autosuggest-toggle：在启用/禁用建议之间切换。
-export PATH="/Users/chenzhi.xu/.cargo/bin:/opt/homebrew/opt/mysql-client/bin:$PATH:$HOME/bin"
+export PATH="$HOME/.cargo/bin:/opt/homebrew/opt/mysql-client/bin:$PATH:$HOME/bin:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 
 ## fzf
 # CTRL-T- 将选定的文件和目录粘贴到命令行
@@ -214,23 +238,30 @@ export FZF_CTRL_R_OPTS="
 alias hh=hstr                    # hh to be alias for hstr
 setopt histignorespace           # skip cmds w/ leading space from history
 export HSTR_CONFIG=hicolor,raw-history-view       # get more colors
-bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+# viins vi插入模式下
+bindkey -sM viins "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+export HSTR_TIOCSTI=y
 
 export PATH=$PATH:$HOME/async-profiler-2.7-macos
 
 # 1password
 # eval "$(op completion zsh)"; compdef _op op
 
-#eval "$(jira --completion-script-zsh)"
+# eval "$(jira --completion-script-zsh)"
 
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
 
 export PATH=$PATH:/opt/homebrew/opt/zookeeper/bin/
 
 
-[ -f /Users/chenzhi.xu/.docker/init-zsh.sh ] && source /Users/chenzhi.xu/.docker/init-zsh.sh # Added by Docker Desktop
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+source /Users/chenzhi.xu/.docker/init-zsh.sh || true # Added by Docker Desktop
+
+# vim中调用terminal 会带入VIM,VIMRUNTIME. 有此变量再使用nvim会报错
+export VIM=
+export VIMRUNTIME=
+
+
+export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH:/opt/cisco/secureclient/bin"
+
 
