@@ -328,8 +328,8 @@ nnoremap ,h  :action LocalHistory.ShowHistory<CR>
 "nnoremap <leader>u :action FindUsages<CR>
 nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
 "nnoremap <leader>u :action ShowUsages<CR>
-nnoremap <leader>sk :action TypeHierarchy<CR>
-nnoremap <leader>sj :action CallHierarchy<CR>
+nnoremap <leader>ht :action TypeHierarchy<CR>
+nnoremap <leader>hc :action CallHierarchy<CR>
 
 "Refactor
 nnoremap <leader>t :action Refactorings.QuickListPopupAction<CR>

@@ -265,3 +265,4 @@ export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH:/opt/cisco/secureclient/bin"
 
 
+
