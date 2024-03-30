@@ -176,8 +176,11 @@ export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$CLASSPATH
 
 
 
-alias ls='ls -FG'
-alias l='ls -ltr'
+#alias ls='ls -FG'
+#alias l='ls -ltr'
+alias ls="eza"
+alias l="eza -lh"
+alias tree="eza --tree"
 alias du='du -h -d 0'
 alias vi='nvim'
 alias rm='trash-put'
@@ -187,6 +190,9 @@ alias op='open .'
 alias tnew='tmux new -s '
 alias ta='tmux at '
 alias tls='tmux ls && read session && tmux attach -t ${session:-default} || tmux new -s ${session:-default}'
+alias j='z'
+alias proxy='export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890'
+alias unproxy='unset https_proxy http_proxy all_proxy'
 #alias lg='lazygit'
 alias cpn='copypath'
 lg() {
@@ -254,7 +260,7 @@ export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
 export PATH=$PATH:/opt/homebrew/opt/zookeeper/bin/
 
 
-source /Users/chenzhi.xu/.docker/init-zsh.sh || true # Added by Docker Desktop
+[ -f /Users/chenzhi.xu/.docker/init-zsh.sh ] && source /Users/chenzhi.xu/.docker/init-zsh.sh # Added by Docker Desktop
 
 # vim中调用terminal 会带入VIM,VIMRUNTIME. 有此变量再使用nvim会报错
 export VIM=
@@ -264,5 +270,7 @@ export VIMRUNTIME=
 export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH:/opt/cisco/secureclient/bin"
 
+eval "$(zoxide init zsh)"
+eval "$(register-python-argcomplete cz)"
 
 
