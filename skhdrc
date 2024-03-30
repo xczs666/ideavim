@@ -168,10 +168,10 @@ shift + alt - w : yabai -m window --resize top:0:-20; yabai -m window --resize b
 shift + alt - d : yabai -m window --resize right:20:0; yabai -m window --resize left:20:0
 
 # 旋转窗口布局
-alt - r : yabai -m space --rotate 90
+alt - o : yabai -m space --rotate 90
 
 # 全屏
-alt -f : yabai -m window --toggle zoom-fullscreen
+alt - f : yabai -m window --toggle zoom-fullscreen
 
 # 设置/取消窗口 space
 alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
@@ -186,7 +186,7 @@ alt - t : yabai -m window --toggle float;\
           yabai -m window --grid 4:4:1:1:2:2
 
 # 修改窗口切分方式
-alt - e : yabai -m window --toggle split
+alt - r : yabai -m window --toggle split
 
 # 重置窗口布局
 shift + alt - 0 : yabai -m space --balance
