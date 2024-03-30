@@ -228,17 +228,19 @@ export PATH="$HOME/.cargo/bin:/opt/homebrew/opt/mysql-client/bin:$PATH:$HOME/bin
 # ALT-C- cd 进入选择的目录
 #   设置FZF_ALT_C_COMMAND为覆盖默认命令
 #   设置FZF_ALT_C_OPTS传递附加选项
-export FZF_DEFAULT_COMMAND="fd -I --color=always"
+export FZF_DEFAULT_COMMAND="fd -H -I --color=always"
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -I -t d --color=always"
-export FZF_CTRL_R_OPTS="
-  --preview 'echo {}' --preview-window up:3:hidden:wrap
-  --bind 'ctrl-/:toggle-preview'
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-  --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_ALT_C_COMMAND="fd -H -I -t d --color=always"
+#export FZF_CTRL_R_OPTS="
+#  --preview 'echo {}' --preview-window up:3:hidden:wrap
+#  --bind 'ctrl-/:toggle-preview'
+#  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+#  --color header:italic
+#  --header 'Press CTRL-Y to copy command into clipboard'"
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fzf --zsh)"
+bindkey -M viins '\C-x\C-e' edit-command-line
 
 # HSTR configuration - add this to ~/.zshrc
 alias hh=hstr                    # hh to be alias for hstr
@@ -268,7 +270,7 @@ export VIMRUNTIME=
 
 
 export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
-export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH:/opt/cisco/secureclient/bin"
+export PATH="/Users/chenzhi.xu/bin/src/cz/node_modules/commitizen/bin:/opt/homebrew/opt/mysql@8.0/bin:$PATH:/opt/cisco/secureclient/bin"
 
 eval "$(zoxide init zsh)"
 eval "$(register-python-argcomplete cz)"
