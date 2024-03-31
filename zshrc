@@ -78,7 +78,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 function zvm_config() {
   ZVM_VI_SURROUND_BINDKEY=s-prefix
   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-  ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+  #ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
   # 其他插件的bindkey 加载
   ZVM_INIT_MODE=sourcing
 }
@@ -160,6 +160,7 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   autoload -Uz compinit
   compinit
+  source $(brew --prefix)/share/bash-completion/completions/*
 fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
