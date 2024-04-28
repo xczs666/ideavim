@@ -63,7 +63,7 @@ module.exports = {
   // skipQuestions: ['scope','body'],
 
   // limit subject length
-  subjectLimit: 100,
+  subjectLimit: 1000,
   // breaklineChar: '|', // It is supported for fields body and footer.
   // default: 'ISSUES CLOSED:'
   footerPrefix : 'TASKS CLOSED:',

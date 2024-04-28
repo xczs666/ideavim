@@ -16,7 +16,7 @@ set notimeout
 set timeoutlen=5000
 
 "垂直滚动时，光标距离顶部/底部的位置(单位：行)
-set scrolloff=5
+set scrolloff=7
 "禁用错误提示音
 set visualbell
 set noerrorbells
@@ -34,6 +34,9 @@ set showmatch
 set keep-english-in-normal
 filetype off                  " required
 """ IdeaVim options
+set history=500
+" 插入模式下 Shift + 箭头开始选择
+set keymodel+=startsel,stopsel,stopselect
 " Smart join for <C-J>
 set ideajoin
 " Map vim marks to IDEA global marks
@@ -57,25 +60,57 @@ set idearefactormode=keep
 ":NERDTreeClose
 ":NERDTreeFind
 ":NERDTreeRefreshRoot
-"Key   | Description
-"o     | Open files, directories and bookmarks
-"O     | Recursively open the selected directory
-"t     | Open selected node/bookmark in a new tab
-"i     | Open selected file in a split window
-"s     | Open selected file in a new vsplit
-"x     | Close the current nodes parent
-"X     | Recursively close all children of the current node
-"P     | Jump to the root node
-"p     | Jump to current nodes parent
-"K     | Jump up inside directories at the current tree depth
-"J     | Jump down inside directories at the current tree depth
-"m     | Display the NERDTree menu
-"q     | Close the NERDTree window
+"| Key     |  Description                                            |  Map Setting                   |
+"|---------|---------------------------------------------------------|--------------------------------|
+"| `o`     |  Open files, directories and bookmarks                  | `g:NERDTreeMapActivateNode`    |
+"| `go`    |  Open selected file, but leave cursor in the NERDTree   | `g:NERDTreeMapPreview`         |
+"| `t`     |  Open selected node/bookmark in a new tab               | `g:NERDTreeMapOpenInTab`       |
+"| `T`     |  Same as 't' but keep the focus on the current tab      | `g:NERDTreeMapOpenInTabSilent` |
+"| `i`     |  Open selected file in a split window                   | `g:NERDTreeMapOpenSplit`       |
+"| `gi`    |  Same as i, but leave the cursor on the NERDTree        | `g:NERDTreeMapPreviewSplit`    |
+"| `s`     |  Open selected file in a new vsplit                     | `g:NERDTreeMapOpenVSplit`      |
+"| `gs`    |  Same as s, but leave the cursor on the NERDTree        | `g:NERDTreeMapPreviewVSplit`   |
+"| `O`     |  Recursively open the selected directory                | `g:NERDTreeMapOpenRecursively` |
+"| `x`     |  Close the current nodes parent                         | `g:NERDTreeMapCloseDir`        |
+"| `X`     |  Recursively close all children of the current node     | `g:NERDTreeMapCloseChildren`   |
+"| `P`     |  Jump to the root node                                  | `g:NERDTreeMapJumpRoot`        |
+"| `p`     |  Jump to current nodes parent                           | `g:NERDTreeMapJumpParent`      |
+"| `K`     |  Jump up inside directories at the current tree depth   | `g:NERDTreeMapJumpFirstChild`  |
+"| `J`     |  Jump down inside directories at the current tree depth | `g:NERDTreeMapJumpLastChild`   |
+"| `<C-J>` |  Jump down to next sibling of the current directory     | `g:NERDTreeMapJumpNextSibling` |
+"| `<C-K>` |  Jump up to previous sibling of the current directory   | `g:NERDTreeMapJumpPrevSibling` |
+"| `r`     |  Recursively refresh the current directory              | `g:NERDTreeMapRefresh`         |
+"| `R`     |  Recursively refresh the current root                   | `g:NERDTreeMapRefreshRoot`     |
+"| `m`     |  Display the NERDTree menu                              | `g:NERDTreeMapMenu`            |
+"| `q`     |  Close the NERDTree window                              | `g:NERDTreeMapQuit`            |
+"| `A`     |  Zoom (maximize/minimize) the NERDTree window           | `g:NERDTreeMapToggleZoom`      |
 Plug 'preservim/nerdtree'
 
 " <A-n>, <A-x>, <A-p>, g<A-n>
- Plug 'terryma/vim-multiple-cursors'
-"set multiple-cursors
+Plug 'terryma/vim-multiple-cursors'
+set multiple-cursors
+
+" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+let g:multi_cursor_use_default_mapping=0
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+omap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+omap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
+" <A-n> is used to enter accented text e.g. ñ
+" Feel free to pick your own mappings that are not affected. I like to use <leader>
+nmap <S-C-n> <Plug>AllWholeOccurrences
+xmap <S-C-n> <Plug>AllWholeOccurrences
+omap <S-C-n> <Plug>AllWholeOccurrences
+nmap g<S-C-n> <Plug>AllOccurrences
+xmap g<S-C-n> <Plug>AllOccurrences
+omap g<S-C-n> <Plug>AllOccurrences
+
 
 "" ms/ mcr mcv mcd
 "set multicursor
@@ -96,6 +131,7 @@ Plug 'vim-exchange'
 Plug 'vim-scripts/ReplaceWithRegister'
 "set ReplaceWithRegister
 
+" <ll>f/F/t/T/w/W/b/B/e/E/ge/gE/j/k/n/N/s
 Plug 'easymotion/vim-easymotion'
 " set easymotion
 " easymotion插件
@@ -128,7 +164,7 @@ let g:WhichKey_DefaultDelay = 500
 
 """""""" map
 "noremap <Esc> <nop>
-nmap <S-Enter> O<Esc>
+nmap <S-Enter> o<Esc>
 "nmap <CR> o<Esc>
 "visual 模式 下 按* 号 搜索 光标选中的内容(对已选中的内容进行查找)
 vmap * "ry/<C-R>r<CR>
@@ -165,6 +201,7 @@ nmap <leader>vs :action IntentionActionAsAction_com.intellij.codeInsight.intenti
 nmap <leader>vO dd[{P
 nmap <leader>vo <leader>vs<leader>vOj$%
 nmap <leader>vB vaBvv
+nmap <leader>n /\(^[^A-z]\+\)\@<=[a-z]<CR>
 "inoremap <C-\> <C-O>:action CodeCompletion<CR>
 "imap <C-\> <Action>(CodeCompletion)
 "nnoremap <C-\> :action CodeCompletion<CR>
@@ -467,22 +504,6 @@ endif
 " NERDTree
 nnoremap ,t :NERDTreeFind<CR>
 
-" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
-nmap <C-x> <Plug>NextWholeOccurrence
-xmap <C-x> <Plug>NextWholeOccurrence
-nmap g<C-x> <Plug>NextOccurrence
-xmap g<C-x> <Plug>NextOccurrence
-"xmap <C-s> <Plug>SkipOccurrence
-"xmap <C-p> <Plug>RemoveOccurrence
-
-" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
-" <A-n> is used to enter accented text e.g. ñ
-nmap ,<C-x> <Plug>AllWholeOccurrences
-xmap ,<C-x> <Plug>AllWholeOccurrences
-nmap ,g<C-x> <Plug>AllOccurrences
-xmap ,g<C-x> <Plug>AllOccurrences
-
-
 " CamelCaseMotion approximation (obsolete with proper CamelCaseMotoin plugin)
 " Missing inner word motions e.g. i,w
 " nmap ,w [w
@@ -553,8 +574,8 @@ endfunction
 
 
 " 翻转关键字
-"nnoremap ! :call Invert(0)<CR>
-nnoremap ! :call ToggleIsNot()<CR>
+nnoremap ! :call Invert(0)<CR>
+"nnoremap ! :call ToggleIsNot()<CR>
 " 指定部分字符翻转
 vnoremap ! :<C-u>call Invert(1)<CR>
 " 单词跳转
@@ -591,6 +612,10 @@ nmap <leader>ai [ct{i
 let g:WhichKeyDesc_add_implements="<leader>ai add implements"
 nnoremap <leader>fu bbdiwxxxx~wxxb
 let g:WhichKeyDesc_variable_unwrap="<leader>fu variable unwrap"
+nmap <leader>fn viao<ESC>diw4x~w2x
+let g:WhichKeyDesc_variable_native="<leader>fn variable native"
+vnoremap <leader>fn o<ESC>diw4x~w2x
+let g:WhichKeyDesc_variable_native="<leader>fn variable native"
 nnoremap <leader>Fm F=w
 let g:WhichKeyDesc_back_forward_method="<leader>Fm back forward method"
 nnoremap <leader>fm f=w
@@ -619,8 +644,8 @@ set ideastrictmode
 " IEDA
 sethandler <C-;> a:vim
 sethandler <M-i> a:ide
-sethandler <C-n> a:IDE
-sethandler <C-p> a:IDE
+sethandler <C-n> a:VIM
+sethandler <C-p> a:VIM
 
 "=============================================================
 " 默认键位配置

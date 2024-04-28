@@ -52,7 +52,8 @@ yabai -m rule --add app="^系统偏好设置$" manage=off
 yabai -m rule --add app="^提醒事项$" manage=off
 yabai -m rule --add app="^关于本机$" manage=off
 yabai -m rule --add app="^Alfred Preferences$" manage=off
-yabai -m rule --add app="^Cisco Secure Client$" manage=off
+yabai -m rule --add app="^Cisco.*$" manage=off
 yabai -m rule --add app="^SeaTalk$" manage=off
+yabai -m rule --add app="^Anki$" manage=off
 
 echo "yabai configuration loaded..""
