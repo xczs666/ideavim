@@ -31,7 +31,7 @@ set ignorecase
 set smartcase " no ignore case when pattern is uppercase
 " 显示匹配括号
 set showmatch
-set keep-english-in-normal
+"set keep-english-in-normal
 filetype off                  " required
 """ IdeaVim options
 set history=500

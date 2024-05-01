@@ -55,5 +55,6 @@ yabai -m rule --add app="^Alfred Preferences$" manage=off
 yabai -m rule --add app="^Cisco.*$" manage=off
 yabai -m rule --add app="^SeaTalk$" manage=off
 yabai -m rule --add app="^Anki$" manage=off
+yabai -m rule --add app="^IINA$" manage=off
 
 echo "yabai configuration loaded..""
