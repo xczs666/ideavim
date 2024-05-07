@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
-
+# https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
+# echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
 # 这里参考了 yabai 的 wiki 。具体步骤下面讲
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
@@ -52,7 +53,7 @@ yabai -m rule --add app="^系统偏好设置$" manage=off
 yabai -m rule --add app="^提醒事项$" manage=off
 yabai -m rule --add app="^关于本机$" manage=off
 yabai -m rule --add app="^Alfred Preferences$" manage=off
-yabai -m rule --add app="^Cisco.*$" manage=off
+yabai -m rule --add app="^Cisco Secure Client$" manage=off
 yabai -m rule --add app="^SeaTalk$" manage=off
 yabai -m rule --add app="^Anki$" manage=off
 yabai -m rule --add app="^IINA$" manage=off
