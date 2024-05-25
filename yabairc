@@ -57,5 +57,6 @@ yabai -m rule --add app="^Cisco Secure Client$" manage=off
 yabai -m rule --add app="^SeaTalk$" manage=off
 yabai -m rule --add app="^Anki$" manage=off
 yabai -m rule --add app="^IINA$" manage=off
+yabai -m rule --add app="^Thunder$" manage=off
 
-echo "yabai configuration loaded..""
+echo "yabai configuration loaded.."
