@@ -171,7 +171,7 @@ shift + alt - d : yabai -m window --resize right:20:0; yabai -m window --resize 
 alt - o : yabai -m space --rotate 90
 
 # 全屏
-alt - f : yabai -m window --toggle zoom-fullscreen
+alt - a : yabai -m window --toggle zoom-fullscreen
 
 # 设置/取消窗口 space
 alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
@@ -237,6 +237,7 @@ shift + alt - p : yabai -m window --space prev; yabai -m space --focus prev
 
 # 切换回最近的一个桌面
 alt - x : yabai -m space --focus recent
+shift + alt - x : yabai -m window --space recent;yabai -m space --focus recent
 
 # prevents skhd from monitoring events for listed processes.
 #.blacklist [
