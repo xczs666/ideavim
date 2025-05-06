@@ -53,6 +53,10 @@ set idearefactormode=keep
 "set rtp+=~/.vim/bundle/vundle
 "call vundle#rc()
 
+"=============================================================
+"启用插件 begin
+"=============================================================
+
 "https://github.com/JetBrains/ideavim/wiki/NERDTree-support
 ":NERDTree
 ":NERDTreeFocus
@@ -87,29 +91,8 @@ set idearefactormode=keep
 Plug 'preservim/nerdtree'
 
 " <A-n>, <A-x>, <A-p>, g<A-n>
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 set multiple-cursors
-
-" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
-let g:multi_cursor_use_default_mapping=0
-nmap <C-n> <Plug>NextWholeOccurrence
-xmap <C-n> <Plug>NextWholeOccurrence
-omap <C-n> <Plug>NextWholeOccurrence
-nmap g<C-n> <Plug>NextOccurrence
-xmap g<C-n> <Plug>NextOccurrence
-omap g<C-n> <Plug>NextOccurrence
-xmap <C-x> <Plug>SkipOccurrence
-xmap <C-p> <Plug>RemoveOccurrence
-
-" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
-" <A-n> is used to enter accented text e.g. ñ
-" Feel free to pick your own mappings that are not affected. I like to use <leader>
-nmap <S-C-n> <Plug>AllWholeOccurrences
-xmap <S-C-n> <Plug>AllWholeOccurrences
-omap <S-C-n> <Plug>AllWholeOccurrences
-nmap g<S-C-n> <Plug>AllOccurrences
-xmap g<S-C-n> <Plug>AllOccurrences
-omap g<S-C-n> <Plug>AllOccurrences
 
 
 "" ms/ mcr mcv mcd
@@ -121,7 +104,19 @@ omap g<S-C-n> <Plug>AllOccurrences
 "" ys ysiw cs ds
 Plug 'vim-surround'
 
+"<C-s> <C-S-s>
+set switch
+
+" 扩展%
 Plug 'chrisbra/matchit'
+
+" aq：围绕任何引号。
+" iq：在任何引号内。
+" ab：围绕任何括号、花括号和方括号。
+" ib：位于任何括号、花括号和方括号内。
+set mini-ai
+
+set peekaboo
 
 "cx, cxx, X, cxc
 Plug 'vim-exchange'
@@ -147,7 +142,7 @@ let g:EasyMotion_override_acejump = 0
 
 "文本对象编辑 https://www.vim.org/scripts/script.php?script_id=2699
 Plug 'vim-scripts/argtextobj.vim' " aa, ia
-let g:argtextobj_pairs="[:],(:),<:>"
+let g:argtextobj_pairs="{:},[:],(:),<:>"
 
 " {,}可以跳转到带空格到行
 Plug 'dbakker/vim-paragraph-motion'
@@ -158,7 +153,16 @@ Plug 'michaeljsmith/vim-indent-object'
 " IdeaVim-Quickscope plugin.高亮f,t
 set quickscope
 
+" ie ae
+set textobj-entire
+
 set which-key
+
+" if af
+set functiontextobj
+"=============================================================
+"启用插件 end
+"=============================================================
 " make the popup appear much slower
 let g:WhichKey_DefaultDelay = 500
 
@@ -190,6 +194,7 @@ imap <M-F> <Action>(EditorNextWord)
 imap <M-B> <Action>(EditorPreviousWord)
 nnoremap <M-F> :action fastRequest.gotoFastRequest<CR>
 nnoremap <leader>vi :!neovide %<CR>
+nnoremap <D-S-n> :action NewClass<CR>
 
 "=============================================================
 " 个人习惯
@@ -650,3 +655,67 @@ sethandler <C-p> a:VIM
 "=============================================================
 " 默认键位配置
 "=============================================================
+
+"=============================================================
+"Plugin switch begin
+"=============================================================
+" Map to <leader>s and <leader>S
+nnoremap <C-s> :Switch<CR>
+nnoremap <C-S-s> :SwitchReverse<CR>
+
+" Or use - and +
+"nnoremap - :Switch<CR>
+"nnoremap + :SwitchReverse<CR>
+" Enable all patterns from multiple groups
+let g:switch_definitions = 'group:basic,group:java,group:rspec'
+
+"" Enable specific patterns
+"let g:switch_definitions = 'basic_true_false,java_visibility,rspec_should'
+"
+"" Mix groups and individual patterns
+"let g:switch_definitions = 'group:basic,java_visibility,rspec_should'
+let g:switch_custom_definitions =  [
+    \ [['\bdebug\b', 'info'], ['\binfo\b', 'warn'], ['\bwarn\b', 'error'], ['\berror\b', 'debug']],
+    \ [['\bisEmpty\b', 'isNotEmpty'], ['\bisNotEmpty\b', 'isEmpty']],
+    \ [['(?i)\bYES\b', 'NO'], ['(?i)\bNO\b', 'YES']],
+    \ [['(?i)\bGET\b', 'POST'], ['(?i)\bPOST\b', 'PUT'], ['(?i)\bPUT\b', 'DELETE'], ['(?i)\bDELETE\b', 'GET']],
+    \ ['width:\s*(\d+)px', 'width: \1em'],
+    \ ['height:\s*(\d+)px', 'height: \1em']
+\ ]
+" 启动时还没有switchWords,switchNormalizedCaseWord函数，所以直接用生成后的内容
+"let g:switch_custom_definitions = [ switchWords(['debug', 'info', 'warn', 'error']), switchWords(['isEmpty', 'isNotEmpty']), switchNormalizedCaseWords(['GET', 'POST', 'PUT', 'DELETE']), ['width:\s*(\d+)px', 'width: \1em'], ['height:\s*(\d+)px', 'height: \1em'] ]
+"=============================================================
+"Plugin switch end
+"=============================================================
+
+"=============================================================
+"Plugin multiple-cursors begin
+"=============================================================
+" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+let g:multi_cursor_use_default_mapping=0
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+omap <C-n> <Plug>NextWholeOccurrence
+" nmap g<C-n> <Plug>NextOccurrence
+" xmap g<C-n> <Plug>NextOccurrence
+" omap g<C-n> <Plug>NextOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
+" <A-n> is used to enter accented text e.g. ñ
+" Feel free to pick your own mappings that are not affected. I like to use <leader>
+nmap <S-C-n> <Plug>AllWholeOccurrences
+xmap <S-C-n> <Plug>AllWholeOccurrences
+omap <S-C-n> <Plug>AllWholeOccurrences
+"nmap g<S-C-n> <Plug>AllOccurrences
+"xmap g<S-C-n> <Plug>AllOccurrences
+"omap g<S-C-n> <Plug>AllOccurrences
+nmap <leader>g<C-n> <Plug>AllOccurrences
+xmap <leader>g<C-n> <Plug>AllOccurrences
+"=============================================================
+"Plugin multiple-cursors end
+"=============================================================
+
