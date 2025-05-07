@@ -464,6 +464,10 @@ nnoremap <leader>ms :action MakeStatic<CR>
 let g:WhichKeyDesc_make_static="<leader>ms MakeStatic"
 nnoremap <leader>ce :let @/=""<CR>
 let g:WhichKeyDesc_clear_search="<leader>ce Clear search"
+nmap <leader>cd <Action>(CompileDirty)
+nmap <leader>cc <Action>(CompileProject)
+nmap <leader>cf <Action>(CompileFile)
+
 set hls
 
 
