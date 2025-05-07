@@ -243,10 +243,13 @@ nmap [q <Action>(GotoPrevElementUnderCaretUsage)
 "imap <C-l> <Action>(ClassNameCompletion)
 "imap <C-l> <Action>(SmartTypeCompletion)
 nnoremap <C-l> :action GotoDeclaration<CR>
-"imap <D-CR> <Action>(EditorCompleteStatement)
-"nnoremap <D-CR> :action EditorCompleteStatement<CR>
-imap <M-CR> <Action>(EditorCompleteStatement)
-nnoremap <M-CR> :action EditorCompleteStatement<CR>
+
+imap <S-CR> <Action>(EditorEnter)
+nnoremap <S-CR> :action EditorEnter<CR>
+imap <D-CR> <Action>(EditorCompleteStatement)
+nnoremap <D-CR> :action EditorCompleteStatement<CR>
+imap <M-CR> <Action>(ShowIntentionActions)
+nnoremap <M-CR> :action ShowIntentionActions<CR>
 imap <C-cr> <Action>(ClassNameCompletion)
 nmap <C-cr> <Action>(ClassNameCompletion)
 imap <C-S-cr> <Action>(SmartTypeCompletion)
