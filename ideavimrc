@@ -184,8 +184,8 @@ noremap 0 ^
 noremap ^ 0
 "inoremap <C-A> <Home>
 "inoremap <C-E> <End>
-inoremap <c-a> <c-o>^
-inoremap <c-e> <c-o>$
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$
 inoremap <C-B> <Left>
 "inoremap <C-J> <Down>
 "inoremap <C-K> <Up>
@@ -240,32 +240,34 @@ nmap [q <Action>(GotoPrevElementUnderCaretUsage)
 "nnoremap <C-l> :action GotoNextError<CR>
 "imap <C-D-l> <Action>(GotoPreviousError)
 "nnoremap <C-D-l> :action GotoPreviousError<CR>
-"imap <c-l> <Action>(ClassNameCompletion)
-"imap <c-l> <Action>(SmartTypeCompletion)
-nnoremap <c-l> :action GotoDeclaration<CR>
-imap <D-CR> <Action>(EditorCompleteStatement)
-nnoremap <D-CR> :action EditorCompleteStatement<CR>
-imap <C-cr> <Action>(SmartTypeCompletion)
-nmap <C-cr> <Action>(SmartTypeCompletion)
-imap <C-S-CR> <Action>(ClassNameCompletion)
-nnoremap <C-S-CR> :action ClassNameCompletion<CR>
+"imap <C-l> <Action>(ClassNameCompletion)
+"imap <C-l> <Action>(SmartTypeCompletion)
+nnoremap <C-l> :action GotoDeclaration<CR>
+"imap <D-CR> <Action>(EditorCompleteStatement)
+"nnoremap <D-CR> :action EditorCompleteStatement<CR>
+imap <M-CR> <Action>(EditorCompleteStatement)
+nnoremap <M-CR> :action EditorCompleteStatement<CR>
+imap <C-cr> <Action>(ClassNameCompletion)
+nmap <C-cr> <Action>(ClassNameCompletion)
+imap <C-S-cr> <Action>(SmartTypeCompletion)
+nnoremap <C-S-cr> :action SmartTypeCompletion<CR>
 imap <C-D-cr> <Action>(CodeCompletion)
 nnoremap <C-D-cr> :action CodeCompletion<CR>
 
-nnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
-vnoremap <c-h> :action Refactorings.QuickListPopupAction<CR>
-"nnoremap <c-[> :action Back<CR>
-"nnoremap <c-k> :action FileStructurePopup<CR>
+nnoremap <C-h> :action Refactorings.QuickListPopupAction<CR>
+vnoremap <C-h> :action Refactorings.QuickListPopupAction<CR>
+"nnoremap <C-[> :action Back<CR>
+"nnoremap <C-k> :action FileStructurePopup<CR>
 "Move code up and down
-inoremap <c-j> <Esc>:m +1<CR>gi
-inoremap <c-k> <Esc>:m -2<CR>gi
-"inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
-"inoremap <c-k> <Esc>:action MoveStatementUp<CR>i
+inoremap <C-j> <Esc>:m +1<CR>gi
+inoremap <C-k> <Esc>:m -2<CR>gi
+"inoremap <C-j> <Esc>:action MoveStatementDown<CR>i
+"inoremap <C-k> <Esc>:action MoveStatementUp<CR>i
 vnoremap J :action MoveStatementDown<CR>
 vnoremap K :action MoveStatementUp<CR>
 
-"nnoremap <c-w> :action JumpToLastWindow<CR>
- noremap <c-w><c-w> :action NextSplitter<CR>
+"nnoremap <C-w> :action JumpToLastWindow<CR>
+ noremap <C-w><C-w> :action NextSplitter<CR>
 
 nmap [[ <Action>(MethodUp)
 vmap [[ <Action>(MethodUp)
@@ -298,14 +300,14 @@ vnoremap 'd 'D
 
 
 " These don't work in Rider, annoyingly. Try HighlightUsagesInFile (see <leader>h below)
-" nmap <c-s-]> <Action>(GotoNextElementUnderCaretUsage)
-" nmap <c-s-[> <Action>(GotoPrevElementUnderCaretUsage)
-nnoremap <c-0> /[<(,]<CR>
-nnoremap <c-9> ?[<(,]<CR>
-nmap <c--> via
-nnoremap <c-d-0> /[>),]<CR>
-nnoremap <c-d-9> ?[>),]<CR>
-nnoremap <c-d--> %
+" nmap <C-s-]> <Action>(GotoNextElementUnderCaretUsage)
+" nmap <C-s-[> <Action>(GotoPrevElementUnderCaretUsage)
+nnoremap <C-0> /[<(,]<CR>
+nnoremap <C-9> ?[<(,]<CR>
+nmap <C--> via
+nnoremap <C-d-0> /[>),]<CR>
+nnoremap <C-d-9> ?[>),]<CR>
+nnoremap <C-d--> %
 imap <D-i> <Action>(EditorContextInfo)
 nmap <D-i> <Action>(EditorContextInfo)
 imap <D-p> <Action>(ParameterInfo)
@@ -315,14 +317,14 @@ nmap <D-p> <Action>(ParameterInfo)
 nmap gL <Action>(QuickImplementations)
 nmap gy <Action>(ShowErrorDescription)
 
-"inoremap <c-l> <Esc>:action EditorCompleteStatement<CR>
+"inoremap <C-l> <Esc>:action EditorCompleteStatement<CR>
 nmap <C-,> <Action>(ActivateTerminalToolWindow)
 nmap <C-.> <Action>(Terminal.OpenInTerminal)
 nnoremap <leader>cp :!echo % \| pbcopy<CR>
 nnoremap <leader>it :!open -a iterm .<CR>
 "nnoremap ,t :action TerminalOpenInTerminal<CR>
 nmap <D-ESC> <Action>(HideActiveWindow)
-"nmap <c-m> <Action>(HideSideWindows)
+"nmap <C-m> <Action>(HideSideWindows)
 nnoremap ,e :e ~/.ideavimrc<CR>
 nnoremap ,r :action IdeaVim.ReloadVimRc.reload<CR>
 "nnoremap ,m :action CMake.ReloadCMakeProject<CR>
@@ -368,7 +370,7 @@ noremap <leader>sw :action SurroundWith<CR>
 nnoremap ,l :action RecentLocations<CR>
 nnoremap ,h  :action LocalHistory.ShowHistory<CR>
 "nnoremap <leader>u :action FindUsages<CR>
-nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
+nnoremap <C-z> :action ToggleDistractionFreeMode<CR>
 "nnoremap <leader>u :action ShowUsages<CR>
 nnoremap <leader>ht :action TypeHierarchy<CR>
 nnoremap <leader>hc :action CallHierarchy<CR>
