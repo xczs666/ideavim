@@ -230,8 +230,8 @@ nmap <C-;> <Action>(GotoTypeDeclaration)
 "nmap <C-'> <Action>(GotoSuperMethod)
 nmap <leader>ss <Action>(GotoSuperMethod)
 "nmap <C-k> <Action>(AceAction)
-nnoremap ]e :action GotoNextError<CR>
-nnoremap [e :action GotoPreviousError<CR>
+"nnoremap ]e :action GotoNextError<CR>
+"nnoremap [e :action GotoPreviousError<CR>
 nmap <C-D-n> <Action>(GotoNextElementUnderCaretUsage)
 nmap <C-D-p> <Action>(GotoPrevElementUnderCaretUsage)
 nmap ]q <Action>(GotoNextElementUnderCaretUsage)
@@ -524,6 +524,13 @@ nnoremap ,t :NERDTreeFind<CR>
 " nmap ,b [b
 " nmap ,e ]w
 " nmap ,ge ]b
+" IdeaVim 开箱即用地支持驼峰式动作：]w， 还可以将默认动作重新映射到 ideavimrc/vimrc 中的驼峰式动作[w：]b[b
+" map w [w
+" map e ]w
+" map b [b
+nmap vi<leader>w [bv]w
+nmap di<leader>w [bv]wd
+nmap ci<leader>w [bv]ws
 
 " plugin StringManipulation
 " crc camelCase
