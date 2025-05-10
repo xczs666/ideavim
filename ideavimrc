@@ -549,7 +549,11 @@ vnoremap <leader>cru :action StringManipulation.ToScreamingSnakeCase<CR>
 nnoremap <leader>cru :action StringManipulation.ToKebabCase<CR><Esc>
 vnoremap <leader>cru :action StringManipulation.ToKebabCase<CR>
 
-nmap <leader>cl <Action>(RestfulTool.action.OptionForEditor-CopyApiPath)
+" nmap <leader>cl <Action>(RestfulTool.action.OptionForEditor-CopyApiPath)
+" Request Mapper 还有一个 SpringbootUrlFullPath
+nmap <D-S-/> <Action>(GoToRequestMapping)
+" Web Url Copy
+nmap <leader>cl <Action>(com.rhw.weburlcopy.CopyUrlPath)
 nmap <leader>sl <Action>(ActivateEndpointsToolWindow)
 
 
