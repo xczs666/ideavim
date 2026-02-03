@@ -5,6 +5,7 @@ module.exports = {
   types: [
     {value: '🔗 WIP',      name: '🔗 WIP:      Work in progress'},
     {value: '✨ feat',     name: '✨ feat:     一个新的特性'},
+    {value: '📡 tech',     name: '📡 tech:     一个新的技术特性'},
     {value: '🐛 fix',      name: '🐛 fix:      修复一个Bug'},
     {value: '📄 docs',     name: '📄 docs:     仅文档变更'},
     {value: '💄 style',    name: '💄 style:    空格, 分号等格式变更'},
@@ -38,9 +39,11 @@ module.exports = {
   },
   */
 
-  allowTicketNumber: false,
+  usePreparedCommit: true, // to re-use commit from ./.git/COMMIT_EDITMSG
+  allowTicketNumber: true,
+  prependTicketToHead: true,
   isTicketNumberRequired: false,
-  ticketNumberPrefix: 'TICKET-',
+  ticketNumberPrefix: 'SPDBP-',
   ticketNumberRegExp: '\\d{1,5}',
 
   // override the messages, defaults are as follows
@@ -58,7 +61,7 @@ module.exports = {
 
   allowCustomScopes: true,
   skipEmptyScopes: true,
-  allowBreakingChanges: ['✨ feat', '🐛 fix'],
+  allowBreakingChanges: ['✨ feat', '📡 tech', '🐛 fix'],
   // skip any questions you want
   // skipQuestions: ['scope','body'],
 
