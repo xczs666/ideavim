@@ -71,4 +71,5 @@ module.exports = {
   // default: 'ISSUES CLOSED:'
   footerPrefix : 'TASKS CLOSED:',
   // askForBreakingChangeFirst : true, // default is false
+
 };
