@@ -77,7 +77,17 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # zsh-vi-mode 配置https://github.com/jeffreytse/zsh-vi-mode
 function zvm_config() {
-  ZVM_VI_SURROUND_BINDKEY=s-prefix
+  # 1. classic模式（动词->s->环绕）
+  #  S" ：添加"以进行视觉选择
+  #  ys" ：添加"以进行视觉选择
+  #  cs"' 改为"​'
+  #  ds" ： 删除"
+  # 2. s-prefix模式（s->动词->环绕）
+  #  sa" ：添加"以进行视觉选择
+  #  sd" ： 删除"
+  #  sr"' 改为"​'
+  #  ZVM_VI_SURROUND_BINDKEY=s-prefix
+  ZVM_VI_SURROUND_BINDKEY=classic
   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
   #ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
   # 其他插件的bindkey 加载
@@ -227,9 +237,15 @@ lg() {
     fi
 }
 
+# XDG_CONFIG_HOME 是 XDG 基础目录规范 定义的环境变量，用于指定用户配置文件的存放位置。
+# 变量	默认值	用途
+# XDG_CONFIG_HOME	~/.config	用户配置文件
+# XDG_DATA_HOME	~/.local/share	用户数据文件
+# XDG_CACHE_HOME	~/.cache	缓存文件
+# XDG_STATE_HOME	~/.local/state	状态文件
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
 # change lazygit config directory, default use ~/Library/Application Support/lazygit/config.yml
-#export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 export M2_HOME=/opt/homebrew/opt/maven
 export M2=$M2_HOME/bin
