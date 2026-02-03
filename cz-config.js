@@ -39,7 +39,8 @@ module.exports = {
   },
   */
 
-  usePreparedCommit: true, // to re-use commit from ./.git/COMMIT_EDITMSG
+  // 如果要使用前面的提交信息则设置为true，但是会造成type重复，如果不要则全部注释而不能是设置false,false会有一个false的提示
+  // usePreparedCommit: false, // to re-use commit from ./.git/COMMIT_EDITMSG
   allowTicketNumber: true,
   prependTicketToHead: true,
   isTicketNumberRequired: false,
@@ -67,7 +68,7 @@ module.exports = {
 
   // limit subject length
   subjectLimit: 1000,
-  // breaklineChar: '|', // It is supported for fields body and footer.
+  breaklineChar: '|', // It is supported for fields body and footer.
   // default: 'ISSUES CLOSED:'
   footerPrefix : 'TASKS CLOSED:',
   // askForBreakingChangeFirst : true, // default is false
