@@ -1,0 +1,119 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "cmd+i",
+        "command": "composerMode.agent"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "-cursorDown",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "editor.action.revealDefinition",
+        "when": "editorHasDefinitionProvider && editorTextFocus"
+    },
+    {
+        "key": "ctrl+;",
+        "command": "editor.action.goToTypeDefinition"
+    },
+    {
+        "key": "ctrl+]",
+        "command": "editor.action.marker.next",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.action.marker.prev",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+,",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "z c",
+        "command": "editor.fold",
+        "when": "editorTextFocus && foldingEnabled && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "z o",
+        "command": "editor.unfold",
+        "when": "editorTextFocus && foldingEnabled && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "z shift+o",
+        "command": "editor.unfoldAll",
+        "when": "editorTextFocus && foldingEnabled && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "editor.action.triggerSuggest",
+        "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
+    },
+    {
+        "key": "alt+enter",
+        "command": "editor.action.autoFix",
+        "when": "textInputFocus && !editorReadonly && supportedCodeAction =~ /(\\s|^)quickfix\\b/"
+    },
+    {
+        "key": "space r",
+        "command": "editor.action.rename",
+        "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "g d",
+        "command": "editor.action.revealDeclaration",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "editor.action.goToImplementation",
+        "when": "editorHasImplementationProvider && editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "g shift+d",
+        "command": "java.action.navigateToSuperImplementation",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "workbench.action.navigateBack",
+        "when": "canNavigateBack"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "workbench.action.navigateForward",
+        "when": "canNavigateForward"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "java.action.navigateToSuperImplementation",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "space h c",
+        "command": "editor.showCallHierarchy",
+        "when": "editorHasCallHierarchyProvider && editorTextFocus && !inReferenceSearchEditor && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "space h t",
+        "command": "java.action.showTypeHierarchy",
+        "when": "editorTextFocus && editorHasCallHierarchyProvider && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+s",
+        "command": "editor.action.refactor",
+        "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "cmd+n",
+        "command": "editor.action.sourceAction"
+    },
+    {
+        "key": "cmd+n",
+        "command": "-workbench.action.files.newUntitledFile"
+    }
+]

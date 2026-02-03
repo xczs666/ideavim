@@ -70,7 +70,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=$HOME/.zsh_custom
@@ -83,9 +83,22 @@ function zvm_config() {
   # 其他插件的bindkey 加载
   ZVM_INIT_MODE=sourcing
 }
-#function zvm_after_init() {
-#  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-#}
+function zvm_after_init() {
+  # Alt+D 删除光标后的单词（insert 模式）
+  bindkey -M viins '\ed' kill-word
+  # Alt+Backspace 删除光标前的单词
+  bindkey -M viins '\e^?' backward-kill-word
+  # Alt+B 向后跳一个单词
+  bindkey -M viins '\eb' backward-word
+  # Alt+F 向前跳一个单词
+  bindkey -M viins '\ef' forward-word
+  # Ctrl+_ 撤销
+  bindkey -M viins '^_' undo
+  # Alt+/ 重做
+  bindkey -M viins '\e/' redo
+  
+  # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -114,6 +127,8 @@ plugins=(
     dircycle
     you-should-use
     autoupdate
+    # google XXX;github XXX
+    web-search
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -132,6 +147,8 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
+#VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+#VI_MODE_SET_CURSOR=true
 export EDITOR='vim'
 
 # Compilation flags
@@ -166,14 +183,18 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# ~/.zshrc — disable Powerlevel10k when Cursor Agent runs
+if [[ -n "$CURSOR_AGENT" ]]; then
+  # Skip theme initialization for better compatibility
+else
+  [[ -r ~/.p10k.zsh ]] && source ~/.p10k.zsh
+fi
 
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # `/usr/libexec/java_home -v 8`
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/
-export JAVA_HOME=/Users/chenzhi.xu/Library/Java/JavaVirtualMachines/corretto-1.8.0_382/Contents/Home/
+export JAVA_HOME=/Users/chenzhi.xu/Library/Java/JavaVirtualMachines/corretto-1.8.0_452/Contents/Home/
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$CLASSPATH
 
 
@@ -208,7 +229,7 @@ lg() {
 
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
 # change lazygit config directory, default use ~/Library/Application Support/lazygit/config.yml
-export XDG_CONFIG_HOME="$HOME/.config"
+#export XDG_CONFIG_HOME="$HOME/.config"
 
 export M2_HOME=/opt/homebrew/opt/maven
 export M2=$M2_HOME/bin
@@ -244,6 +265,22 @@ export FZF_ALT_C_COMMAND="fd -H -I -t d --color=always"
 eval "$(fzf --zsh)"
 bindkey -M viins '\C-x\C-e' edit-command-line
 
+# history
+HISTSIZE=10000000
+SAVEHIST=10000000
+#setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+#setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+#setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+#setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+#setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+#setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+#setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+#setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+#setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 # HSTR configuration - add this to ~/.zshrc
 alias hh=hstr                    # hh to be alias for hstr
 setopt histignorespace           # skip cmds w/ leading space from history
@@ -261,7 +298,7 @@ export PATH=$PATH:$HOME/async-profiler-2.7-macos
 
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
 
-export PATH=$PATH:/opt/homebrew/opt/zookeeper/bin/
+export PATH=$PATH:/opt/homebrew/opt/zookeeper/bin/:/opt/homebrew/opt/mysql@8.0/bin
 
 
 [ -f /Users/chenzhi.xu/.docker/init-zsh.sh ] && source /Users/chenzhi.xu/.docker/init-zsh.sh # Added by Docker Desktop
@@ -271,10 +308,14 @@ export VIM=
 export VIMRUNTIME=
 
 
-export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+#export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 export PATH="/Users/chenzhi.xu/bin/src/cz/node_modules/commitizen/bin:/opt/homebrew/opt/mysql@8.0/bin:$PATH:/opt/cisco/secureclient/bin"
 
 eval "$(zoxide init zsh)"
 eval "$(register-python-argcomplete cz)"
+
+export PATH=$PATH:"$HOME/Documents/workspace/loan-core-delivery-config/scripts/"
+
+export PATH="$HOME/.local/bin:$PATH"
 
 

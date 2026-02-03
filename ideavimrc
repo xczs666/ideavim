@@ -132,7 +132,7 @@ Plug 'easymotion/vim-easymotion'
 " easymotion插件
 " 忽略大小写
 let g:EasyMotion_smartcase = 1
-nmap s <Plug>(easymotion-s2)
+map s <Plug>(easymotion-s2)
 let g:EasyMotion_override_acejump = 0
 
 "set sneak
@@ -256,7 +256,6 @@ imap <C-S-cr> <Action>(SmartTypeCompletion)
 nnoremap <C-S-cr> :action SmartTypeCompletion<CR>
 imap <C-D-cr> <Action>(CodeCompletion)
 nnoremap <C-D-cr> :action CodeCompletion<CR>
-
 nnoremap <C-h> :action Refactorings.QuickListPopupAction<CR>
 vnoremap <C-h> :action Refactorings.QuickListPopupAction<CR>
 "nnoremap <C-[> :action Back<CR>
@@ -356,6 +355,8 @@ nnoremap <leader>kcr :action ChooseRunConfiguration<CR>
 let g:WhichKeyDesc_ChooseRunConfiguration="<leader>kcr ChooseRunConfiguration"
 nnoremap <leader>kcd :action ChooseDebugConfiguration<CR>
 let g:WhichKeyDesc_ChooseDebugConfiguration="<leader>kcd ChooseDebugConfiguration"
+vnoremap <leader>v :action<CR>
+let g:WhichKeyDesc_ToMultipleCursor="<leader>v ToMultipleCursor"
 nnoremap <leader>po :action ToggleLineBreakpoint<CR>
 nnoremap <leader>pv :action ViewBreakpoints<CR>
 
@@ -377,6 +378,7 @@ nnoremap <C-z> :action ToggleDistractionFreeMode<CR>
 "nnoremap <leader>u :action ShowUsages<CR>
 nnoremap <leader>ht :action TypeHierarchy<CR>
 nnoremap <leader>hc :action CallHierarchy<CR>
+" nmap zC <Action>(CollapseAllRegions)
 
 "Refactor
 nnoremap <leader>t :action Refactorings.QuickListPopupAction<CR>
@@ -467,6 +469,7 @@ let g:WhichKeyDesc_clear_search="<leader>ce Clear search"
 nmap <leader>cd <Action>(CompileDirty)
 nmap <leader>cc <Action>(CompileProject)
 nmap <leader>cf <Action>(CompileFile)
+nmap <leader>oc <Action>(OpenInCursor)
 
 set hls
 
@@ -477,8 +480,11 @@ nnoremap <leader>cs :action ChangeSignature<CR>
 
 """""""""""""""""""Jump articles"""""""""""""""""""""""""""
 nnoremap gc gg:action MethodDown<CR>
-nnoremap gl :action GotoImplementation<CR>
-nnoremap gs :action GotoSuperMethod<CR>
+let g:WhichKeyDesc_method_down_method="<leader>gc GotoClass"
+nnoremap <leader>gl :action GotoImplementation<CR>
+let g:WhichKeyDesc_goto_implementation_method="<leader>gl GotoImplementation"
+nnoremap <leader>gs :action GotoSuperMethod<CR>
+let g:WhichKeyDesc_goto_super_method="<leader>gs GotoSuperMethod"
 "nnoremap ge :action GotoNextError<CR>i
 
 "nnoremap ,f :action FindInPath<CR>
@@ -534,24 +540,24 @@ nmap ci<leader>w [bv]ws
 
 " plugin StringManipulation
 " crc camelCase
-nnoremap <leader>crc :action StringManipulation.ToCamelCase<CR><Esc>
-vnoremap <leader>crc :action StringManipulation.ToCamelCase<CR>
+nnoremap crc :action StringManipulation.ToCamelCase<CR><Esc>
+vnoremap crc :action StringManipulation.ToCamelCase<CR>
 " crm MixedCase
-nnoremap <leader>crm :action StringManipulation.ToPascalCase<CR><Esc>
-vnoremap <leader>crm :action StringManipulation.ToPascalCase<CR>
+nnoremap crm :action StringManipulation.ToPascalCase<CR><Esc>
+vnoremap crm :action StringManipulation.ToPascalCase<CR>
 " crs snake_case
-nnoremap <leader>crs :action StringManipulation.ToSnakeCase<CR><Esc>
-vnoremap <leader>crs :action StringManipulation.ToSnakeCase<CR>
+nnoremap crs :action StringManipulation.ToSnakeCase<CR><Esc>
+vnoremap crs :action StringManipulation.ToSnakeCase<CR>
 " cru UPPER_CASE
-nnoremap <leader>cru :action StringManipulation.ToScreamingSnakeCase<CR><Esc>
-vnoremap <leader>cru :action StringManipulation.ToScreamingSnakeCase<CR>
+nnoremap cru :action StringManipulation.ToScreamingSnakeCase<CR><Esc>
+vnoremap cru :action StringManipulation.ToScreamingSnakeCase<CR>
 " cr- dash-case
-nnoremap <leader>cru :action StringManipulation.ToKebabCase<CR><Esc>
-vnoremap <leader>cru :action StringManipulation.ToKebabCase<CR>
+nnoremap crk :action StringManipulation.ToKebabCase<CR><Esc>
+vnoremap crk :action StringManipulation.ToKebabCase<CR>
 
 " nmap <leader>cl <Action>(RestfulTool.action.OptionForEditor-CopyApiPath)
 " Request Mapper 还有一个 SpringbootUrlFullPath
-nmap <D-S-/> <Action>(GoToRequestMapping)
+nmap <C-D-/> <Action>(GoToRequestMapping)
 " Web Url Copy
 nmap <leader>cl <Action>(com.rhw.weburlcopy.CopyUrlPath)
 nmap <leader>sl <Action>(ActivateEndpointsToolWindow)
@@ -645,14 +651,18 @@ nnoremap <leader>Fm F=w
 let g:WhichKeyDesc_back_forward_method="<leader>Fm back forward method"
 nnoremap <leader>fm f=w
 let g:WhichKeyDesc_forward_method="<leader>fm forward method"
+nmap <leader>fl ysiw>iList<Esc>3wl
+imap <C-\>fl <Esc>hysiw>iList<Esc>3wli
+let g:WhichKeyDesc_forward_method="<leader>ff field to List"
 nnoremap <leader>fa yiwgg:action MethodDown<CR>o@Autowired<Enter>private <Esc>pb~A <Esc>pA;<Esc>``
 let g:WhichKeyDesc_variable_to_field="<leader>fa variable to field"
-nnoremap g= :action ReformatCode<CR>:action OptimizeImports<CR>
+nnoremap == :action ReformatCode<CR>:action OptimizeImports<CR>
 let g:WhichKeyDesc_format_file="g= format file"
 nnoremap <leader>pn /[,)]<CR>bb
 let g:WhichKeyDesc_next_parameter="<leader>pn next parameter"
 " 寄存器，宏t 全参构造器转为builder
 let @t="0jddkPj0:s/^[ ,]*//<CR>v/\\(, \\\|$\\)<CR>hdkt=i(<Esc>pa)<Esc>ld$:s/^\\( *\\)this/\\1/<CR>j0"
+vnoremap <leader>kl :action CodeColumnAlign.AlignAction<CR>
 
 nnoremap <silent> vv viw
 
@@ -739,3 +749,11 @@ xmap <leader>g<C-n> <Plug>AllOccurrences
 "Plugin multiple-cursors end
 "=============================================================
 
+"=============================================================
+"DataGrip 配置
+"=============================================================
+if &ide =~? 'datagrip'
+    nnoremap <leader>ev :action sql.IntroduceAliasAction<CR>
+    nmap <leader>em <Action>(DatabaseView.ConvertToSubqueryAction)
+    nnoremap <leader>es :action sql.ExtractNamedQueryAction<CR>
+endif

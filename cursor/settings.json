@@ -1,0 +1,58 @@
+{
+    "maven.executable.preferMavenWrapper": false,
+    // "java.jdt.ls.vmargs": "-javaagent:/Users/chenzhi.xu/.m2/repository/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar -Xbootclasspath/a:/Users/chenzhi.xu/.m2/repository/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar",
+    // "java.jdt.ls.vmargs": "-javaagent:/Users/chenzhi.xu/.m2/repository/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "workbench.colorTheme": "Darcula (IntelliJ)",
+    "jdk.jdkhome": "/Library/Java/JavaVirtualMachines/temurin24.jdk/Contents/Home/",
+    "jdk.project.jdkhome": "/Users/chenzhi.xu/Library/Java/JavaVirtualMachines/corretto-1.8.0_452/Contents/Hom/",
+    "jdk.runConfig.vmOptions": "-Djps.track.ap.dependencies=false",
+    "jdk.serverVmOptions": [
+        "-Djps.track.ap.dependencies=false"
+    ],
+    "xml.server.preferBinary": true,
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "vscode-neovim.ctrlKeysForNormalMode": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "h",
+        "j",
+        "m",
+        "r",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z",
+        "/",
+        "]",
+        "right",
+        "left",
+        "up",
+        "down",
+        "backspace",
+        "delete",
+        "n"
+    ],
+    "cursor.composer.shouldAllowCustomModes": true,
+    "gitlab-mr.autoCommitChanges": true,
+    "gitlab-mr.autoOpenMr": true,
+    "gitlab-mr.targetBranch": "dbp-dev/v7.0.10_20250620",
+    "files.autoSave": "afterDelay",
+    "files.trimTrailingWhitespace": true,
+    "editor.fontSize": 14,
+    "editor.mouseWheelZoom": true,
+    "java.saveActions.organizeImports": true,
+    "javascript.updateImportsOnPaste.enabled": true,
+    "explorer.excludeGitIgnore": true
+}
