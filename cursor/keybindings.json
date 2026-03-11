@@ -63,20 +63,20 @@
         "command": "editor.action.rename",
         "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly && neovim.init && neovim.mode != 'insert'"
     },
-    {
-        "key": "g d",
-        "command": "editor.action.revealDeclaration",
-        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
-    },
+    // {
+    //     "key": "g d",
+    //     "command": "editor.action.revealDeclaration",
+    //     "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    // },
+    // {
+    //     "key": "g shift+d",
+    //     "command": "java.action.navigateToSuperImplementation",
+    //     "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    // },
     {
         "key": "ctrl+j",
         "command": "editor.action.goToImplementation",
         "when": "editorHasImplementationProvider && editorTextFocus && neovim.init && neovim.mode == 'normal'"
-    },
-    {
-        "key": "g shift+d",
-        "command": "java.action.navigateToSuperImplementation",
-        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
     },
     {
         "key": "ctrl+o",

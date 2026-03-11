@@ -1,13 +1,11 @@
 {
     "maven.executable.preferMavenWrapper": false,
-    // "java.jdt.ls.vmargs": "-javaagent:/Users/chenzhi.xu/.m2/repository/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar -Xbootclasspath/a:/Users/chenzhi.xu/.m2/repository/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar",
-    // "java.jdt.ls.vmargs": "-javaagent:/Users/chenzhi.xu/.m2/repository/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar",
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
     "workbench.colorTheme": "Darcula (IntelliJ)",
-    "jdk.jdkhome": "/Library/Java/JavaVirtualMachines/temurin24.jdk/Contents/Home/",
-    "jdk.project.jdkhome": "/Users/chenzhi.xu/Library/Java/JavaVirtualMachines/corretto-1.8.0_452/Contents/Hom/",
+    "jdk.jdkhome": "/Library/Java/JavaVirtualMachines/temurin-24.jdk/Contents/Home/",
+    "jdk.project.jdkhome": "/Users/chenzhi.xu/Library/Java/JavaVirtualMachines/corretto-1.8.0_462/Contents/Home/",
     "jdk.runConfig.vmOptions": "-Djps.track.ap.dependencies=false",
     "jdk.serverVmOptions": [
         "-Djps.track.ap.dependencies=false"
@@ -54,5 +52,138 @@
     "editor.mouseWheelZoom": true,
     "java.saveActions.organizeImports": true,
     "javascript.updateImportsOnPaste.enabled": true,
-    "explorer.excludeGitIgnore": true
+    "security.promptForLocalFileProtocolHandling": false,
+    "git.autofetch": true,
+    "explorer.confirmDelete": false,
+    "explorer.confirmPasteNative": false,
+    "editorjumper.ideConfigurations": [
+        {
+            "name": "IDEA",
+            "isCustom": false,
+            "hidden": false,
+            "commandPath": null
+        },
+        {
+            "name": "WebStorm",
+            "isCustom": false,
+            "hidden": false,
+            "commandPath": null
+        },
+        {
+            "name": "PyCharm",
+            "isCustom": false,
+            "hidden": false,
+            "commandPath": null
+        },
+        {
+            "name": "GoLand",
+            "isCustom": false,
+            "hidden": false,
+            "commandPath": null
+        },
+        {
+            "name": "CLion",
+            "isCustom": false,
+            "hidden": false,
+            "commandPath": null
+        },
+        {
+            "name": "PhpStorm",
+            "isCustom": false,
+            "hidden": false,
+            "commandPath": null
+        },
+        {
+            "name": "RubyMine",
+            "isCustom": false,
+            "hidden": false,
+            "commandPath": null
+        },
+        {
+            "name": "Rider",
+            "isCustom": false,
+            "hidden": false,
+            "commandPath": null
+        },
+        {
+            "name": "Android Studio",
+            "isCustom": false,
+            "hidden": false,
+            "commandPath": null
+        },
+        {
+            "name": "Xcode",
+            "commandPath": null,
+            "isCustom": false,
+            "hidden": false
+        }
+    ],
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "java.autobuild.enabled": false,
+    "makefile.configureOnOpen": false,
+    "sonarlint.automaticAnalysis": true,
+    "sonarlint.connectedMode.connections.sonarqube": [
+        {
+            "serverUrl": "https://sonarqube.npt.seabank.io",
+            "connectionId": "cursor"
+        }
+    ],
+    "sonarlint.focusOnNewCode": true,
+    "sonarlint.ls.javaHome": "/Library/Java/JavaVirtualMachines/temurin-19.jdk/Contents/Home",
+    "sonarlint.pathToNodeExecutable": "/opt/homebrew/opt/node@22/bin/node",
+    "explorer.confirmDragAndDrop": false,
+    "workbench.externalBrowser": "chrome",
+    "markdown-preview-enhanced.plantumlJarPath": "/Users/chenzhi.xu/.config/plantuml/plantuml-1.2026.2.jar",
+    "markdown-preview-enhanced.plantumlServer": "https://www.plantuml.com/plantuml",
+
+
+    // 主题配置
+    "editor.fontFamily": "JetBrains Mono, Menlo, Monaco, 'Courier New', monospace",
+    "workbench.colorCustomizations": {
+        "editor.background": "#2B2F3A",
+        "editor.lineHighlightBackground": "#313847",
+        "editor.selectionBackground": "#3D455C88",
+        "editorCursor.foreground": "#A7C5FF",
+        "editorIndentGuide.background1": "#3A4050",
+        "editorIndentGuide.activeBackground1": "#5A6580",
+        "sideBar.background": "#252A36",
+        "sideBar.foreground": "#AEB6C7",
+        "sideBar.border": "#323847",
+        "list.activeSelectionBackground": "#313847",
+        "list.activeSelectionForeground": "#D7DFEF",
+        "list.inactiveSelectionBackground": "#2C3342",
+        "list.hoverBackground": "#2E3544",
+        "activityBar.background": "#232835",
+        "activityBar.foreground": "#C7D2E5",
+        "activityBar.inactiveForeground": "#7E8AA3",
+        "activityBar.border": "#323847"
+    },
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
+        "rules": {
+            "class:java": "#D5BA82",
+            "type:java": "#56B6C2",
+            "interface:java": "#98C379",
+            "property:java": "#E06C75",
+            "variable:java": "#ACB2BE",
+            "parameter:java": "#C678DD",
+            "method:java": "#61AFEF",
+            "annotation:java": "#B58DD9",
+            "enumMember:java": "#D19A66",
+        }
+    },
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "name": "Java annotation @ symbol",
+                "scope": [
+                    "punctuation.definition.annotation",
+                    "punctuation.definition.annotation.java"
+                ],
+                "settings": {
+                    "foreground": "#B58DD9"
+                }
+            }
+        ]
+    }
 }
