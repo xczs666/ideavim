@@ -119,6 +119,8 @@
         }
     ],
     "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.macOptionIsMeta": true,
+    "terminal.integrated.macOptionClickForcesSelection": false,
     "java.autobuild.enabled": false,
     "makefile.configureOnOpen": false,
     "sonarlint.automaticAnalysis": true,
