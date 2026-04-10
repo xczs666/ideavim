@@ -188,7 +188,7 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   autoload -Uz compinit
   compinit
-  source $(brew --prefix)/share/bash-completion/completions/*
+  #source $(brew --prefix)/share/bash-completion/completions/*
 fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -328,10 +328,7 @@ export VIMRUNTIME=
 export PATH="/Users/chenzhi.xu/bin/src/cz/node_modules/commitizen/bin:/opt/homebrew/opt/mysql@8.0/bin:$PATH:/opt/cisco/secureclient/bin"
 
 eval "$(zoxide init zsh)"
-eval "$(register-python-argcomplete cz)"
+#eval "$(register-python-argcomplete cz)"
 
-export PATH=$PATH:"$HOME/Documents/workspace/loan-core-delivery-config/scripts/"
-
-export PATH="$HOME/.local/bin:$PATH"
-
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
