@@ -1,3 +1,10 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/Users/chenzhi.xu/.oh-my-zsh/custom/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -17,6 +24,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
+export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="ys"
 
@@ -104,9 +112,12 @@ function zvm_after_init() {
   bindkey -M viins '\ef' forward-word
   # Ctrl+_ 撤销
   bindkey -M viins '^_' undo
+  # Alt+U (备用)
+  bindkey '^[u' undo
   # Alt+/ 重做
   bindkey -M viins '\e/' redo
-  
+  # Ctrl+Y (重做)
+  bindkey '^Y' redo
   # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
 # Which plugins would you like to load?
@@ -236,6 +247,8 @@ lg() {
         rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
     fi
 }
+alias claude='claude --allow-dangerously-skip-permissions'
+alias python='python3'
 
 # XDG_CONFIG_HOME 是 XDG 基础目录规范 定义的环境变量，用于指定用户配置文件的存放位置。
 # 变量	默认值	用途
@@ -305,6 +318,8 @@ export HSTR_CONFIG=hicolor,raw-history-view       # get more colors
 bindkey -sM viins "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
 export HSTR_TIOCSTI=y
 
+eval "$(atuin init zsh)"
+
 export PATH=$PATH:$HOME/async-profiler-2.7-macos
 
 # 1password
@@ -330,5 +345,6 @@ export PATH="/Users/chenzhi.xu/bin/src/cz/node_modules/commitizen/bin:/opt/homeb
 eval "$(zoxide init zsh)"
 #eval "$(register-python-argcomplete cz)"
 
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+export PATH="/opt/homebrew/opt/openjdk/bin/:$PATH"
+
 
