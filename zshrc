@@ -1,20 +1,16 @@
 # OPENSPEC:START
 # OpenSpec shell completions configuration
 fpath=("/Users/chenzhi.xu/.oh-my-zsh/custom/completions" $fpath)
-autoload -Uz compinit
-compinit
 # OPENSPEC:END
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+if [[ -o interactive && -t 1 && -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
+# Base PATH entries are configured in ~/.zshenv so non-interactive zsh can use them.
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -24,8 +20,12 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-ZSH_THEME="powerlevel10k/powerlevel10k"
+if [[ -n "$CURSOR_AGENT" ]]; then
+  ZSH_THEME=""
+else
+  export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+  ZSH_THEME="powerlevel10k/powerlevel10k"
+fi
 # ZSH_THEME="ys"
 
 # Set list of themes to pick from when loading at random
@@ -132,7 +132,6 @@ plugins=(
 	# git clone https://github.com/bobthecow/git-flow-completion ~/.oh-my-zsh/custom/plugins/git-flow-completion
 	# rm /opt/homebrew/share/zsh/site-functions/_git && rm "$ZSH_COMPDUMP" && exec zsh
 	git-flow-completion
-    zsh-syntax-highlighting
     zsh-autosuggestions
     docker
     docker-compose
@@ -150,7 +149,12 @@ plugins=(
     autoupdate
     # google XXX;github XXX
     web-search
+    zsh-syntax-highlighting
 )
+
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh-completions:$FPATH"
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -170,8 +174,6 @@ source $ZSH/oh-my-zsh.sh
 
 #VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 #VI_MODE_SET_CURSOR=true
-export EDITOR='vim'
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -192,16 +194,6 @@ export EDITOR='vim'
 setopt autolist
 # /opt/homebrew/share/zsh/site-functions
 
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-export HOMEBREW_NO_AUTO_UPDATE=true
-
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  autoload -Uz compinit
-  compinit
-  #source $(brew --prefix)/share/bash-completion/completions/*
-fi
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # ~/.zshrc — disable Powerlevel10k when Cursor Agent runs
@@ -210,15 +202,6 @@ if [[ -n "$CURSOR_AGENT" ]]; then
 else
   [[ -r ~/.p10k.zsh ]] && source ~/.p10k.zsh
 fi
-
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
-# `/usr/libexec/java_home -v 8`
-# export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/
-export JAVA_HOME=/Users/chenzhi.xu/Library/Java/JavaVirtualMachines/corretto-1.8.0_452/Contents/Home/
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$CLASSPATH
-
-
 
 #alias ls='ls -FG'
 #alias l='ls -ltr'
@@ -250,19 +233,6 @@ lg() {
 alias claude='claude --allow-dangerously-skip-permissions'
 alias python='python3'
 
-# XDG_CONFIG_HOME 是 XDG 基础目录规范 定义的环境变量，用于指定用户配置文件的存放位置。
-# 变量	默认值	用途
-# XDG_CONFIG_HOME	~/.config	用户配置文件
-# XDG_DATA_HOME	~/.local/share	用户数据文件
-# XDG_CACHE_HOME	~/.cache	缓存文件
-# XDG_STATE_HOME	~/.local/state	状态文件
-# https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
-# change lazygit config directory, default use ~/Library/Application Support/lazygit/config.yml
-export XDG_CONFIG_HOME="$HOME/.config"
-
-export M2_HOME=/opt/homebrew/opt/maven
-export M2=$M2_HOME/bin
-
 ## zsh-autosuggestions
 # autosuggest-accept：接受当前建议。
 # autosuggest-execute：接受并执行当前建议。
@@ -271,8 +241,6 @@ export M2=$M2_HOME/bin
 # autosuggest-disable：禁用建议。
 # autosuggest-enable：重新启用建议。
 # autosuggest-toggle：在启用/禁用建议之间切换。
-export PATH="$HOME/.cargo/bin:/opt/homebrew/opt/mysql-client/bin:$PATH:$HOME/bin:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
-
 ## fzf
 # CTRL-T- 将选定的文件和目录粘贴到命令行
 #   设置FZF_CTRL_T_COMMAND为覆盖默认命令
@@ -291,8 +259,10 @@ export FZF_ALT_C_COMMAND="fd -H -I -t d --color=always"
 #  --color header:italic
 #  --header 'Press CTRL-Y to copy command into clipboard'"
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(fzf --zsh)"
-bindkey -M viins '\C-x\C-e' edit-command-line
+if [[ -o interactive && -t 0 && -t 1 ]]; then
+  eval "$(fzf --zsh)"
+  bindkey -M viins '\C-x\C-e' edit-command-line
+fi
 
 # history
 HISTSIZE=10000000
@@ -314,13 +284,11 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 alias hh=hstr                    # hh to be alias for hstr
 setopt histignorespace           # skip cmds w/ leading space from history
 export HSTR_CONFIG=hicolor,raw-history-view       # get more colors
-# viins vi插入模式下
-bindkey -sM viins "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
-export HSTR_TIOCSTI=y
+# 保留 hh 手动调用 hstr，Ctrl-r 交给 atuin
 
-eval "$(atuin init zsh)"
-
-export PATH=$PATH:$HOME/async-profiler-2.7-macos
+if [[ -o interactive && -t 0 && -t 1 ]]; then
+  eval "$(atuin init zsh)"
+fi
 
 # 1password
 # eval "$(op completion zsh)"; compdef _op op
@@ -328,9 +296,6 @@ export PATH=$PATH:$HOME/async-profiler-2.7-macos
 # eval "$(jira --completion-script-zsh)"
 
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
-
-export PATH=$PATH:/opt/homebrew/opt/zookeeper/bin/:/opt/homebrew/opt/mysql@8.0/bin
-
 
 [ -f /Users/chenzhi.xu/.docker/init-zsh.sh ] && source /Users/chenzhi.xu/.docker/init-zsh.sh # Added by Docker Desktop
 
@@ -340,11 +305,9 @@ export VIMRUNTIME=
 
 
 #export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
-export PATH="/Users/chenzhi.xu/bin/src/cz/node_modules/commitizen/bin:/opt/homebrew/opt/mysql@8.0/bin:$PATH:/opt/cisco/secureclient/bin"
 
-eval "$(zoxide init zsh)"
-#eval "$(register-python-argcomplete cz)"
-
-export PATH="/opt/homebrew/opt/openjdk/bin/:$PATH"
-
+if [[ -o interactive ]]; then
+  eval "$(zoxide init zsh)"
+  eval "$(register-python-argcomplete cz)"
+fi
 
