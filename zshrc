@@ -222,6 +222,7 @@ alias proxy='export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.
 alias unproxy='unset https_proxy http_proxy all_proxy'
 #alias lg='lazygit'
 alias cpn='copypath'
+alias cpb='b=$(git branch --show-current); echo "$b"; echo "$b" | pbcopy'
 lg() {
     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
     lazygit "$@"
