@@ -312,3 +312,4 @@ if [[ -o interactive ]]; then
   eval "$(register-python-argcomplete cz)"
 fi
 
+. "$HOME/.atuin/bin/env"

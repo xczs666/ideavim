@@ -325,7 +325,8 @@ nmap <C-.> <Action>(Terminal.OpenInTerminal)
 nnoremap <leader>cp :!echo % \| pbcopy<CR>
 nnoremap <leader>it :!open -a iterm .<CR>
 "nnoremap ,t :action TerminalOpenInTerminal<CR>
-nmap <D-ESC> <Action>(HideActiveWindow)
+"nmap <D-ESC> <Action>(HideActiveWindow)
+map <D-ESC> <Action>(NextWindow)
 "nmap <C-m> <Action>(HideSideWindows)
 nnoremap ,e :e ~/.ideavimrc<CR>
 nnoremap ,r :action IdeaVim.ReloadVimRc.reload<CR>
