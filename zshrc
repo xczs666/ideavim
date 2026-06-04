@@ -287,8 +287,8 @@ setopt histignorespace           # skip cmds w/ leading space from history
 export HSTR_CONFIG=hicolor,raw-history-view       # get more colors
 # 保留 hh 手动调用 hstr，Ctrl-r 交给 atuin
 
-if [[ -o interactive && -t 0 && -t 1 ]]; then
-  eval "$(atuin init zsh)"
+if [[ -o interactive ]]; then
+  (( $+commands[atuin] )) && eval "$(atuin init zsh)"
 fi
 
 # 1password
