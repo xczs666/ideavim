@@ -1,6 +1,6 @@
 # OPENSPEC:START
 # OpenSpec shell completions configuration
-fpath=("/Users/chenzhi.xu/.oh-my-zsh/custom/completions" $fpath)
+fpath=("$HOME/.oh-my-zsh/custom/completions" ${fpath})
 # OPENSPEC:END
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -156,7 +156,36 @@ if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh-completions:$FPATH"
 fi
 
+
 source $ZSH/oh-my-zsh.sh
+
+## fzf
+# Load fzf widgets after oh-my-zsh/zsh-vi-mode, but before fzf-tab.
+export FZF_DEFAULT_COMMAND="fd -H -I --color=always"
+export FZF_DEFAULT_OPTS="--ansi"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd -H -I -t d --color=always"
+if [[ -o interactive ]]; then
+  eval "$(fzf --zsh)"
+  bindkey -M emacs '^T' fzf-file-widget
+  bindkey -M viins '^T' fzf-file-widget
+  bindkey -M vicmd '^T' fzf-file-widget
+  bindkey -M viins '\C-x\C-e' edit-command-line
+fi
+
+# fzf-tab must be loaded after compinit/oh-my-zsh initializes completion.
+source "/opt/homebrew/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
+
+# Load render-markdown completion from the command itself.
+if command -v render-markdown >/dev/null 2>&1; then
+  eval "$(render-markdown --zsh-completion)"
+fi
+
+# Use fzf-tab for git branch selection, including `git switch <TAB>`.
+zstyle ':fzf-tab:complete:git-switch:*' fzf-preview \
+  'git log --oneline --decorate --color=always -n 20 -- ${(Q)word}'
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+  'git log --oneline --decorate --color=always -n 20 -- ${(Q)word}'
 
 # User configuration
 
@@ -234,6 +263,70 @@ lg() {
 alias claude='claude --allow-dangerously-skip-permissions'
 alias python='python3'
 
+_mycli_dsn_aliases() {
+  local -a aliases
+  aliases=(${(f)"$(mycli --list-dsn 2>/dev/null)"})
+  _describe 'mycli dsn alias' aliases
+}
+
+_mycli() {
+  local context state line
+
+  _arguments -C \
+    '(-h --host --hostname)'{-h,--host,--hostname}'[host address]:host:_hosts' \
+    '(-P --port)'{-P,--port}'[port number]:port:' \
+    '(-u --user --username)'{-u,--user,--username}'[user name]:user:' \
+    '(-S --socket)'{-S,--socket}'[socket file]:socket:_files' \
+    '(-p --pass --password)'{-p,--pass,--password}'[password]' \
+    '--password-file[file containing password]:file:_files' \
+    '--ssl-mode[ssl behavior]:(auto on off)' \
+    '--ssl-ca[CA file]:file:_files' \
+    '--ssl-capath[CA directory]:directory:_files -/' \
+    '--ssl-cert[certificate file]:file:_files' \
+    '--ssl-key[key file]:file:_files' \
+    '--ssl-cipher[ssl cipher]:cipher:' \
+    '--tls-version[tls version]:(tlsv1 tlsv1.1 tlsv1.2 tlsv1.3)' \
+    '--ssl-verify-server-cert[verify server certificate]' \
+    '(-v --verbose)'{-v,--verbose}'[verbose output]' \
+    '(-q --quiet)'{-q,--quiet}'[quiet output]' \
+    '(-D --database)'{-D,--database}'[database name]:database:' \
+    '(-d --dsn)'{-d,--dsn}'[dsn alias]:dsn:_mycli_dsn_aliases' \
+    '--list-dsn[list configured dsn aliases]' \
+    '(-R --prompt)'{-R,--prompt}'[prompt format]:prompt:' \
+    '--toolbar[toolbar format]:toolbar:' \
+    '(-l --logfile)'{-l,--logfile}'[log file]:file:_files' \
+    '--checkpoint[checkpoint file]:file:_files' \
+    '--resume[resume batch execution]' \
+    '--myclirc[myclirc path]:file:_files' \
+    '--auto-vertical-output[auto vertical output]' \
+    '--show-warnings[show warnings]' \
+    '--no-show-warnings[disable warnings]' \
+    '(-t --table)'{-t,--table}'[table output]' \
+    '--csv[csv output]' \
+    '--warn[warn on destructive queries]' \
+    '--no-warn[disable destructive query warnings]' \
+    '--warn-batch[warn in batch mode]' \
+    '--local-infile[enable or disable local infile]:(true false)' \
+    '(-g --login-path)'{-g,--login-path}'[login path]:login path:' \
+    '(-e --execute)'{-e,--execute}'[execute SQL and quit]:sql:' \
+    '--init-command[run SQL after connect]:sql:' \
+    '--unbuffered[fetch rows on demand]' \
+    '--charset[character set]:charset:' \
+    '--character-set[character set]:charset:' \
+    '--batch[sql script to execute]:file:_files' \
+    '--format[output format]:(default csv tsv table)' \
+    '--throttle[pause seconds between queries]:seconds:' \
+    '--progress[show batch progress]' \
+    '--use-keyring[keyring mode]:(true false reset)' \
+    '--keepalive-ticks[keepalive interval seconds]:seconds:' \
+    '--checkup[run configuration checkup]' \
+    '(-V --version)'{-V,--version}'[show version]' \
+    '--help[show help]' \
+    '*:database:'
+}
+
+compdef _mycli mycli
+
 ## zsh-autosuggestions
 # autosuggest-accept：接受当前建议。
 # autosuggest-execute：接受并执行当前建议。
@@ -242,29 +335,6 @@ alias python='python3'
 # autosuggest-disable：禁用建议。
 # autosuggest-enable：重新启用建议。
 # autosuggest-toggle：在启用/禁用建议之间切换。
-## fzf
-# CTRL-T- 将选定的文件和目录粘贴到命令行
-#   设置FZF_CTRL_T_COMMAND为覆盖默认命令
-#   设置FZF_CTRL_T_OPTS传递附加选项
-# ALT-C- cd 进入选择的目录
-#   设置FZF_ALT_C_COMMAND为覆盖默认命令
-#   设置FZF_ALT_C_OPTS传递附加选项
-export FZF_DEFAULT_COMMAND="fd -H -I --color=always"
-export FZF_DEFAULT_OPTS="--ansi"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -H -I -t d --color=always"
-#export FZF_CTRL_R_OPTS="
-#  --preview 'echo {}' --preview-window up:3:hidden:wrap
-#  --bind 'ctrl-/:toggle-preview'
-#  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-#  --color header:italic
-#  --header 'Press CTRL-Y to copy command into clipboard'"
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-if [[ -o interactive && -t 0 && -t 1 ]]; then
-  eval "$(fzf --zsh)"
-  bindkey -M viins '\C-x\C-e' edit-command-line
-fi
-
 # history
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -312,4 +382,5 @@ if [[ -o interactive ]]; then
   eval "$(register-python-argcomplete cz)"
 fi
 
-. "$HOME/.atuin/bin/env"
+alias codex='codex --sandbox danger-full-access --ask-for-approval never'
+
