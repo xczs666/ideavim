@@ -94,7 +94,6 @@ Plug 'preservim/nerdtree'
 " Plug 'terryma/vim-multiple-cursors'
 set multiple-cursors
 
-
 "" ms/ mcr mcv mcd
 "set multicursor
 ""nmap q <Plug>(multicursor-ms/)
@@ -730,8 +729,8 @@ omap <C-n> <Plug>NextWholeOccurrence
 " nmap g<C-n> <Plug>NextOccurrence
 " xmap g<C-n> <Plug>NextOccurrence
 " omap g<C-n> <Plug>NextOccurrence
-nmap g<C-n> <Plug>NextOccurrence
-xmap g<C-n> <Plug>NextOccurrence
+nmap g<C-n> <Action>(SelectAllOccurrences)
+xmap g<C-n> <Action>(SelectAllOccurrences)
 xmap <C-x> <Plug>SkipOccurrence
 xmap <C-p> <Plug>RemoveOccurrence
 

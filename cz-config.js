@@ -3,29 +3,29 @@
 module.exports = {
 
   types: [
-    {value: '🔗 WIP',      name: '🔗 WIP:      Work in progress'},
-    {value: '✨ feat',     name: '✨ feat:     一个新的特性'},
-    {value: '📡 tech',     name: '📡 tech:     一个新的技术特性'},
-    {value: '🐛 fix',      name: '🐛 fix:      修复一个Bug'},
-    {value: '📄 docs',     name: '📄 docs:     仅文档变更'},
-    {value: '💄 style',    name: '💄 style:    空格, 分号等格式变更'},
-    {value: '♻️  refactor', name: '♻️ refactor: 代码重构，注意：和特性、修复区分开'},
-    {value: '⚡️ perf',     name: '⚡️ perf:     提升性能'},
-    {value: '✅ test',     name: '✅ test:     添加测试'},
-    {value: '🎉 init',     name: '🎉 init:     初始化'},
-    {value: '🚀 chore',    name: '🚀 chore:    开发工具变动(构建、脚手架工具等)'},
-    {value: '⏪️ revert',   name: '⏪️ revert:   代码回退'},
-    {value: "🧩 update",   name: "🧩 update:   第三方库升级" },
+    {name: '1. 🔗 WIP:      Work in progress',                   value: '🔗 WIP'},
+    {name: '2. ✨ feat:     一个新的特性',                       value: '✨ feat'},
+    {name: '3. 📡 tech:     一个新的技术特性',                   value: '📡 tech'},
+    {name: '4. 🐛 fix:      修复一个Bug',                        value: '🐛 fix'},
+    {name: '5. 📄 docs:     仅文档变更',                         value: '📄 docs'},
+    {name: '6. 💄 style:    空格, 分号等格式变更',               value: '💄 style'},
+    {name: '7. 🔧 refactor: 代码重构，注意：和特性、修复区分开', value: '🔧 refactor'},
+    {name: '8. ⚡️ perf:     提升性能',                           value: '⚡️ perf'},
+    {name: '9. ✅ test:     添加测试',                           value: '✅ test'},
+    {name: '10. 🎉 init:     初始化',                            value: '🎉 init'},
+    {name: '11. 🚀 chore:    开发工具变动(构建、脚手架工具等)',  value: '🚀 chore'},
+    {name: '12. ⏪️ revert:   代码回退',                          value: '⏪️ revert'},
+    {name: "13. 🧩 update:   第三方库升级" ,                     value: "🧩 update"},
   ],
 
-/*
   scopes: [
-     {name: 'accounts'},
-     {name: 'admin'},
-     {name: 'exampleScope'},
-     {name: 'changeMe'}
+    {name: '1. specStyle', value: 'specStyle'},
+    {name: '2. spec',      value: 'spec'     },
+    {name: '3. skill',     value: 'skill'    },
+    {name: '4. code',      value: 'code'     },
+    {name: '5. config',    value: 'config'   },
+    {name: '6. framework', value: 'framework'},
   ],
-*/
 
   // it needs to match the value for field type. Eg.: 'fix'
   /*
@@ -45,7 +45,10 @@ module.exports = {
   prependTicketToHead: true,
   isTicketNumberRequired: false,
   ticketNumberPrefix: 'SPDBP-',
-  ticketNumberRegExp: '\\d{1,5}',
+  ticketNumberRegExp: '\\d{1,6}',
+  // Jira 单号默认从当前分支提取，输入框仍可手工修改。
+  branchTicketNumberRegExp: '(?:^|/)SPDBP-(\\d{1,6})(?:$|[-_/])',
+  branchTicketNumberCaptureGroup: 1,
 
   // override the messages, defaults are as follows
   messages: {
